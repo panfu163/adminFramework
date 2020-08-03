@@ -1,0 +1,104 @@
+<!---
+ --@author  PanFu
+ --@data 2019-07-13:56
+ --@description MOJOWeb-left 左侧导航
+ --@version 1.0
+--->
+<template>
+  <el-container>
+    <heads></heads>
+    <div class="side" :class="{on:sfold}">
+      <sidebar></sidebar>
+      <menus></menus>
+    </div>
+    <tags></tags>
+    <div class="min" :class="{on:sfold}">
+      <router-view />
+    </div>
+  </el-container>
+</template>
+
+<script>
+import heads from "@/components/public/head";
+import sidebar from "@/components/public/sidebar";
+import tags from "@/components/public/tag";
+import menus from "@/components/public/menu";
+
+export default {
+  name: "Main",
+  components: {
+    heads,
+    sidebar,
+    tags,
+    menus
+  },
+  mounted() {
+    this.bus.$on("sfold",res=>{
+      console.log(res);
+      this.sfold=res;
+    });
+  },
+  data() {
+    return {
+      sfold:false
+    };
+  },
+  methods: {},
+};
+</script>
+
+<style lang="scss" scoped>
+.side {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -moz-box-orient: vertical;
+  -moz-box-direction: normal;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 2;
+  width: 284px;
+  transform:translate(0,0);
+  transition:0.3s;
+  &.on{
+    width:213px;
+  }
+}
+.min {
+  position: absolute;
+  top: 100px;
+  bottom: 0;
+  left: 284px;
+  width: calc(99.5% - 284px);
+  height: calc(100%- 70px);
+  min-width: 600px;
+  min-height: 500px;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -moz-box-orient: vertical;
+  -moz-box-direction: normal;
+  flex-direction: column;
+  overflow: auto;
+  z-index: 2;
+  transform:translate(0,0);
+  transition:0.3s;
+  &.on{
+    width: calc(99.5% - 214px);
+    left:214px;
+  }
+}
+</style>
