@@ -1,5 +1,5 @@
 /****
- * 配置文件存放目录
+ * @description 配置文件存放目录
  */
 const config= {
   publicPath:{
