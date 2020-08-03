@@ -20,7 +20,7 @@ npm run dev   启动开发环镜接口地址
 ### 打包发到正式环境
 ```
 npm run build
-npm run build:dev 打包到生产（正式）环境
+npm run build:dev 打包到开发环境
 npm run build:test 打包到测试环境
 npm run build:prod 打包到生产（正式）环境
 注：修改打包环境目录需在以下文件修改
