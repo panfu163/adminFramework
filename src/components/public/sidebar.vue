@@ -136,7 +136,13 @@ export default {
           title: this.$t("sidebar.authority"), //权限
           url: "/power",
           name: "权限列表",
-          icon: "el-icon-s-tools"
+          icon: "el-icon-lock"
+        },
+        {
+          title: this.$t("sidebar.user"), //"会员",
+          url: "/user",
+          name: "基本信息",
+          icon: "el-icon-user-solid"
         },
         {
           title: this.$t("sidebar.warehouse"), //仓库
@@ -148,38 +154,41 @@ export default {
           title: this.$t("sidebar.product"), //"产品",
           url: "/product",
           name: "产品查询",
-          icon: "el-icon-s-management"
-        },
-        {
-          title: this.$t("sidebar.purchase"), //"采购",
-          url: "",
-          icon: "el-icon-s-marketing"
-        },
-        {
-          title: this.$t("sidebar.order"), //"订单",
-          url: "",
           icon: "el-icon-goods"
         },
         {
-          title: this.$t("sidebar.user"), //"会员",
-          url: "/user",
-          name: "基本信息",
-          icon: "el-icon-user-solid"
+          title: this.$t("sidebar.order"), //"订单",
+          url: "/order",
+          icon: "el-icon-tickets"
+        },{
+          title: this.$t("sidebar.logistics"), //"物流管理",
+          url: "",
+          icon: "el-icon-truck"
+        },
+        {
+          title: this.$t("sidebar.finance"), //"财务",
+          url: "/pay",
+          icon: "el-icon-s-check"
         },
         {
           title: this.$t("sidebar.supplier"), //"供应商",
           url: "",
-          icon: "el-icon-s-check"
+          icon: "el-icon-s-custom"
+        },
+        {
+          title: this.$t("sidebar.purchase"), //"采购",
+          url: "",
+          icon: "el-icon-shopping-cart-1"
         },
         {
           title: this.$t("sidebar.shop"), //"店铺",
           url: "",
-          icon: "el-icon-s-shop"
+          icon: "el-icon-office-building"
         },
         {
-          title: this.$t("sidebar.finance"), //"财务",
+          title: this.$t("sidebar.distribution"), //"分销",
           url: "",
-          icon: "el-icon-s-shop"
+          icon: "el-icon-pie-chart"
         },
         {
           title: this.$t("sidebar.shortLetter"), //"短信",
@@ -189,7 +198,7 @@ export default {
         {
           title: this.$t("sidebar.customerService"), //"客服",
           url: "",
-          icon: "el-icon-phone"
+          icon: "el-icon-headset"
         },
         {
           title: this.$t("sidebar.gallery"), //"图库",
@@ -210,7 +219,7 @@ export default {
         {
           title: this.$t("sidebar.information"), //"信息",
           url: "",
-          icon: "el-icon-view"
+          icon: "el-icon-collection"
         },
         {
           title: this.$t("sidebar.community"), //"社区",

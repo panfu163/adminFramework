@@ -1,28 +1,20 @@
 export default {
-  nav: {
-    home: "首页", //首页
-    monitor: "监控", //监控
-    analyze: "分析", //分析
-    alarm: "报警", // 报警
-    maintenance: "运维", //运维
-    config: "配置", //配置
-    device: "设备", //设备
-    scada: "画面" //画面
-  },
   sidebar: {
     authority: "权限",
     warehouse: "仓库",
     product: "产品",
     purchase: "采购",
     order: "订单",
+    logistics:"物流",
     user: "会员",
     supplier: "供应商",
-    shop: "店铺",
+    shop: "门店",
     finance: "财务",
     shortLetter: "短信",
     customerService: "客服",
     gallery: "图库",
     marketing: "营销",
+    distribution:"分销",
     data: "数据",
     information: "信息",
     community: "社区",
@@ -166,6 +158,40 @@ export default {
       }
     }
   },
+  pay:{
+      title: "支付管理",
+      management: {
+        title: "支付管理",
+        list: {
+          list:"支付列表",
+          securityCenter: "安全中心",
+          mail: "邮件设置",
+          sms: "短消息"
+        }
+      },
+      BaseInformation: {
+      title:"基体信息",
+      list: {
+        settings: "支付设置",
+        info: "商品基本资料",
+        import: "数据导入",
+        backups: "数据备份",
+        restore: "数据还原"
+      }
+    }
+  },
+  order:{
+    title: "订单管理",
+    management: {
+      title: "订单管理",
+      list: {
+        list:"订单列表",
+        securityCenter: "安全中心",
+        mail: "邮件设置",
+        sms: "短消息"
+      }
+    }
+  },
   confirm: {
     ok: "确认",
     cancel: "取消",
@@ -175,5 +201,10 @@ export default {
   userInfo: {
     info: "个人信息",
     password: "密码"
-  }
+  },
+  nav: {
+    home: "首页", //首页
+    pay:"支付中心",
+    order:"订单中心"
+  },
 };

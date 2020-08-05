@@ -11,7 +11,9 @@ import power from "assets/js/router/power"; //权限管理
 import warehouse from "assets/js/router/warehouse"; //库存管理
 import product from "assets/js/router/product"; //产品管理
 import bigdata from "assets/js/router/bigdata"; //大数据管理
-import user from "assets/js/router/user"; //产品管理
+import user from "assets/js/router/user"; //会员管理
+import pay from "assets/js/router/pay"; //财务管理管理
+import order from "assets/js/router/order"; //财务管理管理
 
 Vue.use(Router);
 const router = new Router({
@@ -64,6 +66,14 @@ const router = new Router({
       path: "/user",
       component: Main,
       children: user
+    },{
+      path: "/order",
+      component: Main,
+      children: order
+    },{
+      path: "/pay",
+      component: Main,
+      children: pay
     },
     {
       path: "*",

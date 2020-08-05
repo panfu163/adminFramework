@@ -7,13 +7,13 @@
 <template>
   <el-container>
     <heads></heads>
-    <div class="side" :class="{on:sfold}">
+    <div class="side" :style="{height:isHeight+'px'}" :class="{on:sfold}">
       <sidebar></sidebar>
       <menus></menus>
     </div>
     <tags></tags>
-    <div class="min" :class="{on:sfold}">
-      <router-view />
+    <div class="min" :style="{height:isHeight+'px'}" :class="{on:sfold}">
+      <router-view></router-view>
     </div>
   </el-container>
 </template>
@@ -32,16 +32,21 @@ export default {
     tags,
     menus
   },
-  mounted() {
-    this.bus.$on("sfold",res=>{
-      console.log(res);
-      this.sfold=res;
-    });
-  },
   data() {
     return {
-      sfold:false
+      sfold:false,
+      isHeight:"",
     };
+  },
+  mounted() {
+    this.bus.$on("sfold",res=>{
+      this.sfold=res;
+    });
+    //设置高度
+    this.isHeight=document.documentElement.clientHeight;
+    window.onresize=()=>{
+        this.isHeight=document.documentElement.clientHeight;
+      }
   },
   methods: {},
 };
@@ -92,7 +97,8 @@ export default {
   -moz-box-orient: vertical;
   -moz-box-direction: normal;
   flex-direction: column;
-  overflow: auto;
+  overflow-x:hidden;
+  overflow-y:auto;
   z-index: 2;
   transform:translate(0,0);
   transition:0.3s;

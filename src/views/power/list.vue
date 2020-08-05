@@ -1,26 +1,22 @@
 <template>
-  <div class="search">
+  <div class="content">
     <div class="title-box">
       <el-form ref="form" :inline="true" :model="form" label-width="80px">
-        <el-form-item label="用户名">
-          <el-input v-model="form.name"></el-input>
+        <el-form-item label="用户名：">
+          <el-input v-model="form.name" placeholder="请输入用户名"></el-input>
         </el-form-item>
-        <el-form-item label="状态">
-          <el-select v-model="form.region" placeholder="请选择用户状态">
+        <el-form-item label="在线状态：" label-width="120px">
+          <el-select v-model="form.region" placeholder="请选择用户在线状态">
             <el-option label="在线" value="shanghai"></el-option>
             <el-option label="离线" value="beijing"></el-option>
             <el-option label="停用" value="beijing"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="入职时间">
-          <el-col :span="24">
-            <el-date-picker
-              type="date"
-              placeholder="选择日期"
-              v-model="form.date1"
-              style="width: 100%;"
-            ></el-date-picker>
-          </el-col>
+        <el-form-item label="状态：">
+          <el-select v-model="form.state" placeholder="请选择当前状态">
+            <el-option label="正常" value="shanghai"></el-option>
+            <el-option label="停用" value="beijing"></el-option>
+          </el-select>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSubmit">查询</el-button>
@@ -113,7 +109,7 @@
   </div>
 </template>
 <style lang="scss" scoped>
-.search {
+.content {
   padding: 10px;
   background: #fff;
   box-sizing: border-box;
@@ -140,6 +136,7 @@ export default {
       form: {
         name: "",
         region: "",
+        state:"",
         date1: "",
         date2: "",
         delivery: false,
@@ -157,7 +154,7 @@ export default {
           onlineTime: "2020-12-20 20:30:30",
           leavelineTime:"2022-02-03 20:30:30",
           userRol:"超级管理员",
-          phone:"18285533808",
+          phone:"18288888888",
           mail:"1602858720@qq.com"
         },
         {
@@ -169,7 +166,7 @@ export default {
           onlineTime: "2020-12-20 20:30:30",
           leavelineTime:"2022-02-03 20:30:30",
           userRol:"超级管理员",
-          phone:"18285533808",
+          phone:"18288888888",
           mail:"1602858720@qq.com"
         },
         {
@@ -181,7 +178,7 @@ export default {
           onlineTime: "2020-12-20 20:30:30",
           leavelineTime:"2022-02-03 20:30:30",
           userRol:"超级管理员",
-          phone:"18285533808",
+          phone:"18288888888",
           mail:"1602858720@qq.com"
         }, {
           headPic:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",
@@ -192,7 +189,7 @@ export default {
           onlineTime: "2020-12-20 20:30:30",
           leavelineTime:"2022-02-03 20:30:30",
           userRol:"超级管理员",
-          phone:"18285533808",
+          phone:"18288888888",
           mail:"1602858720@qq.com"
         },
 
@@ -202,7 +199,28 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log("submit!");
+      const loading = this.$loading({
+        text: 'Loading',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      });
+      setTimeout(() => {
+        loading.close();
+        for(let i=0;i<10;i++){
+          this.tableData.push({
+            headPic:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",
+            name: "admin"+i,
+            state: "在线",
+            fullName:"彭老总"+i,
+            department:"总经办",
+            onlineTime: "2020-12-20 20:30:30",
+            leavelineTime:"2022-02-03 20:30:30",
+            userRol:"超级管理员",
+            phone:"18288888888",
+            mail:"1602858720@qq.com"
+          })
+        }
+      }, 2000);
     },
     //先择
     handleSelectionChange(val) {

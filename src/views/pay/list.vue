@@ -51,9 +51,9 @@
         </el-form-item>
       </el-form>
     </div>
-    <el-row>
-      <el-button type="success" round @click="addUser">添加商品</el-button>
-    </el-row>
+<!--    <el-row>-->
+<!--      <el-button type="success" round @click="addUser">添加商品</el-button>-->
+<!--    </el-row>-->
     <el-table
       ref="multipleTable"
       v-loading="loading"
@@ -83,8 +83,7 @@
           {{ scope.row.name }}
         </template>
       </el-table-column>
-      <el-table-column prop="state" label="状态" >
-      </el-table-column>
+      <el-table-column prop="state" label="状态" ></el-table-column>
       <el-table-column prop="onlineTime" label="上架时间" show-overflow-tooltip >
       </el-table-column>
       <el-table-column prop="leavelineTime" label="下架时间"  show-overflow-tooltip>
@@ -96,16 +95,6 @@
       <el-table-column prop="phone" label="销售价">
       </el-table-column>
       <el-table-column prop="mail" label="市场价" show-overflow-tooltip>
-      </el-table-column>
-      <el-table-column prop="status" label="状态" width="150">
-        <template slot-scope="scope">
-          <el-switch
-                  v-model="scope.row.status"
-                  inactive-text="上架"
-                  active-text="下架"
-          >
-          </el-switch>
-        </template>
       </el-table-column>
       <el-table-column prop="userRol" label="所在用户组">
       </el-table-column>

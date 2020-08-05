@@ -2,34 +2,57 @@
   <div class="search">
     <div class="title-box">
       <el-form ref="form" :inline="true" :model="form" label-width="80px">
-        <el-form-item label="用户名">
+        <el-form-item label="商品名称">
           <el-input v-model="form.name"></el-input>
         </el-form-item>
-        <el-form-item label="状态">
-          <el-select v-model="form.region" placeholder="请选择用户状态">
-            <el-option label="在线" value="shanghai"></el-option>
-            <el-option label="离线" value="beijing"></el-option>
-            <el-option label="停用" value="beijing"></el-option>
+        <el-form-item label="仓库">
+          <el-select v-model="form.region" placeholder="请选择活动区域">
+            <el-option label="总仓库" value="shanghai"></el-option>
+            <el-option label="电商库" value="beijing"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="入职时间">
-          <el-col :span="24">
+        <el-form-item label="状态">
+          <el-select v-model="form.region" placeholder="请选择状态">
+            <el-option label="在售" value="beijing"></el-option>
+            <el-option label="下架" value="shanghai"></el-option>
+            <el-option label="待上架" value="beijing"></el-option>
+            <el-option label="缺货" value="beijing"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="上架时间">
+          <el-col :span="11">
             <el-date-picker
-              type="date"
-              placeholder="选择日期"
-              v-model="form.date1"
-              style="width: 100%;"
+                    type="date"
+                    placeholder="选择日期"
+                    v-model="form.date1"
+                    style="width: 100%;"
             ></el-date-picker>
           </el-col>
+          <el-col class="line" :span="2">-</el-col>
+          <el-col :span="11">
+            <el-time-picker
+                    placeholder="选择时间"
+                    v-model="form.date2"
+                    style="width: 100%;"
+            ></el-time-picker>
+          </el-col>
         </el-form-item>
-        <el-form-item>
+        <div>
+        <el-form-item label="类型">
+          <el-radio-group v-model="form.resource">
+            <el-radio label="实物"></el-radio>
+            <el-radio label="虚拟"></el-radio>
+          </el-radio-group>
+        </el-form-item>
+        </div>
+        <el-form-item class="el-row-btn">
           <el-button type="primary" @click="onSubmit">查询</el-button>
           <el-button>取消</el-button>
         </el-form-item>
       </el-form>
     </div>
     <el-row>
-      <el-button type="success" round @click="addUser">添加用户</el-button>
+      <el-button type="success" round @click="addUser">添加商品</el-button>
     </el-row>
     <el-table
       ref="multipleTable"
@@ -55,31 +78,31 @@
           />
         </template>
       </el-table-column>
-      <el-table-column label="用户名" width="120">
+      <el-table-column label="商品名称" width="220">
         <template slot-scope="scope">
           {{ scope.row.name }}
         </template>
       </el-table-column>
-      <el-table-column prop="state" label="在线状态" >
+      <el-table-column prop="state" label="状态" >
       </el-table-column>
-      <el-table-column prop="onlineTime" label="在线时间" show-overflow-tooltip >
+      <el-table-column prop="onlineTime" label="上架时间" show-overflow-tooltip >
       </el-table-column>
-      <el-table-column prop="leavelineTime" label="离线时间"  show-overflow-tooltip>
+      <el-table-column prop="leavelineTime" label="下架时间"  show-overflow-tooltip>
       </el-table-column>
-      <el-table-column prop="fullName" label="姓名">
+      <el-table-column prop="fullName" label="库存">
       </el-table-column>
-      <el-table-column prop="department" label="部门">
+      <el-table-column prop="department" label="单位">
       </el-table-column>
-      <el-table-column prop="phone" label="联系电话">
+      <el-table-column prop="phone" label="销售价">
       </el-table-column>
-      <el-table-column prop="mail" label="联系邮箱" show-overflow-tooltip>
+      <el-table-column prop="mail" label="市场价" show-overflow-tooltip>
       </el-table-column>
       <el-table-column prop="status" label="状态" width="150">
         <template slot-scope="scope">
           <el-switch
                   v-model="scope.row.status"
-                  inactive-text="启用"
-                  active-text="停用"
+                  inactive-text="上架"
+                  active-text="下架"
           >
           </el-switch>
         </template>
@@ -101,6 +124,8 @@
     <div style="margin-top: 20px">
       <el-button @click="toggleSelection(tableData)">全选</el-button>
       <el-button @click="toggleSelection()">取消选择</el-button>
+      <el-button @click="toggleSelection()">商品上架</el-button>
+      <el-button @click="toggleSelection()">商品下架</el-button>
       <el-button @click="del()"  type="primary">删除</el-button>
     </div>
     <el-pagination
@@ -126,6 +151,9 @@
     text-align: right;
     margin-top: 20px;
   }
+  .el-row-btn{
+    padding:0 40px;
+  }
 }
 .el-row {
   text-align: right;
@@ -150,50 +178,50 @@ export default {
       tableData: [
         {
           headPic:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",
-          name: "admin",
-          state:"在线",
-          fullName:"彭老总",
-          department:"总经办",
+          name: "六桂福（LUK KWAI FOOK）黄金吊坠 莲纹八宝牌 古法黄金吊坠项链足金吊坠送配绳男女款 BD0748 6.7-6.79g",
+          state:"下架",
+          fullName:"122",
+          department:"双",
           onlineTime: "2020-12-20 20:30:30",
           leavelineTime:"2022-02-03 20:30:30",
           userRol:"超级管理员",
-          phone:"18285533808",
-          mail:"1602858720@qq.com"
+          phone:"80.00",
+          mail:"180.00"
         },
         {
           headPic:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",
-          name: "panfu",
-          state:"在线",
-          fullName:"彭老总",
-          department:"总经办",
+          name: "六桂福（LUK KWAI FOOK）黄金吊坠 莲纹八宝牌 古法黄金吊坠项链足金吊坠送配绳男女款 BD0748 6.7-6.79g",
+          state:"缺货",
+          fullName:"124",
+          department:"个",
           onlineTime: "2020-12-20 20:30:30",
           leavelineTime:"2022-02-03 20:30:30",
           userRol:"超级管理员",
-          phone:"18285533808",
-          mail:"1602858720@qq.com"
+          phone:"180.00",
+          mail:"380.00"
         },
         {
           headPic:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",
-          name: "pengweix",
-          state:"离线",
-          fullName:"彭老总",
-          department:"总经办",
+          name: "六桂福（LUK KWAI FOOK）黄金吊坠 莲纹八宝牌 古法黄金吊坠项链足金吊坠送配绳男女款 BD0748 6.7-6.79g",
+          state:"在售",
+          fullName:"132",
+          department:"个",
           onlineTime: "2020-12-20 20:30:30",
           leavelineTime:"2022-02-03 20:30:30",
           userRol:"超级管理员",
-          phone:"18285533808",
-          mail:"1602858720@qq.com"
+          phone:"280.00",
+          mail:"680.00"
         }, {
           headPic:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",
-          name: "admin",
-          state: "在线",
-          fullName:"彭老总",
-          department:"总经办",
+          name: "六桂福（LUK KWAI FOOK）黄金吊坠 莲纹八宝牌 古法黄金吊坠项链足金吊坠送配绳男女款 BD0748 6.7-6.79g",
+          state: "待上架",
+          fullName:"243",
+          department:"个",
           onlineTime: "2020-12-20 20:30:30",
           leavelineTime:"2022-02-03 20:30:30",
           userRol:"超级管理员",
-          phone:"18285533808",
-          mail:"1602858720@qq.com"
+          phone:"380.00",
+          mail:"880.00"
         },
 
       ],
@@ -256,7 +284,7 @@ export default {
     },
     //添加用户组
     addUser(){
-      this.$router.push({ path: '/power/addUser'});
+      this.$router.push({ path: '/product/addProduct'});
     }
   },
   mounted() {

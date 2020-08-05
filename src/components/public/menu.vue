@@ -47,7 +47,7 @@
   box-sizing: border-box;
   width: 160px;
   background: #eee;
-  overflow-y: auto;
+  overflow:hidden;
   color: #323233;
   background: #fff;
   transform:translate(0,0);
@@ -68,6 +68,9 @@
   }
   .el-menu {
     border: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: calc(100%- 50px);
   }
   .el-menu-vertical-demo {
     width: 100%;
@@ -280,7 +283,7 @@ export default {
               data: [
                 {
                   title: this.$t("product.search.list.check"),
-                  url: "/warehouse"
+                  url: "/product"
                 },
                 {
                   title: this.$t("product.search.list.notes"),
@@ -488,7 +491,66 @@ export default {
               ]
             }
           ]
-        }
+        },
+        {
+          name: "pay",
+          list: [
+            {
+              title: this.$t("pay.title"),
+              icon: "el-icon-search",
+              id: "1",
+              data: [
+                {
+                  title: this.$t("pay.management.list.list"),
+                  url: "/pay"
+                }
+              ]
+            },
+            {
+              title: this.$t("pay.BaseInformation.title"),
+              icon: "el-icon-setting",
+              id: "2",
+              data: [
+                {
+                  title: this.$t("pay.BaseInformation.list.settings"),
+                  url: ""
+                },
+                {
+                  title: this.$t("pay.BaseInformation.list.info"),
+                  url: ""
+                },
+                {
+                  title: this.$t("pay.BaseInformation.list.import"),
+                  url: ""
+                },
+                {
+                  title: this.$t("pay.BaseInformation.list.backups"),
+                  url: ""
+                },
+                {
+                  title: this.$t("pay.BaseInformation.list.restore"),
+                  url: ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          name: "order",
+          list: [
+            {
+              title: this.$t("order.management.title"),
+              icon: "el-icon-search",
+              id: "1",
+              data: [
+                {
+                  title: this.$t("order.management.list.list"),
+                  url: "/order"
+                }
+              ]
+            },
+          ]
+        },
       ];
     }
   },
