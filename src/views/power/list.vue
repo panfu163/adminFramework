@@ -1,26 +1,25 @@
 <template>
   <div class="content">
     <div class="title-box">
-      <el-form ref="form" :inline="true" :model="form" label-width="80px">
-        <el-form-item label="用户名：">
+      <el-form ref="formId" :inline="true" :model="form" label-width="80px">
+        <el-form-item label="用户名：" prop="name">
           <el-input v-model="form.name" placeholder="请输入用户名"></el-input>
         </el-form-item>
-        <el-form-item label="在线状态：" label-width="120px">
+        <el-form-item label="在线状态：" prop="region" label-width="120px">
           <el-select v-model="form.region" placeholder="请选择用户在线状态">
-            <el-option label="在线" value="shanghai"></el-option>
-            <el-option label="离线" value="beijing"></el-option>
-            <el-option label="停用" value="beijing"></el-option>
+            <el-option label="在线" value="online"></el-option>
+            <el-option label="离线" value="offline"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="状态：">
-          <el-select v-model="form.state" placeholder="请选择当前状态">
-            <el-option label="正常" value="shanghai"></el-option>
-            <el-option label="停用" value="beijing"></el-option>
+        <el-form-item label="状态：" prop="state">
+          <el-select v-model="form.state"  placeholder="请选择当前状态">
+            <el-option label="正常" value="normal"></el-option>
+            <el-option label="停用" value="stop"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSubmit">查询</el-button>
-          <el-button>取消</el-button>
+          <el-button @click="onReset()">重置</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -38,6 +37,7 @@
       stripe
       highlight-current-row
       @selection-change="handleSelectionChange"
+      :header-cell-style="{background:'#eef1f6',color:'#18333f'}"
     >
       <el-table-column type="index" :index="indexMethod" label="#"> </el-table-column>
       <el-table-column type="selection" width="55"> </el-table-column>
@@ -137,12 +137,6 @@ export default {
         name: "",
         region: "",
         state:"",
-        date1: "",
-        date2: "",
-        delivery: false,
-        type: [],
-        resource: "",
-        desc: ""
       },
       tableData: [
         {
@@ -198,6 +192,7 @@ export default {
     };
   },
   methods: {
+    //查询
     onSubmit() {
       const loading = this.$loading({
         text: 'Loading',
@@ -221,6 +216,11 @@ export default {
           })
         }
       }, 2000);
+    },
+    //重置
+    onReset(){
+      console.log("=========")
+      this.$refs.formId.resetFields()
     },
     //先择
     handleSelectionChange(val) {

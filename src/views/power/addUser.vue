@@ -2,35 +2,35 @@
   <div class="content">
     <h4>{{this.$route.meta.title}}</h4>
     <el-form ref="form" :inline="true" :model="form" label-width="100px">
-      <el-form-item label="用户账号">
+      <el-form-item label="用户账号:">
         <el-input v-model="form.name"  placeholder="必填"></el-input>
       </el-form-item>
       <el-row>
-        <el-form-item label="账号密码">
+        <el-form-item label="账号密码:">
           <el-input v-model="form.name"  placeholder="必填"></el-input>
         </el-form-item>
       </el-row>
       <el-row>
-        <el-form-item label="联系手机号">
+        <el-form-item label="联系手机号:">
           <el-input v-model="form.name"  placeholder="必填"></el-input>
         </el-form-item>
       </el-row>
       <el-row>
-        <el-form-item label="联系邮箱">
+        <el-form-item label="联系邮箱:">
           <el-input v-model="form.name"  placeholder="必填"></el-input>
         </el-form-item>
       </el-row>
       <el-row>
-      <el-form-item label="真实性名">
+      <el-form-item label="真实性名:">
         <el-input v-model="form.name"  placeholder="必填"></el-input>
       </el-form-item>
       </el-row>
       <el-row>
-        <el-form-item label="所在部门">
+        <el-form-item label="所在部门:">
           <el-select v-model="form.region" placeholder="请选择部门">
-            <el-option label="技术部" value="shanghai"></el-option>
-            <el-option label="后勤" value="beijing"></el-option>
-            <el-option label="商务部" value="beijing"></el-option>
+            <el-option label="技术部" value="jinshu"></el-option>
+            <el-option label="后勤" value="houqing"></el-option>
+            <el-option label="商务部" value="shangwubu"></el-option>
           </el-select>
         </el-form-item>
       </el-row>

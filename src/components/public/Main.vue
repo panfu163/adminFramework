@@ -85,8 +85,6 @@ export default {
   left: 284px;
   width: calc(99.5% - 284px);
   height: calc(100%- 70px);
-  min-width: 600px;
-  min-height: 500px;
   box-sizing: border-box;
   display: -webkit-box;
   display: -webkit-flex;
@@ -100,6 +98,7 @@ export default {
   overflow-x:hidden;
   overflow-y:auto;
   z-index: 2;
+  padding-bottom:100px;
   transform:translate(0,0);
   transition:0.3s;
   &.on{
