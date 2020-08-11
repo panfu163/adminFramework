@@ -3,7 +3,18 @@
 -->
 <template>
   <div class="content">
+
     <div class="title-box">
+      <i class="el-icon-info"></i>
+      <div class="title-content">
+        <p>什么是角色？</p>
+        <p>角色机制是向您信任的实体（例如：用户、某个应用或某服务）进行授权的一种安全方法。根据不同应用场景，受信任的实体可能有如下一些例子：</p>
+        <p>您账户下的一个用户（可能是代表一个移动 App 的后端服务）；</p>
+        <p>其他账户中的用户（需要进行跨账户的资源访问）；</p>
+        <p>角色颁发短时有效的访问令牌（STS 令牌），使其成为一种更安全的授予访问权限的方法。</p>
+      </div>
+    </div>
+    <el-row>
       <el-form ref="form" :inline="true" :model="form" label-width="100px">
         <el-form-item label="角色名称">
           <el-input v-model="form.name"  placeholder="请选择角色名称"></el-input>
@@ -18,10 +29,8 @@
           <el-button type="primary" @click="onSubmit">查询</el-button>
           <el-button>取消</el-button>
         </el-form-item>
+        <el-button type="success" round @click="addUser">添加角色</el-button>
       </el-form>
-    </div>
-    <el-row>
-      <el-button type="primary" round @click="addUser">添加角色</el-button>
     </el-row>
     <el-table
             ref="multipleTable"
@@ -34,6 +43,7 @@
             stripe
             highlight-current-row
             @selection-change="handleSelectionChange"
+            :header-cell-style="{background:'#eef1f6',color:'#18333f'}"
     >
       <el-table-column type="index" label="#" :index="indexMethod"> </el-table-column>
       <el-table-column type="selection"></el-table-column>
@@ -95,6 +105,21 @@
       background: #ecf5ff;
       padding: 20px;
       margin-bottom: 10px;
+      display:flex;
+      &>i{
+        padding-top: 0.5em;
+        @include color("color");
+      }
+      .title-content{
+        padding-left:10px;
+        p{
+          margin-top: 0.5em;
+          margin-bottom: 0.5em;
+          font-size:12px;
+          line-height: 1.5 !important;
+        }
+      }
+
     }
     .pagination {
       text-align: right;

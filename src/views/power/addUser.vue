@@ -1,41 +1,73 @@
 <template>
   <div class="content">
     <h4>{{this.$route.meta.title}}</h4>
-    <el-form ref="form" :inline="true" :model="form" label-width="100px">
-      <el-form-item label="用户账号:">
-        <el-input v-model="form.name"  placeholder="必填"></el-input>
+    <el-form ref="formId" :inline="true" :model="form" label-width="100px">
+      <el-form-item label="用户账号:" prop="name">
+        <el-input v-model="form.name" minlength="6"  placeholder="必填"></el-input>
       </el-form-item>
       <el-row>
-        <el-form-item label="账号密码:">
-          <el-input v-model="form.name"  placeholder="必填"></el-input>
+        <el-form-item label="账号密码:" prop="password">
+          <el-input v-model="form.password" minlength="6"  placeholder="必填" show-password></el-input>
         </el-form-item>
       </el-row>
       <el-row>
-        <el-form-item label="联系手机号:">
-          <el-input v-model="form.name"  placeholder="必填"></el-input>
+        <el-form-item label="联系手机号:" prop="phone">
+          <el-input v-model="form.phone" type="number" placeholder="必填" minlength="11" maxlength="11"></el-input>
         </el-form-item>
       </el-row>
       <el-row>
-        <el-form-item label="联系邮箱:">
-          <el-input v-model="form.name"  placeholder="必填"></el-input>
+        <el-form-item label="联系邮箱:"  prop="mailbox">
+          <el-input v-model="form.mailbox"  type="email"  placeholder="必填"></el-input>
         </el-form-item>
       </el-row>
       <el-row>
-      <el-form-item label="真实性名:">
-        <el-input v-model="form.name"  placeholder="必填"></el-input>
+      <el-form-item label="真实姓名:" prop="fullName">
+        <el-input v-model="form.fullName"  placeholder="必填"></el-input>
       </el-form-item>
       </el-row>
       <el-row>
         <el-form-item label="所在部门:">
           <el-select v-model="form.region" placeholder="请选择部门">
+            <el-option label="总经办" value="houqing"></el-option>
+            <el-option label="财务部" value="chawu"></el-option>
             <el-option label="技术部" value="jinshu"></el-option>
-            <el-option label="后勤" value="houqing"></el-option>
-            <el-option label="商务部" value="shangwubu"></el-option>
+            <el-option label="后勤部" value="houqing"></el-option>
+            <el-option label="商务部" value="shangwu"></el-option>
+            <el-option label="人事部" value="renshi"></el-option>
+            <el-option label="销售部" value="xiaoshe"></el-option>
+            <el-option label="营运部" value="yuanying"></el-option>
+            <el-option label="证券部" value="zhengjuan"></el-option>
           </el-select>
         </el-form-item>
       </el-row>
       <el-row>
         <h5>用户组</h5>
+        <el-row class="user-group" prop="data">
+          <el-tree
+                  ref="newTopRightsTree"
+                  :data="data"
+                  show-checkbox
+                  node-key="id"
+                  :default-expanded-keys="[]"
+                  :default-checked-keys="checkedKeys"
+                  :props="defaultProps">
+          </el-tree>
+        </el-row>
+      </el-row>
+      <el-row>
+        <h5>系统权限设置</h5>
+        <el-row>
+          <el-tree
+                  :props="props"
+                  :load="loadNode"
+                  lazy
+                  show-checkbox
+                  @check-change="handleCheckChange">
+          </el-tree>
+        </el-row>
+      </el-row>
+      <el-row>
+        <h5>界面权限设置</h5>
         <el-row>
           <el-tree
                   :props="props"
@@ -48,6 +80,7 @@
       </el-row>
     </el-form>
     <el-button class="btn" type="primary" @click="onSubmit">确定</el-button>
+    <el-button class="btn" @click="onReset">重置</el-button>
   </div>
 </template>
 <style lang="scss" scoped>
@@ -75,6 +108,11 @@
       min-width:200px;
       margin:20px;
     }
+    .user-group{
+      width:100%;
+      height:280px;
+      overflow-y:auto;
+    }
   }
 </style>
 <script>
@@ -83,19 +121,71 @@
       return {
         form: {
           name: "",
-          region: "",
-          date1: "",
-          date2: "",
-          delivery: false,
-          type: [],
-          resource: "",
-          desc: ""
+          password:"",
+          phone: "",
+          fullName: "",
+          desc: "",
+          mailbox:""
         },
+        data: [{
+          id: 1,
+          label: '系统用户组',
+          children:[{
+            id:4,
+            label:'管理员'
+          }, {
+            id:5,
+            label:'网站运营'
+          }, {
+            id:6,
+            label:'网站编辑'
+          },{
+            id:7,
+            label:'仓库管理员'
+          },{
+            id:8,
+            label:'客服'
+          }]
+        }, {
+          id:2,
+          label: '新闻部用户组',
+          children: [{
+            id: 9,
+            label: '主编'
+          }, {
+            id: 10,
+            label: '副主缟'
+          }, {
+            id:11,
+            label: '新闻编辑员'
+          }, {
+            id:12,
+            label: '新闻采集员'
+          }]
+        }, {
+          id: 3,
+          label: '财务组',
+          children: [{
+            id: 13,
+            label: '财务总监'
+          }, {
+            id:14,
+            label: '会计'
+          }, {
+            id:15,
+            label: '出纳'
+          }]
+        }],
+        defaultProps: {
+          children: 'children',
+          label: 'label'
+        },
+        checkedKeys:[5],
         count:1,
         props: {
           label: 'name',
           children: 'zones'
-        }
+        },
       };
     },
     methods: {
@@ -103,16 +193,21 @@
       onSubmit() {
         console.log("submit!");
       },
+      //重置
+      onReset(){
+        this.$refs.formId.resetFields();
+        this.$refs.newTopRightsTree.setCheckedKeys([])//树形重置
+      },
       loadNode(node, resolve) {
         if (node.level === 0) {
-          return resolve([{ name: '会员用户组' }, { name: '新闻用户' }]);
+          return resolve([{ name: '库存系统管理' }, { name: '支付系统管理' }]);
         }
         if (node.level > 3) return resolve([]);
 
         var hasChild;
-        if (node.data.name === "会员用户组") {
+        if (node.data.name === "库存系统管理") {
           hasChild = true;
-        } else if (node.data.name === "新闻用户") {
+        } else if (node.data.name === "支付系统管理") {
           console.log("========");
           hasChild = false;
         } else {
@@ -123,22 +218,21 @@
           var data;
           if (hasChild) {
             data = [{
-              name: '普通会员' + this.count++
+              name: '添加' + this.count++
             }, {
-              name: '注册会员' + this.count++
+              name: '删除' + this.count++
             }];
           } else {
             data = [{
-              name: '新闻采集员' + this.count++
+              name: '添加' + this.count++
             }, {
-              name: '新闻编辑人员' + this.count++
+              name: '修改' + this.count++
             }];
           }
 
           resolve(data);
         }, 500);
-      }
-
+      },
     },
     mounted() {
 

@@ -180,6 +180,7 @@ export default {
   },
   watch: {
     $route(to) {
+      console.log("我是head~~~")
       //单页处理
       //在mounted函数执行的方法，放到该处
       this.path = to.meta.navigation;

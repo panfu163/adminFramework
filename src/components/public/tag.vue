@@ -98,21 +98,17 @@ export default {
   mounted() {
     this.path = this.$route.path;
     let item = this.$route;
-    let val = [
-      {
+    let val = [{
         title: item.meta.title,
         url: item.path
-      }
-    ];
+      }];
     this.dynamicTags = val;
-    this.bus.$on("sfold",res=>{
-      console.log(res);
-      this.sfold=res;
-    });
+    this.bus.$on("sfold",res=>{this.sfold=res;});
   },
   computed: {},
   watch: {
     $route(to) {
+      console.log("我是tag~~~")
       if (to.path) {
         let val = {
           title: to.meta.title,

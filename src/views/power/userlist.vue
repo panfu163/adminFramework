@@ -1,24 +1,30 @@
 <template>
   <div class="content">
     <div class="title-box">
-      <el-form ref="form" :inline="true" :model="form" label-width="120px">
-        <el-form-item label="用户组名称">
-          <el-input v-model="form.name"  placeholder="请选择用户组名称"></el-input>
-        </el-form-item>
-        <el-form-item label="状态">
-          <el-select v-model="form.region" placeholder="请选择状态">
-            <el-option label="正常" value="shanghai"></el-option>
-            <el-option label="停用" value="beijing"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="onSubmit">查询</el-button>
-          <el-button>取消</el-button>
-        </el-form-item>
-      </el-form>
+      <i class="el-icon-info"></i>
+      <div class="title-content">
+        <p>通过用户组对职责相同的角色用户进行分类并授权，可以更加高效地管理用户及其权限。</p>
+        <p>对一个用户组进行授权后，用户组内的所有用户会自动继承该用户组的权限。</p>
+        <p>如果一个用户被加入到多个用户组，那么该用户将会继承多个用户组的权限。</p>
+      </div>
     </div>
     <el-row>
-      <el-button type="primary" round @click="addUser">添加用户组</el-button>
+        <el-form ref="formId" :inline="true" :model="form" label-width="120px">
+          <el-form-item label="用户组名称：" prop="name">
+            <el-input v-model="form.name"  placeholder="请填写用户组名称"></el-input>
+          </el-form-item>
+          <el-form-item label="状态:" prop="region">
+            <el-select v-model="form.region" placeholder="请选择状态">
+              <el-option label="正常" value="shanghai"></el-option>
+              <el-option label="停用" value="beijing"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="onSubmit">查询</el-button>
+            <el-button @click="onReset()">重置</el-button>
+          </el-form-item>
+          <el-button type="success" round @click="addUser">添加用户组</el-button>
+        </el-form>
     </el-row>
     <el-table
       ref="multipleTable"
@@ -31,6 +37,7 @@
       stripe
       highlight-current-row
       @selection-change="handleSelectionChange"
+      :header-cell-style="{background:'#eef1f6',color:'#18333f'}"
     >
       <el-table-column type="index" label="#" :index="indexMethod"> </el-table-column>
       <el-table-column type="selection"
@@ -38,15 +45,13 @@
                        disabled="true"
       ></el-table-column>
       <el-table-column prop="name" label="用户组名称"></el-table-column>
-      <el-table-column prop="creationTime" label="创建时间" show-overflow-tooltip>
-      </el-table-column>
-      <el-table-column prop="updateTime" label="更新时间" show-overflow-tooltip>
-      </el-table-column>
-      <el-table-column prop="status" label="状态" show-overflow-tooltip>
+      <el-table-column prop="remarks" label="备注">
       </el-table-column>
       <el-table-column prop="creater" label="创建人" show-overflow-tooltip>
       </el-table-column>
-      <el-table-column prop="checker" label="审核人" show-overflow-tooltip>
+      <el-table-column prop="creationTime" label="创建时间" show-overflow-tooltip>
+      </el-table-column>
+      <el-table-column prop="updateTime" label="更新时间" show-overflow-tooltip>
       </el-table-column>
       <el-table-column prop="status" label="状态" show-overflow-tooltip>
         <template slot-scope="scope">
@@ -59,7 +64,7 @@
         </template>
       </el-table-column>
       <el-table-column fixed="right" label="操作" width="200">
-        <template slot-scope="scope" v-if="scope.$index!=0 && scope.$index!=1">
+        <template slot-scope="scope" v-if="scope.$index!=0">
           <el-button @click="handleClick(scope.row)" type="text" size="mini"
             >查看</el-button
           >
@@ -96,6 +101,21 @@
     background: #ecf5ff;
     padding: 20px;
     margin-bottom: 10px;
+    display:flex;
+    &>i{
+      padding-top: 0.5em;
+      @include color("color");
+    }
+    .title-content{
+      padding-left:10px;
+      p{
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+        font-size:12px;
+        line-height: 1.5 !important;
+      }
+    }
+
   }
   .pagination {
     text-align: right;
@@ -124,28 +144,45 @@ export default {
       },
       tableData: [
         {
-          name: "系统默认",
+          id:1,
+          name: "系统用户组",
+          remarks:"系统默认用户组不可修改",
           creationTime: "2019-09-12 32:30:24",
           updateTime: "2019-09-12 32:30:24",
           status:"正常",
           creater:"系统",
           checker:"系统",
         },{
-          name: "系统管理员",
+          id:2,
+          name: "财务组",
+          remarks:"财务部门权限用户组",
           creationTime: "2019-09-12 32:30:24",
           updateTime: "2019-09-12 32:30:24",
           status:"正常",
           creater:"系统",
           checker:"系统",
         },{
-          name: "产品管理组",
+          id:3,
+          name: "产品组",
+          remarks:"产品部门权限用户组",
           creationTime: "2019-09-12 32:30:24",
           updateTime: "2019-09-12 32:30:24",
           status:"正常",
           creater:"admin",
           checker:"admin",
         },{
-          name: "订单管理组",
+          id:4,
+          name: "订单组",
+          remarks:"订单部门、售后部门权限用户组",
+          creationTime: "2019-09-12 32:30:24",
+          updateTime: "2019-09-12 32:30:24",
+          status:"正常",
+          creater:"admin",
+          checker:"admin",
+        },{
+          id:5,
+          name: "运营组",
+          remarks:"市场部门、运营部门、销售权限用户组",
           creationTime: "2019-09-12 32:30:24",
           updateTime: "2019-09-12 32:30:24",
           status:"正常",
@@ -159,6 +196,11 @@ export default {
   methods: {
     onSubmit() {
       console.log("submit!");
+    },
+    //重置
+    onReset(){
+      console.log("=========")
+      this.$refs.formId.resetFields()
     },
     handleSelectionChange(val) {
       this.multipleSelection = val;
@@ -198,8 +240,8 @@ export default {
     },
     toggleSelection(rows) {
       if (rows) {
-        rows.forEach(row => {
-            if(row.name=="系统默认"|| row.name=="系统管理员"){
+        rows.forEach((row,index) => {
+            if(index==0){
               return;
             }
             this.$refs.multipleTable.toggleRowSelection(row);
@@ -214,7 +256,7 @@ export default {
     },
     //处理选中
     checkSelectable(row,index){
-        if (index==0|| index==1) {//这个判断根据你的情况而定
+        if (index==0) {//这个判断根据你的情况而定
           return 0;//不可勾选
         }else {
           return 1;//可勾选

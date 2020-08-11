@@ -114,11 +114,9 @@ export default {
     };
   },
   mounted() {
-    console.log("我是menu");
     this.pathName = this.$route.meta.navigation; //设置导航数据
     let str = this.$route.path;
     let array = str.match(this.reg)[0]; //处理子路由取父路由
-    console.log('23492083492')
     this.bus.$on("sfold",res=>{
       console.log(res);
       this.sfold=res;
@@ -241,17 +239,17 @@ export default {
               id: "1",
               data: [
                 {
-                  title: this.$t("power.manage.list.userManagement"),
-                  url: "/power"
-                },
-                {
                   title: this.$t("power.manage.list.userList"),
                   url: "/power/userList"
                 },
                 {
                   title: this.$t("power.manage.list.rolList"),
                   url: "/power/rolList"
-                }
+                },
+                {
+                  title: this.$t("power.manage.list.userManagement"),
+                  url: "/power"
+                },
               ]
             },
             {
@@ -556,6 +554,7 @@ export default {
   },
   watch: {
     $route(to) {
+      console.log("我是menu~~~")
       //单页处理
       //在mounted函数执行的方法，放到该处
       this.pathName = to.meta.navigation;

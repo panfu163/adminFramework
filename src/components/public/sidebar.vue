@@ -235,10 +235,10 @@ export default {
     }
   },
   mounted() {
-    console.log("我是side");
     let str = this.$route.path;
     let array = str.match(this.reg)[0]; //处理子路由取父路由
     this.isActive = array; //处理导航选中
+
     //this.isActive=localStorage.getItem("serviceAddress")?localStorage.getItem("serviceAddress") : "会员";//分服务包才用得到
   },
   methods: {
@@ -266,6 +266,7 @@ export default {
   },
   watch: {
     $route(to) {
+      console.log("我是sidebar~~~")
       //单页处理
       //在mounted函数执行的方法，放到该处
       let str = to.path;

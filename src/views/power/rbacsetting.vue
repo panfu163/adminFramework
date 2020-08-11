@@ -2,37 +2,18 @@
   <div class="content">
     <el-row>
       <el-col :span="3">
-        <el-menu  default-active="1">
-          <el-menu-item index="1">
-          <i class="el-icon-s-tools"></i>
-          <span slot="title">权限系统</span>
-        </el-menu-item>
-          <el-menu-item index="2">
-            <i class="el-icon-menu"></i>
-            <span slot="title">仓库系统</span>
-          </el-menu-item>
-          <el-menu-item index="3">
-            <i class="el-icon-document"></i>
-            <span slot="title">订单系统</span>
-          </el-menu-item>
-          <el-menu-item index="4">
-            <i class="el-icon-setting"></i>
-            <span slot="title">产品系统</span>
-          </el-menu-item>
-        </el-menu>
+        <el-tree class="el-cols" accordion :data="data" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
       </el-col>
-
-
       <el-col :span="21" class="pagination">
-        <h4>用户组</h4>
-          <el-checkbox  class="el-checkbox-title" :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
-          <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
-            <el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
-          </el-checkbox-group>
-        <h4>角色</h4>
+        <h5>功能权限</h5>
         <el-checkbox  class="el-checkbox-title" :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
         <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
           <el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
+        </el-checkbox-group>
+        <h5>界面权限</h5>
+        <el-checkbox  class="el-checkbox-title" :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
+        <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
+          <el-checkbox v-for="city in cityOptions" :label="city" :key="city">{{city}}</el-checkbox>
         </el-checkbox-group>
        <el-button class="btn" type="primary">确定</el-button>
       </el-col>
@@ -41,7 +22,7 @@
 </template>
 <style lang="scss" scoped>
 .content {
-  padding:0 10px 10px;
+  padding:10px 10px;
   background: #fff;
   box-sizing: border-box;
   h4{
@@ -54,7 +35,7 @@
   }
   h5{
     border-bottom: 1px solid #eee;
-    padding-bottom:20px;
+    padding-bottom:10px;
     margin-bottom:20px;
     display:block;
   }
@@ -68,6 +49,10 @@
   }
   .pagination {
     padding:10px 20px;
+    border-left:1px solid #eee;
+    .el-checkbox-group{
+      margin-bottom:20px;
+    }
     .el-checkbox-title{
       margin-bottom:10px;
       &:first-child{
@@ -79,13 +64,63 @@
 </style>
 <script>
   const cityOptions = ['删除功能', '增加功能', '修改功能'];
+  const pangOptions = ['增加导航', '修改图片', '修改LOGO'];
 export default {
   data() {
     return {
       checkAll: false,
       checkedCities: [],
       cities: cityOptions,
-      isIndeterminate: true
+      cityOptions:pangOptions,
+      isIndeterminate: true,
+      data: [{
+        label: '权限',
+        children: [{
+          label: '账户管理',
+          children: [{
+            label: '用户组管理'
+          },{
+            label: '角色管理'
+          },{
+            label: '用户管理'
+          },{
+            label: '权限管理',
+            children: [{
+              label: '权限设置'
+            }]
+          }]
+        }]
+      }, {
+        label: '会员',
+        children: [{
+          label: '二级 2-1',
+          children: [{
+            label: '三级 2-1-1'
+          }]
+        }, {
+          label: '二级 2-2',
+          children: [{
+            label: '三级 2-2-1'
+          }]
+        }]
+      }, {
+        label: '仓库',
+        children: [{
+          label: '二级 3-1',
+          children: [{
+            label: '三级 3-1-1'
+          }]
+        }, {
+          label: '二级 3-2',
+          children: [{
+            label: '三级 3-2-1'
+          }]
+        }]
+      }],
+      defaultProps: {
+        children: 'children',
+        label: 'label'
+      }
     };
   },
   methods: {
@@ -97,6 +132,20 @@ export default {
       let checkedCount = value.length;
       this.checkAll = checkedCount === this.cities.length;
       this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
+    },
+    handleNodeClick(data) {
+      console.log(data);
+      const loading = this.$loading({
+        text: 'Loading',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      });
+      this.cities=[];
+      this.pangOptions=[];
+      setTimeout(() => {loading.close();
+      this.cities=['删除功能', '增加功能', '修改功能','查看功能']
+      this.pangOptions=['增加导航', '修改图片', '修改LOGO']
+      },500)
     }
   },
   mounted() {

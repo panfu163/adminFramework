@@ -13,7 +13,7 @@
 //字体颜色
 @mixin color($color) {
   @include themeify{
-    background:index($color);
+    color:index($color);
   }
 }
 
