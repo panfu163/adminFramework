@@ -38,6 +38,16 @@ const warehouse = [
     },
     component: () =>
       import("@/views/warehouse/uniqueCode.vue")
+  },
+  {
+    path: "/warehouse/goods",
+    name: "goods",
+    meta: {
+      title: "基础商品",
+      navigation: "warehouse" //处理导航显示-子路由需和父路由一至
+    },
+    component: () =>
+        import("@/views/warehouse/goods.vue")
   }
 ];
 export default warehouse;

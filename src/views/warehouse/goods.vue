@@ -1,49 +1,29 @@
 <template>
   <div class="search">
     <div class="title-box">
-      <el-form ref="form" :inline="true" :model="form" label-width="80px">
+      <el-form ref="form" :inline="true" :model="form" label-width="120px">
         <el-form-item label="商品名称">
           <el-input v-model="form.name"></el-input>
         </el-form-item>
-        <el-form-item label="仓库">
-          <el-select v-model="form.region" placeholder="请选择活动区域">
-            <el-option label="总仓库" value="shanghai"></el-option>
-            <el-option label="电商库" value="beijing"></el-option>
+        <el-form-item label="供应商名称">
+          <el-select v-model="form.region" placeholder="请选择供应商">
+            <el-option label="淘宝公司" value="shanghais"></el-option>
+            <el-option label="华为公司" value="beijings"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="查询时间">
-          <el-col :span="11">
+        <el-form-item label="品牌名称">
+          <el-select v-model="form.desc" placeholder="请选择品牌">
+            <el-option label="苹果" value="shanghai"></el-option>
+            <el-option label="小米" value="beijing"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="录入时间">
             <el-date-picker
               type="date"
               placeholder="选择日期"
               v-model="form.date1"
               style="width: 100%;"
             ></el-date-picker>
-          </el-col>
-          <el-col class="line" :span="2">-</el-col>
-          <el-col :span="11">
-            <el-time-picker
-              placeholder="选择时间"
-              v-model="form.date2"
-              style="width: 100%;"
-            ></el-time-picker>
-          </el-col>
-        </el-form-item>
-      </el-form>
-      <el-form ref="form" :model="form" label-width="80px">
-        <el-form-item label="状态">
-          <el-checkbox-group v-model="form.type">
-            <el-checkbox label="已入库" name="type"></el-checkbox>
-            <el-checkbox label="已出库" name="type"></el-checkbox>
-            <el-checkbox label="待出库" name="type"></el-checkbox>
-            <el-checkbox label="待审核" name="type"></el-checkbox>
-          </el-checkbox-group>
-        </el-form-item>
-        <el-form-item label="类型">
-          <el-radio-group v-model="form.resource">
-            <el-radio label="实物"></el-radio>
-            <el-radio label="虚拟"></el-radio>
-          </el-radio-group>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSubmit">查询</el-button>
@@ -67,8 +47,8 @@
       highlight-current-row
       @selection-change="handleSelectionChange"
     >
-      <el-table-column type="index" :index="indexMethod"> </el-table-column>
-      <el-table-column type="selection" width="55"> </el-table-column>
+      <el-table-column type="index" label="#" :index="indexMethod"> </el-table-column>
+      <el-table-column type="selection"  width="55"> </el-table-column>
       <el-table-column label="" width="60">
         <template slot-scope="scope">
           <img
@@ -84,17 +64,17 @@
           {{ scope.row.date }}
         </template>
       </el-table-column>
-      <el-table-column prop="name" label="库存单位" width="120">
+      <el-table-column prop="name" label="供应商名称" width="120">
       </el-table-column>
-      <el-table-column prop="address" label="实物库存" show-overflow-tooltip>
+      <el-table-column prop="address" label="公司地址" show-overflow-tooltip>
       </el-table-column>
-      <el-table-column prop="address" label="占用库存" show-overflow-tooltip>
+      <el-table-column prop="phone" label="联系电话" show-overflow-tooltip>
       </el-table-column>
-      <el-table-column prop="address" label="可用库存" show-overflow-tooltip>
+      <el-table-column prop="userName" label="联系人" show-overflow-tooltip>
       </el-table-column>
-      <el-table-column prop="address" label="在途库存" show-overflow-tooltip>
+      <el-table-column prop="eml" label="联系邮箱" show-overflow-tooltip>
       </el-table-column>
-      <el-table-column prop="address" label="总成本" show-overflow-tooltip>
+      <el-table-column prop="address" label="产地" show-overflow-tooltip>
       </el-table-column>
       <el-table-column fixed="right" label="操作" width="200">
         <template slot-scope="scope">
@@ -115,6 +95,7 @@
     <div style="margin-top: 20px">
       <el-button @click="toggleSelection(tableData)">全选</el-button>
       <el-button @click="toggleSelection()">取消选择</el-button>
+      <el-button @click="del()"  type="primary">删除</el-button>
     </div>
     <el-pagination
       class="pagination"
@@ -212,51 +193,72 @@ export default {
       },
       tableData: [
         {
-          date: "实物商品（购买时需填写收货地址，测试商品，不发货，不退款）",
-          name: "个",
-          address: "12",
+          date: "华为手机X100",
+          name: "华为科技有限公司",
+          address: "广东省深圳市福田区华强北188号",
+          phone:"18285533797",
+          eml:"1602858720@qq.com",
+          userName:"潘先生",
           head_pic:
             "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
         },
         {
-          date: "实物商品（购买时需填写收货地址，测试商品，不发货，不退款）",
-          name: "个",
-          address: "22",
+          date: "华为手机X100",
+          name: "华为科技有限公司",
+          address: "广东省深圳市福田区华强北188号",
+          phone:"18285533797",
+          eml:"1602858720@qq.com",
+          userName:"潘先生",
           head_pic:
             "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
         },
         {
-          date: "实物商品（购买时需填写收货地址，测试商品，不发货，不退款）",
-          name: "个",
-          address: "22",
+          date: "华为手机X100",
+          name: "华为科技有限公司",
+          address: "广东省深圳市福田区华强北188号",
+          phone:"18285533797",
+          eml:"1602858720@qq.com",
+          userName:"潘先生",
           head_pic:
             "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
         },
         {
-          date: "实物商品（购买时需填写收货地址，测试商品，不发货，不退款）",
-          name: "个",
-          address: "22",
+          date: "华为手机X100",
+          name: "华为科技有限公司",
+          address: "广东省深圳市福田区华强北188号",
+          phone:"18285533797",
+          eml:"1602858720@qq.com",
+          userName:"潘先生",
           head_pic:
             "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
         },
         {
-          date: "实物商品（购买时需填写收货地址，测试商品，不发货，不退款）",
-          name: "个",
-          address: "12",
+          date: "华为手机X100",
+          name: "华为科技有限公司",
+          address: "广东省深圳市福田区华强北188号",
+          phone:"18285533797",
+          eml:"1602858720@qq.com",
+          userName:"潘先生",
           head_pic:
             "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
         },
         {
-          date: "实物商品（购买时需填写收货地址，测试商品，不发货，不退款）",
-          name: "个",
-          address: "22",
+          date: "华为手机X100",
+          name: "华为科技有限公司",
+          address: "广东省深圳市福田区华强北188号",
+          phone:"18285533797",
+          eml:"1602858720@qq.com",
+          userName:"潘先生",
           head_pic:
             "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
         },
         {
-          date: "实物商品（购买时需填写收货地址，测试商品，不发货，不退款）",
-          name: "个",
-          address: "22",
+          date: "华为手机X100",
+          name: "华为科技有限公司",
+          address: "广东省深圳市福田区华强北188号",
+          phone:"18285533797",
+          eml:"1602858720@qq.com",
+          userName:"潘先生",
           head_pic:
             "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
         }
@@ -294,7 +296,33 @@ export default {
     //添加商品
     addProduct(){
       this.dialogFormVisible=true
-    }
+    },
+    /**
+     * 批量删除行
+     * @param {object} row 行数据
+     * @param {number} i 数据的序号
+     */
+    del() {
+      if (this.multipleSelection.length === 0) {
+        this.$alert('请至少选择一行数据', '系统提示', {
+          confirmButtonText: '确定',
+          callback:()=> {
+          }});
+        return false;
+      }else{
+
+        //外层循环原数组，内层批量选中的数组，注意一点删除的时候，i倒过来循环，不然会引起index下角标因删除前一条而变化的问题
+        for (let i = this.tableData.length; i > 0; i--) {
+          for (let j = 0; j < this.multipleSelection.length; j++) {
+            if (this.tableData[i - 1] === this.multipleSelection[j]) {
+              this.tableData.splice(i - 1, 1);
+            }
+          }
+        }
+
+
+      }
+    },
   },
   mounted() {
     //3秒后关掉加载

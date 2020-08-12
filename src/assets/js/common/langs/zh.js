@@ -26,6 +26,7 @@ export default {
     search: {
       title: "库存查询",
       list: {
+        goods:"基础商品",
         check: "库存查询",
         notes: "库存记录",
         code: "唯一码管理"

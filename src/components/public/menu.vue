@@ -157,16 +157,20 @@ export default {
               id: "1",
               data: [
                 {
+                  title: this.$t("warehouse.search.list.goods"),
+                  url: "/warehouse/goods"
+                },
+                {
                   title: this.$t("warehouse.search.list.check"),
                   url: "/warehouse"
                 },
                 {
                   title: this.$t("warehouse.search.list.notes"),
-                  url: "/InventoryFlow"
+                  url: "/warehouse/InventoryFlow"
                 },
                 {
                   title: this.$t("warehouse.search.list.code"),
-                  url: "/uniqueCode"
+                  url: "/warehouse/uniqueCode"
                 }
               ]
             },

@@ -53,17 +53,16 @@
       ref="multipleTable"
       :data="tableData"
       tooltip-effect="dark"
-      height="400"
+      height="480"
       style="width: 100%;position: relative"
-      border
       stripe
       highlight-current-row
       @selection-change="handleSelectionChange"
     >
-      <el-table-column fixed type="index" :index="indexMethod">
+      <el-table-column fixed type="index" label="头像" :index="indexMethod">
       </el-table-column>
       <el-table-column fixed type="selection" width="55"> </el-table-column>
-      <el-table-column label="头像" width="80">
+      <el-table-column width="80">
         <template slot-scope="scope">
           <img
             :src="scope.row.head_pic"
@@ -73,20 +72,20 @@
           />
         </template>
       </el-table-column>
-      <el-table-column label="账号" width="150">
+      <el-table-column label="账号名称" width="150">
         <template slot-scope="scope">
           {{ scope.row.date }}
         </template>
       </el-table-column>
       <el-table-column prop="name" label="手机号" width="120">
       </el-table-column>
-      <el-table-column prop="adminuser" label="角色" width="120">
+      <el-table-column prop="user" label="用户等级" width="120">
       </el-table-column>
-      <el-table-column prop="user" label="用户组" width="120">
+      <el-table-column prop="adminuser" label="地区" width="100">
       </el-table-column>
-      <el-table-column prop="weixin" label="微信号" show-overflow-tooltip>
+      <el-table-column prop="weixin" label="微信号" width="140">
       </el-table-column>
-      <el-table-column prop="pay" label="支付宝号" show-overflow-tooltip>
+      <el-table-column prop="pay" label="支付宝号" width="140">
       </el-table-column>
       <el-table-column prop="mailbox" label="邮箱" show-overflow-tooltip>
       </el-table-column>
@@ -110,19 +109,19 @@
       </el-table-column>
       <el-table-column prop="promotionID" label="默认" show-overflow-tooltip>
       </el-table-column>
-      <el-table-column fixed="right" label="操作" width="200">
+      <el-table-column fixed="right" label="操作" width="80">
         <template slot-scope="scope">
           <el-button @click="getDetails(scope.row)" type="text" size="mini"
             >查看</el-button
           >
-          <el-button type="text" size="mini">编辑</el-button>
-          <el-button
-            @click.native.prevent="deleteRow(scope.$index, tableData)"
-            type="text"
-            size="mini"
-          >
-            移除
-          </el-button>
+<!--          <el-button type="text" size="mini">发送邮箱</el-button>-->
+<!--          <el-button-->
+<!--            @click.native.prevent="deleteRow(scope.$index, tableData)"-->
+<!--            type="text"-->
+<!--            size="mini"-->
+<!--          >-->
+<!--            移除-->
+<!--          </el-button>-->
         </template>
       </el-table-column>
     </el-table>
@@ -177,7 +176,7 @@ export default {
           date: "panfu",
           name: "18285533808",
           address: "12",
-          adminuser: "超级管理员",
+          adminuser: "北京",
           user: "普通用户组",
           state: "在线",
           mailbox: "panfu163@126.com",
@@ -191,7 +190,7 @@ export default {
         {
           date: "pengweisen",
           name: "18285533808",
-          adminuser: "管理员",
+          adminuser: "北京",
           user: "VIP用户组",
           state: "在线",
           address: "12",
@@ -206,7 +205,7 @@ export default {
         {
           date: "panfu163@126.com",
           name: "18285533808",
-          adminuser: "产品管理员",
+          adminuser: "北京",
           user: "砖石会员",
           state: "在线",
           address: "12",
@@ -221,7 +220,7 @@ export default {
         {
           date: "panfu163@126.com",
           name: "18285533808",
-          adminuser: "-",
+          adminuser: "北京",
           state: "离线",
           user: "普通用户组",
           address: "12",
@@ -236,7 +235,7 @@ export default {
         {
           date: "panfu163@126.com",
           name: "18285533808",
-          adminuser: "-",
+          adminuser: "贵州贵阳",
           state: "离线",
           user: "普通用户组",
           address: "12",
@@ -251,7 +250,7 @@ export default {
         {
           date: "panfu163@126.com",
           name: "18285533808",
-          adminuser: "-",
+          adminuser: "贵州贵阳",
           user: "普通用户组",
           state: "离线",
           address: "12",
@@ -266,7 +265,7 @@ export default {
         {
           date: "panfu163@126.com",
           name: "18285533808",
-          adminuser: "-",
+          adminuser: "贵州贵阳",
           user: "普通用户组",
           state: "离线",
           address: "12",
@@ -281,7 +280,7 @@ export default {
         {
           date: "panfu163@126.com",
           name: "18285533808",
-          adminuser: "-",
+          adminuser: "贵州贵阳",
           user: "普通用户组",
           state: "离线",
           address: "12",
@@ -296,7 +295,7 @@ export default {
         {
           date: "panfu163@126.com",
           name: "18285533808",
-          adminuser: "-",
+          adminuser: "贵州贵阳",
           user: "普通用户组",
           state: "离线",
           address: "12",
