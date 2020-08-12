@@ -2,7 +2,7 @@
   <div class="search">
     <div class="title-box">
       <el-form ref="form" :inline="true" :model="form" label-width="80px">
-        <el-form-item label="系统名称">
+        <el-form-item label="权限名称">
           <el-input v-model="form.name"></el-input>
         </el-form-item>
         <el-form-item label="状态">
@@ -17,6 +17,9 @@
         </el-form-item>
       </el-form>
     </div>
+    <el-row>
+      <el-button type="success" round @click="addUser">添加菜单</el-button>
+    </el-row>
     <el-table
             ref="multipleTable"
             :data="tableData"
@@ -26,11 +29,11 @@
       <el-table-column type="selection"></el-table-column>
       <el-table-column
               prop="title"
-              label="系统名称">
+              label="权限名称">
       </el-table-column>
       <el-table-column
               prop="describe"
-              label="系统说明">
+              label="权限说明">
       </el-table-column>
       <el-table-column
               prop="openingTime"
@@ -39,12 +42,6 @@
       <el-table-column
               prop="downTime"
               label="停用时间">
-      </el-table-column>
-      <el-table-column
-              prop="name"
-              label="使用者"
-              sortable
-              width="180">
       </el-table-column>
       <el-table-column prop="status" label="状态" show-overflow-tooltip>
         <template slot-scope="scope">
@@ -55,23 +52,19 @@
           >
           </el-switch>
         </template>
-      </el-table-column>S
-      <el-table-column
-              prop="address"
-              label="公司地址">
       </el-table-column>
       <el-table-column fixed="right" label="操作" width="200">
         <template slot-scope="scope">
           <el-button @click="addUser(scope.row)" type="text" size="mini"
-          >详情</el-button
+          >编辑</el-button
           >
-<!--          <el-button-->
-<!--                  @click.native.prevent="deleteRow(scope.$index, tableData)"-->
-<!--                  type="text"-->
-<!--                  size="mini"-->
-<!--          >-->
-<!--            删除-->
-<!--          </el-button>-->
+          <el-button
+                  @click.native.prevent="deleteRow(scope.$index, tableData)"
+                  type="text"
+                  size="mini"
+          >
+            删除
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -88,6 +81,37 @@
             :total="1000"
     >
     </el-pagination>
+
+
+
+    <el-dialog title="添加权限"
+               :visible.sync="dialogFormVisible"
+               :append-to-body="appendToBody"
+    >
+      <el-form :model="form">
+        <el-form-item label="权限名称" :label-width="formLabelWidth">
+          <el-input v-model="form.name" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="备注" :label-width="formLabelWidth">
+          <el-input v-model="form.desc"
+                    type="textarea"
+                    placeholder="请输入内容"
+                    maxlength="200"
+                    show-word-limit></el-input>
+        </el-form-item>
+        <el-form-item label="状态" :label-width="formLabelWidth">
+          <el-select v-model="form.region" placeholder="请选择状态">
+            <el-option label="正常" value="shanghai"></el-option>
+            <el-option label="停用" value="beijing"></el-option>
+          </el-select>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+      </div>
+    </el-dialog>
+
 
   </div>
 </template>
@@ -115,6 +139,9 @@
   export default {
     data() {
       return {
+        dialogFormVisible:false,
+        appendToBody:true,
+        formLabelWidth:"120px",
         loading: true,
         form: {
           name: "",
@@ -128,7 +155,7 @@
         },
         tableData: [{
           id: 1,
-          title:"产品",
+          title:"产品管理权限",
           date:'2021-02-20 23:00:00',
           name:'王小虎',
           address:'上海市普陀区金沙江路1518',
@@ -137,7 +164,7 @@
           describe:"订单系统：功能如下退货订单，支付订单、发货订单等"
         }, {
           id: 2,
-          title:"仓库",
+          title:"仓库管理权限",
           date:'2021-02-20 23:00:00',
           name:'王小虎',
           address: '上海市普陀区金沙江路1517',
@@ -146,7 +173,7 @@
           describe:"订单系统：功能如下退货订单，支付订单、发货订单等"
         }, {
           id:3,
-          title:"权限",
+          title:"权限管理",
           date:'2021-02-20 23:00:00',
           name:'王小虎',
           address: '上海市普陀区金沙江路1519',
@@ -155,7 +182,7 @@
           describe:"订单系统：功能如下退货订单，支付订单、发货订单等"
         }, {
           id: 4,
-          title:"订单",
+          title:"查看订单管理",
           date:'2021-02-20 23:00:00',
           name: '王小虎',
           address: '上海市普陀区金沙江路 1516',
