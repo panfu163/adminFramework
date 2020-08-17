@@ -109,39 +109,78 @@
                :visible.sync="dialogFormVisible"
                :append-to-body="appendToBody"
     >
-      <el-form :model="form">
+      <el-form :model="form" class="el-form-box">
+        <el-form-item label="商品图片" :label-width="formLabelWidth">
+
+          <!--上产图片-->
+          <el-upload
+                  action="#"
+                  list-type="picture-card"
+                  :auto-upload="false">
+            <i slot="default" class="el-icon-plus"></i>
+            <div slot="file" slot-scope="{file}">
+              <img
+                      class="el-upload-list__item-thumbnail"
+                      :src="file.url" alt=""
+              >
+              <span class="el-upload-list__item-actions">
+        <span
+                class="el-upload-list__item-preview"
+                @click="handlePictureCardPreview(file)"
+        >
+          <i class="el-icon-zoom-in"></i>
+        </span>
+        <span
+                v-if="!disabled"
+                class="el-upload-list__item-delete"
+                @click="handleDownload(file)"
+        >
+          <i class="el-icon-download"></i>
+        </span>
+        <span
+                v-if="!disabled"
+                class="el-upload-list__item-delete"
+                @click="handleRemove(file)"
+        >
+          <i class="el-icon-delete"></i>
+        </span>
+      </span>
+            </div>
+          </el-upload>
+          <el-dialog :visible.sync="dialogVisible">
+            <img width="100%" :src="dialogImageUrl" alt="">
+          </el-dialog>
+          <!--上产图片NED-->
+        </el-form-item>
         <el-form-item label="商品名称" :label-width="formLabelWidth">
           <el-input v-model="form.name" autocomplete="off"></el-input>
         </el-form-item>
+        <el-form-item label="商品编码" :label-width="formLabelWidth">
+          <el-input v-model="form.desc" autocomplete="off"></el-input>
+        </el-form-item>
         <el-form-item label="库存：" :label-width="formLabelWidth">
-          <el-input v-model="form.name" autocomplete="off"></el-input>
+          <el-input v-model="form.region" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="进货价" :label-width="formLabelWidth">
-          <el-input v-model="form.name" autocomplete="off"></el-input>
+          <el-input v-model="form.price1" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="批发价" :label-width="formLabelWidth">
-          <el-input v-model="form.name" autocomplete="off"></el-input>
+          <el-input v-model="form.price2" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="销售价" :label-width="formLabelWidth">
-          <el-input v-model="form.name" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="市场价" :label-width="formLabelWidth">
-          <el-input v-model="form.name" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="活动价" :label-width="formLabelWidth">
-          <el-input v-model="form.name" autocomplete="off"></el-input>
+          <el-input v-model="form.price3" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="备注" :label-width="formLabelWidth">
-          <el-input v-model="form.desc"
+          <el-input v-model="form.price"
                     type="textarea"
                     placeholder="请输入内容"
                     maxlength="200"
                     show-word-limit></el-input>
         </el-form-item>
-        <el-form-item label="状态" :label-width="formLabelWidth">
+        <el-form-item label="供应商" :label-width="formLabelWidth">
           <el-select v-model="form.region" placeholder="请选择状态">
-            <el-option label="正常" value="shanghai"></el-option>
-            <el-option label="停用" value="beijing"></el-option>
+            <el-option label="华为公司" value="shanghai"></el-option>
+            <el-option label="深圳公司" value="beijing"></el-option>
           </el-select>
         </el-form-item>
       </el-form>
@@ -150,7 +189,6 @@
         <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
       </div>
     </el-dialog>
-
   </div>
 </template>
 <style lang="scss" scoped>
@@ -166,6 +204,10 @@
   .pagination {
     text-align: right;
     margin-top: 20px;
+  }
+  .el-form-box{
+    height:600px;
+    overflow-y: scroll;
   }
 }
 .el-row {
@@ -189,7 +231,11 @@ export default {
         delivery: false,
         type: [],
         resource: "",
-        desc: ""
+        desc: "",
+        price:"",
+        price1:"",
+        price2:"",
+        price3:""
       },
       tableData: [
         {
@@ -323,6 +369,17 @@ export default {
 
       }
     },
+    //图片处理
+    handleRemove(file) {
+      console.log(file);
+    },
+    handlePictureCardPreview(file) {
+      this.dialogImageUrl = file.url;
+      this.dialogVisible = true;
+    },
+    handleDownload(file) {
+      console.log(file);
+    }
   },
   mounted() {
     //3秒后关掉加载

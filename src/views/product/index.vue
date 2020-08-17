@@ -19,9 +19,11 @@
                 </div>
                 <div class="info"><span>库存数量:</span>900</div>
                 <div class="info"><span>仓库名称:</span>电商仓库</div>
-                <div class="info"><span>仓库管理:</span>张三 18285533808</div>
+                <div class="info"><span>仓库管理:</span>张三 18285588808</div>
                 <div class="info"><span>商品编码:</span>DSCK89083</div>
                 <div class="info"><span>库存状态:</span>货源充足</div>
+                <div class="info"><span>销售价:</span>89.00</div>
+                <div class="info"><span>库存数:</span>89</div>
               </el-col>
               <el-col :span="12">
                 <el-carousel trigger="click" height="150px">
