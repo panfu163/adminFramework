@@ -219,7 +219,7 @@ export default {
         });
         return;
       }
-      if(this.phone!=="pfadmin"){
+      if(this.phone!=="admin"){
         this.$message({
           showClose: true,
           message: "输入的用户名不正确",
