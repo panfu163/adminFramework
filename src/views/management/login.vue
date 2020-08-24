@@ -204,34 +204,34 @@ export default {
     Login() {
       localStorage.setItem("userInfo", "panfu");
       if (!this.phone) {
-        this.$message({
-          showClose: true,
-          message: "用户名不能未空!",
-          type: "success"
+        this.$notify({
+          title: '警告',
+          message: '用户名不能未空!',
+          type: 'warning'
         });
         return;
       }
       if (!this.password) {
-        this.$message({
-          showClose: true,
-          message: "密码不能为空!",
-          type: "success"
+        this.$notify({
+          title: '警告',
+          message: '密码不能为空!',
+          type: 'warning'
         });
         return;
       }
       if(this.phone!=="admin"){
-        this.$message({
-          showClose: true,
-          message: "输入的用户名不正确",
-          type: "success"
+        this.$notify({
+          title: '警告',
+          message: '输入的用户名不正确',
+          type: 'warning'
         });
         return;
       }
       if(this.password!=="admin123"){
-        this.$message({
-          showClose: true,
-          message: "输入的密码不正确",
-          type: "success"
+        this.$notify({
+          title: '警告',
+          message: '输入的密码不正确',
+          type: 'warning'
         });
         return;
       }
