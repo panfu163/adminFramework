@@ -1,58 +1,61 @@
 <template>
   <div class="search">
     <div class="title-box">
-      <el-form ref="form" :inline="true" :model="form" label-width="80px">
-        <el-form-item label="商品名称">
-          <el-input v-model="form.name"></el-input>
+      <el-form ref="form" :inline="true" :model="form">
+        <el-form-item label="商品筛选：">
+          <el-input v-model="form.name" placeholder="请输入商品名称/条码/编码"></el-input>
         </el-form-item>
-        <el-form-item label="仓库">
-          <el-select v-model="form.region" placeholder="请选择活动区域">
-            <el-option label="总仓库" value="shanghai"></el-option>
-            <el-option label="电商库" value="beijing"></el-option>
+        <el-form-item label="销售渠道：">
+          <el-select v-model="form.region" placeholder="发布于">
+            <el-option label="全部" value="all"></el-option>
+            <el-option label="发布于" value="published-on"></el-option>
+            <el-option label="未发布于" value="not-published-on"></el-option>
+            <el-option label="未分配渠道" value="unallocated"></el-option>
+          </el-select>
+          <el-select v-model="form.channel" placeholder="全部渠道" style="width: 110px;margin-left:10px;">
+            <el-option label="全部渠道" value="shanghai"></el-option>
+            <el-option label="门店" value="beijing"></el-option>
+            <el-option label="网店" value="beijing"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="状态">
-          <el-select v-model="form.region" placeholder="请选择状态">
-            <el-option label="在售" value="beijing"></el-option>
-            <el-option label="下架" value="shanghai"></el-option>
-            <el-option label="待上架" value="beijing"></el-option>
-            <el-option label="缺货" value="beijing"></el-option>
+        <el-form-item label="商品分类:">
+          <el-select v-model="form.category" placeholder="所有分类">
+            <el-option label="未分类" value="beijing"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="上架时间">
-          <el-col :span="11">
-            <el-date-picker
-                    type="date"
-                    placeholder="选择日期"
-                    v-model="form.date1"
-                    style="width: 100%;"
-            ></el-date-picker>
-          </el-col>
-          <el-col class="line" :span="2">-</el-col>
-          <el-col :span="11">
-            <el-time-picker
-                    placeholder="选择时间"
-                    v-model="form.date2"
-                    style="width: 100%;"
-            ></el-time-picker>
-          </el-col>
+        <el-form-item label="首选供应商:">
+          <el-select v-model="form.category" placeholder="全部">
+            <el-option label="未分类" value="beijing"></el-option>
+          </el-select>
         </el-form-item>
-        <div>
-        <el-form-item label="类型">
-          <el-radio-group v-model="form.resource">
-            <el-radio label="实物"></el-radio>
-            <el-radio label="虚拟"></el-radio>
-          </el-radio-group>
+        <el-form-item label="商品牌:">
+          <el-select v-model="form.category" placeholder="全部">
+            <el-option label="未分类" value="beijing"></el-option>
+          </el-select>
         </el-form-item>
-        </div>
+        <el-form-item label="存货类别:">
+          <el-select v-model="form.category" placeholder="全部">
+            <el-option label="全部" value="beijing"></el-option>
+            <el-option label="产成品" value="beijing"></el-option>
+            <el-option label="半成品" value="beijing"></el-option>
+            <el-option label="原材料" value="beijing"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="商品来源:">
+          <el-select v-model="form.category" placeholder="全部">
+            <el-option label="总部创建" value="beijing"></el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item class="el-row-btn">
           <el-button type="primary" @click="onSubmit">查询</el-button>
-          <el-button>取消</el-button>
+          <el-button>导出</el-button>
+          <el-button>重置</el-button>
         </el-form-item>
       </el-form>
     </div>
     <el-row>
-      <el-button type="success" round @click="addUser">添加商品</el-button>
+      <el-button type="success" round @click="">导入商品</el-button>
+      <el-button type="primary" round @click="addUser">添加商品</el-button>
     </el-row>
     <el-table
       ref="multipleTable"
@@ -173,7 +176,9 @@ export default {
         delivery: false,
         type: [],
         resource: "",
-        desc: ""
+        desc: "",
+        channel:"",
+        category:""
       },
       tableData: [
         {

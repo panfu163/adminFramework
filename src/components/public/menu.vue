@@ -70,11 +70,10 @@
     border: 0;
     overflow-x: hidden;
     overflow-y: auto;
-    height: calc(100%- 50px);
+    height: calc(100% - 50px);
   }
   .el-menu-vertical-demo {
     width: 100%;
-    overflow: hidden;
     box-sizing: border-box;
     .el-submenu__title {
       height: 40px;
@@ -105,7 +104,7 @@
 export default {
   data() {
     return {
-      openeds: ["1","2", "3"], //设置菜单栏展开3个需要展开的菜单导航
+      openeds: ["1","2", "3","4"], //设置菜单栏展开3个需要展开的菜单导航
       defaultActive: "", //当前选中
       tagData: this.$store.state.tag,
       pathName: "", //根据路径来判断子导航,
@@ -279,51 +278,72 @@ export default {
           name: "product",
           list: [
             {
-              title: this.$t("product.search.title"),
+              title: this.$t("product.information.title"),
               icon: "el-icon-search",
               id: "1",
               data: [
                 {
-                  title: this.$t("product.search.list.check"),
+                  title: this.$t("product.information.list.goods"),
                   url: "/product"
                 },
                 {
-                  title: this.$t("product.search.list.notes"),
-                  url: "/InventoryFlow"
+                  title: this.$t("product.information.list.classify"),
+                  url: ""
                 },
                 {
-                  title: this.$t("product.search.list.code"),
-                  url: "/uniqueCode"
+                  title: this.$t("product.information.list.brand"),
+                  url: ""
+                },{
+                  title: this.$t("product.information.list.unitLibrary"),
+                  url: ""
+                },
+                {
+                  title: this.$t("product.information.list.attribute"),
+                  url: ""
                 }
               ]
             },
             {
-              title: this.$t("product.management.title"),
+              title: this.$t("product.shop.title"),
               icon: "el-icon-monitor",
               id: "2",
               data: [
                 {
-                  title: this.$t("product.management.list.returnGoods"),
+                  title: this.$t("product.shop.list.returnGoods"),
                   url: ""
                 },
                 {
-                  title: this.$t("product.management.list.sale"),
+                  title: this.$t("product.shop.list.sale"),
+                  url: ""
+                }
+              ]
+            },
+            {
+              title: this.$t("product.network.title"),
+              icon: "el-icon-mobile-phone",
+              id: "2",
+              data: [
+                {
+                  title: this.$t("product.network.list.returnGoods"),
                   url: ""
                 },
                 {
-                  title: this.$t("product.management.list.allot"),
+                  title: this.$t("product.network.list.sale"),
+                  url: ""
+                }
+              ]
+            },
+            {
+              title: this.$t("product.virtualGoods.title"),
+              icon: "el-icon-cloudy",
+              id: "2",
+              data: [
+                {
+                  title: this.$t("product.virtualGoods.list.returnGoods"),
                   url: ""
                 },
                 {
-                  title: this.$t("product.management.list.ware"),
-                  url: ""
-                },
-                {
-                  title: this.$t("product.management.list.goods"),
-                  url: ""
-                },
-                {
-                  title: this.$t("product.management.list.check"),
+                  title: this.$t("product.virtualGoods.list.sale"),
                   url: ""
                 }
               ]
@@ -351,6 +371,18 @@ export default {
                 },
                 {
                   title: this.$t("product.BaseInformation.list.restore"),
+                  url: ""
+                },
+                {
+                  title: this.$t("product.BaseInformation.list.generating"),
+                  url: ""
+                },
+                {
+                  title: this.$t("product.BaseInformation.list.priceTag"),
+                  url: ""
+                },
+                {
+                  title: this.$t("product.BaseInformation.list.ShapeModulationCode"),
                   url: ""
                 }
               ]

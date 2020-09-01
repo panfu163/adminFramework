@@ -2,7 +2,7 @@ export default {
   sidebar: {
     authority: "权限",
     warehouse: "仓库",
-    product: "产品",
+    product: "商品",
     purchase: "采购",
     order: "订单",
     logistics:"物流",
@@ -74,34 +74,49 @@ export default {
     },
   },
   product: {
-    title: "产品管理",
-    search: {
-      title: "产品管理",
+    title: "商品中心",
+    information: {
+      title: "商品资料",
       list: {
-        check: "产品查询",
-        notes: "上架产品",
-        code: "下架产品"
+        goods: "商品库",
+        classify: "商品分类",
+        brand:"品牌管理",
+        unitLibrary:"单位库",
+        attribute:"属性库"
       }
     },
-    management: {
-      title: "产品管理",
+    shop: {
+      title: "门店商品",
       list: {
-        returnGoods: "退货",
-        sale: "销售",
-        allot: "活动产品",
-        ware: "团购产品",
-        goods: "商品报溢",
-        check: "库存盘点"
+        returnGoods: "商店商品",
+        sale: "商品分组",
+      }
+    },
+    network: {
+      title: "网店商品",
+      list: {
+        returnGoods: "网店商品",
+        sale: "商品分组",
+      }
+    },
+    virtualGoods: {
+      title: "虚拟商品",
+      list: {
+        returnGoods: "虚拟商品",
+        sale: "商品分组",
       }
     },
     BaseInformation: {
-      title: "基体信息",
+      title: "商品工具",
       list: {
-        settings: "仓库设置",
-        info: "商品基本资料",
-        import: "数据导入",
-        backups: "数据备份",
-        restore: "数据还原"
+        settings:"商品设置",
+        info:"标签管理",
+        import:"运费设置",
+        backups:"配送价格",
+        restore:"零售价格",
+        generating:"生成商品代码",
+        priceTag:"打印商品价签",
+        ShapeModulationCode:"打印调形码",
       }
     }
   },
