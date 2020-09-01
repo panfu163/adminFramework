@@ -503,7 +503,7 @@ export default {
             },
             {
               title: this.$t("user.data.title"),
-              icon: "el-icon-setting",
+              icon: "el-icon-bank-card",
               id: "2",
               data: [
                 {
@@ -517,9 +517,24 @@ export default {
                 {
                   title: this.$t("user.data.list.dataBackup"),
                   url: ""
+                }
+              ]
+            },
+            {
+              title: this.$t("user.fundManagement.title"),
+              icon: "el-icon-suitcase",
+              id: "2",
+              data: [
+                {
+                  title: this.$t("user.fundManagement.list.dataImport"),
+                  url: ""
                 },
                 {
-                  title: this.$t("user.data.list.dataRecovery"),
+                  title: this.$t("user.fundManagement.list.dataExport"),
+                  url: ""
+                },
+                {
+                  title: this.$t("user.fundManagement.list.dataBackup"),
                   url: ""
                 }
               ]
@@ -578,8 +593,35 @@ export default {
               id: "1",
               data: [
                 {
-                  title: this.$t("order.management.list.list"),
+                  title: this.$t("order.management.list.query"),
                   url: "/order"
+                },
+                {
+                  title: this.$t("order.management.list.speedy"),
+                  url: ""
+                },
+                {
+                  title: this.$t("order.management.list.consignment"),
+                  url: ""
+                },
+                {
+                  title: this.$t("order.management.list.batch"),
+                  url: ""
+                }, {
+                  title: this.$t("order.management.list.selfRaising"),
+                  url: ""
+                }, {
+                  title: this.$t("order.management.list.refund"),
+                  url: ""
+                }, {
+                  title: this.$t("order.management.list.arrRefund"),
+                  url: ""
+                }, {
+                  title: this.$t("order.management.list.addOrder"),
+                  url: ""
+                }, {
+                  title: this.$t("order.management.list.assess"),
+                  url: ""
                 }
               ]
             },

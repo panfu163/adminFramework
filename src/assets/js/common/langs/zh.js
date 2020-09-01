@@ -6,7 +6,7 @@ export default {
     purchase: "采购",
     order: "订单",
     logistics:"物流",
-    user: "会员",
+    user: "客户",
     supplier: "供应商",
     shop: "门店",
     finance: "财务",
@@ -154,23 +154,30 @@ export default {
     }
   },
   user: {
-    title: "会员管理",
+    title: "客户中心",
     management: {
-      title: "会员管理",
+      title: "客户管理",
       list: {
-        information: "基本信息",
-        securityCenter: "安全中心",
-        mail: "邮件设置",
-        sms: "短消息"
+        information: "客户查询",
+        securityCenter: "客户分群",
+        mail: "客户导入",
+        sms: "标签管理"
       }
     },
     data: {
-      title: "基本信息",
+      title: "权益管理",
       list: {
-        dataImport:"数据导入",
-        dataExport:"数据导出",
-        dataBackup:"数据备份",
-        dataRecovery:"数据还原"
+        dataImport:"权益卡",
+        dataExport:"积分权益",
+        dataBackup:"自定义权益",
+      }
+    },
+    fundManagement: {
+      title: "资金管理",
+      list: {
+        dataImport:"资金规则",
+        dataExport:"资金查询",
+        dataBackup:"运营管理",
       }
     }
   },
@@ -197,14 +204,19 @@ export default {
     }
   },
   order:{
-    title: "订单管理",
+    title: "订单中心",
     management: {
       title: "订单管理",
       list: {
-        list:"订单列表",
-        securityCenter: "安全中心",
-        mail: "邮件设置",
-        sms: "短消息"
+        query:"订单查询",
+        speedy: "快速打单",
+        consignment: "销售发货",
+        batch: "批量发货",
+        selfRaising: "到店自提",
+        refund: "退款维权",
+        arrRefund: "批量退款",
+        addOrder: "添加订单",
+        assess: "售后评价",
       }
     }
   },
