@@ -162,7 +162,7 @@ export default {
           icon: "el-icon-tickets"
         },{
           title: this.$t("sidebar.logistics"), //"物流管理",
-          url: "",
+          url: "/logistics",
           icon: "el-icon-truck"
         },
         {
@@ -192,7 +192,7 @@ export default {
         },
         {
           title: this.$t("sidebar.shortLetter"), //"短信",
-          url: "",
+          url: "/message",
           icon: "el-icon-chat-line-round"
         },
         {

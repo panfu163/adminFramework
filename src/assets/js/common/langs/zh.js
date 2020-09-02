@@ -182,24 +182,54 @@ export default {
     }
   },
   pay:{
-      title: "支付管理",
+      title: "财务管理",
       management: {
-        title: "支付管理",
+        title: "收入管理",
         list: {
-          list:"支付列表",
-          securityCenter: "安全中心",
-          mail: "邮件设置",
-          sms: "短消息"
+          list:"销售毛利",
+          securityCenter: "销售明细",
+          mail: "销售分佣",
+          receipt: "收款对账",
+          returnedMoney: "回款对账"
         }
       },
-      BaseInformation: {
-      title:"基体信息",
+      costManagement: {
+      title:"成本管理",
       list: {
-        settings: "支付设置",
-        info: "商品基本资料",
-        import: "数据导入",
-        backups: "数据备份",
-        restore: "数据还原"
+        settings: "出入库单",
+        info: "存货明细",
+        import: "存货台账",
+        backups: "存货批次",
+        restore: "存货调整",
+        workingExpenses: "经营费用"
+      }
+    },
+    BaseInformations: {
+      title:"结算管理",
+      list: {
+        settings: "采购结算",
+        info: "加盟结算",
+        import: "分用结算",
+      }
+    },
+    paymentReceived: {
+      title:"收付款管理",
+      list: {
+        settings: "付款管理",
+        info: "采购管理",
+        import: "采购退款",
+        backups: "加盟退款",
+        restore: "采购预付款",
+        bargainMoney: "加盟预付款",
+        bargainMoneys:"其他预付款"
+      }
+    },
+    financialData: {
+      title:"财务资料",
+      list: {
+        settings: "财务组织",
+        info: "往来单位",
+        import: "费用项",
       }
     }
   },
@@ -219,6 +249,43 @@ export default {
         assess: "售后评价",
       }
     }
+  },
+  logistics:{
+    title: "物流中心",
+    management: {
+      title: "物流管理",
+      list: {
+        list:"物流查询",
+        settings:"渠道设置",
+        info:"配送设置",
+      }
+    }
+  },
+  message:{
+    title: "短信中心",
+    management: {
+      title: "短信管理",
+      list: {
+        list:"短信列表",
+        mail:"短信签名",
+        channel:"短信渠道"
+      }
+    },
+    sendTheManagement: {
+      title: "发送管理",
+      list: {
+        securityCenter:"发送短信",
+        applyFor:"短信发送申请",
+        audit:"短信发送审核"
+      }
+    },
+    template: {
+      title:"模板管理",
+      list: {
+        securityCenter:"短信模板列表",
+        applyFor:"添加短信模板"
+      }
+    },
   },
   confirm: {
     ok: "确认",

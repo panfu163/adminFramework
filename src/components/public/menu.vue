@@ -552,32 +552,97 @@ export default {
                 {
                   title: this.$t("pay.management.list.list"),
                   url: "/pay"
+                },
+                {
+                  title: this.$t("pay.management.list.securityCenter"),
+                  url: ""
+                },
+                {
+                  title: this.$t("pay.management.list.mail"),
+                  url: ""
+                } ,
+                {
+                  title: this.$t("pay.management.list.receipt"),
+                  url: ""
+                },
+                {
+                  title: this.$t("pay.management.list.returnedMoney"),
+                  url: ""
                 }
               ]
             },
             {
-              title: this.$t("pay.BaseInformation.title"),
-              icon: "el-icon-setting",
+              title: this.$t("pay.costManagement.title"),
+              icon: "el-icon-data-line",
               id: "2",
               data: [
                 {
-                  title: this.$t("pay.BaseInformation.list.settings"),
+                  title: this.$t("pay.costManagement.list.settings"),
                   url: ""
                 },
                 {
-                  title: this.$t("pay.BaseInformation.list.info"),
+                  title: this.$t("pay.costManagement.list.info"),
                   url: ""
                 },
                 {
-                  title: this.$t("pay.BaseInformation.list.import"),
+                  title: this.$t("pay.costManagement.list.import"),
+                  url: ""
+                }
+              ]
+            },
+            {
+              title: this.$t("pay.BaseInformations.title"),
+              icon: "el-icon-data-board",
+              id: "2",
+              data: [
+                {
+                  title: this.$t("pay.BaseInformations.list.settings"),
                   url: ""
                 },
                 {
-                  title: this.$t("pay.BaseInformation.list.backups"),
+                  title: this.$t("pay.BaseInformations.list.info"),
                   url: ""
                 },
                 {
-                  title: this.$t("pay.BaseInformation.list.restore"),
+                  title: this.$t("pay.BaseInformations.list.import"),
+                  url: ""
+                }
+              ]
+            },
+            {
+              title: this.$t("pay.paymentReceived.title"),
+              icon: "el-icon-data-analysis",
+              id: "2",
+              data: [
+                {
+                  title: this.$t("pay.paymentReceived.list.settings"),
+                  url: ""
+                },
+                {
+                  title: this.$t("pay.paymentReceived.list.info"),
+                  url: ""
+                },
+                {
+                  title: this.$t("pay.paymentReceived.list.import"),
+                  url: ""
+                }
+              ]
+            },
+            {
+              title: this.$t("pay.financialData.title"),
+              icon: "el-icon-reading",
+              id: "2",
+              data: [
+                {
+                  title: this.$t("pay.financialData.list.settings"),
+                  url: ""
+                },
+                {
+                  title: this.$t("pay.financialData.list.info"),
+                  url: ""
+                },
+                {
+                  title: this.$t("pay.financialData.list.import"),
                   url: ""
                 }
               ]
@@ -621,6 +686,87 @@ export default {
                   url: ""
                 }, {
                   title: this.$t("order.management.list.assess"),
+                  url: ""
+                }
+              ]
+            },
+          ]
+        },
+        {
+          name: "message",
+          list: [
+            {
+              title: this.$t("message.management.title"),
+              icon: "el-icon-search",
+              id: "1",
+              data: [
+                {
+                  title: this.$t("message.management.list.list"),
+                  url: "/message"
+                },
+                {
+                  title: this.$t("message.management.list.channel"),
+                  url: ""
+                },
+                {
+                  title: this.$t("message.management.list.mail"),
+                  url: ""
+                }
+              ]
+            },{
+              title: this.$t("message.sendTheManagement.title"),
+              icon: "el-icon-chat-dot-square",
+              id: "1",
+              data: [
+                {
+                  title: this.$t("message.sendTheManagement.list.securityCenter"),
+                  url: ""
+                },
+                {
+                  title: this.$t("message.sendTheManagement.list.applyFor"),
+                  url: ""
+                },
+                {
+                  title: this.$t("message.sendTheManagement.list.audit"),
+                  url: ""
+                }
+              ]
+            },
+            {
+              title: this.$t("message.template.title"),
+              icon: "el-icon-postcard",
+              id: "1",
+              data: [
+                {
+                  title: this.$t("message.template.list.securityCenter"),
+                  url: ""
+                },
+                {
+                  title: this.$t("message.template.list.applyFor"),
+                  url: ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          name: "logistics",
+          list: [
+            {
+              title: this.$t("logistics.management.title"),
+              icon: "el-icon-search",
+              id: "1",
+              data: [
+                {
+                  title: this.$t("logistics.management.list.list"),
+                  url: "/logistics"
+                },
+                {
+                  title: this.$t("logistics.management.list.settings"),
+                  url: ""
+                },
+                {
+                  title: this.$t("logistics.management.list.info"),
                   url: ""
                 }
               ]

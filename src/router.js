@@ -12,8 +12,10 @@ import warehouse from "assets/js/router/warehouse"; //库存管理
 import product from "assets/js/router/product"; //产品管理
 import bigdata from "assets/js/router/bigdata"; //大数据管理
 import user from "assets/js/router/user"; //会员管理
-import pay from "assets/js/router/pay"; //财务管理管理
-import order from "assets/js/router/order"; //财务管理管理
+import pay from "assets/js/router/pay"; //支付管理管理
+import order from "assets/js/router/order"; //订单管理管理
+import message from "assets/js/router/message"; //短信管理
+import logistics from "assets/js/router/logistics"; //物流管理
 
 Vue.use(Router);
 const router = new Router({
@@ -74,6 +76,14 @@ const router = new Router({
       path: "/pay",
       component: Main,
       children: pay
+    },{
+      path: "/message",
+      component: Main,
+      children: message
+    },{
+      path: "/logistics",
+      component: Main,
+      children: logistics
     },
     {
       path: "*",
