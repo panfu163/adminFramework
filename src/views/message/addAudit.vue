@@ -2,25 +2,14 @@
   <div class="content">
     <h4>{{this.$route.meta.title}}</h4>
     <el-form ref="formName" :inline="true" :model="ruleForm" :rules="rules" label-width="100px">
-      <el-row>
-        <el-form-item label="手机号:" prop="name">
-          <el-input type="text" v-model="ruleForm.name" minlength="6"  placeholder="多个手号可输入18285533809，18285533809"></el-input>
-          <el-button style="margin-left:10px;" type="success" @click="onSubmit('formName')">导入手机号</el-button>
-        </el-form-item>
-      </el-row>
+      <el-form-item label="模板名称:" prop="name">
+        <el-input v-model="ruleForm.name" minlength="6"  placeholder="请输入模板名称"></el-input>
+      </el-form-item>
       <el-row>
         <el-form-item label="短信类型:" prop="type">
           <el-select v-model="ruleForm.type" placeholder="请选择短信类型">
             <el-option label="普通短信" value="houqing"></el-option>
             <el-option label="营销短信" value="chawu"></el-option>
-          </el-select>
-        </el-form-item>
-      </el-row>
-      <el-row>
-        <el-form-item label="指定发送:" prop="type">
-          <el-select v-model="ruleForm.type" placeholder="请选择短信类型">
-            <el-option label="全部会员" value="houqing"></el-option>
-            <el-option label="张小店会员" value="chawu"></el-option>
           </el-select>
         </el-form-item>
       </el-row>
@@ -38,17 +27,6 @@
             <el-option label="语音短信" value="houqings"></el-option>
             <el-option label="普通短信" value="chawus"></el-option>
           </el-select>
-        </el-form-item>
-      </el-row>
-      <el-row>
-        <el-form-item label="发送时间:" prop="value2">
-          <el-date-picker
-                  v-model="value2"
-                  type="datetime"
-                  placeholder="选择日期时间"
-                  align="right"
-                  :picker-options="pickerOptions">
-          </el-date-picker>
         </el-form-item>
       </el-row>
       <el-row>
@@ -113,7 +91,6 @@
   export default {
     data() {
       return {
-        value2:"",
         ruleForm: {
           name: "",
           type:"",

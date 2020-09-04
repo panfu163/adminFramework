@@ -48,20 +48,47 @@ const product = [
     path: "/message/applyFor",
     name: "messageapplyFor",
     meta: {
-      title: "添加短信模板",
+      title: "短信发送申请",
       navigation: "message" //处理导航显示-子路由需和父路由一至
     },
     component: () =>
         import("@/views/message/applyFor.vue")
   },{
+    path: "/message/addApplyFor",
+    name: "messageaddApplyFor",
+    meta: {
+      title: "短信发送申请",
+      navigation: "message" //处理导航显示-子路由需和父路由一至
+    },
+    component: () =>
+        import("@/views/message/addApplyFor.vue")
+  },{
     path: "/message/audit",
     name: "message",
     meta: {
-      title: "添加短信模板",
+      title: "短信发送审核",
       navigation: "message" //处理导航显示-子路由需和父路由一至
     },
     component: () =>
         import("@/views/message/audit.vue")
+  },{
+    path: "/message/company",
+    name: "messagecompany",
+    meta: {
+      title: "短信渠道",
+      navigation: "message" //处理导航显示-子路由需和父路由一至
+    },
+    component: () =>
+        import("@/views/message/company.vue")
+  },{
+    path: "/message/addAudit",
+    name: "messagecompany",
+    meta: {
+      title: "审核内容",
+      navigation: "message" //处理导航显示-子路由需和父路由一至
+    },
+    component: () =>
+        import("@/views/message/addAudit.vue")
   }
 ];
 export default product;

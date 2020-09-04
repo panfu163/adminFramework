@@ -1,76 +1,110 @@
 <template>
-  <div class="content">
-    <h4>{{this.$route.meta.title}}</h4>
-    <el-form ref="formName" :inline="true" :model="ruleForm" :rules="rules" label-width="100px">
-      <el-form-item label="用户账号:" prop="name">
-        <el-input v-model="ruleForm.name" minlength="6"  placeholder="必填"></el-input>
-      </el-form-item>
-      <el-row>
-        <el-form-item label="账号密码:" prop="password">
-          <el-input v-model="ruleForm.password" minlength="6"  placeholder="必填" show-password></el-input>
+  <div class="search">
+    <div class="title-box">
+      <el-form ref="form" :inline="true" :model="form" label-width="80px">
+        <el-form-item label="短信标题:">
+          <el-input v-model="form.name"  placeholder="请输入手机号"></el-input>
         </el-form-item>
-      </el-row>
-      <el-row>
-        <el-form-item label="联系手机号:" prop="phone">
-          <el-input v-model="ruleForm.phone" type="number" placeholder="必填" minlength="11" maxlength="11"></el-input>
-        </el-form-item>
-      </el-row>
-      <el-row>
-        <el-form-item label="联系邮箱:"  prop="mailbox">
-          <el-input v-model="ruleForm.mailbox"  type="email"  placeholder="必填"></el-input>
-        </el-form-item>
-      </el-row>
-      <el-row>
-        <el-form-item label="真实姓名:" prop="fullName">
-          <el-input v-model="ruleForm.fullName"  placeholder="必填"></el-input>
-        </el-form-item>
-      </el-row>
-      <el-row>
-        <el-form-item label="所在部门:" prop="region">
-          <el-select v-model="ruleForm.region" placeholder="请选择部门">
-            <el-option label="总经办" value="houqing"></el-option>
-            <el-option label="财务部" value="chawu"></el-option>
-            <el-option label="技术部" value="jinshu"></el-option>
-            <el-option label="后勤部" value="houqing"></el-option>
-            <el-option label="商务部" value="shangwu"></el-option>
-            <el-option label="人事部" value="renshi"></el-option>
-            <el-option label="销售部" value="xiaoshe"></el-option>
-            <el-option label="营运部" value="yuanying"></el-option>
-            <el-option label="证券部" value="zhengjuan"></el-option>
+        <el-form-item label="聚道:">
+          <el-select v-model="form.channel" placeholder="请选择公司名称">
+            <el-option label="移动" value="shanghai"></el-option>
+            <el-option label="联通" value="beijing"></el-option>
           </el-select>
         </el-form-item>
-      </el-row>
-    </el-form>
-    <el-button class="btn" type="primary" @click="onSubmit('formName')">确定</el-button>
-    <el-button class="btn" @click="onReset('formName')">取消</el-button>
+        <el-form-item label="类型:">
+          <el-select v-model="form.state" placeholder="请选择运输状态">
+            <el-option label="营销短信" value="shanghai"></el-option>
+            <el-option label="普通短信" value="shanghai"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="onSubmit">查询</el-button>
+          <el-button>取消</el-button>
+        </el-form-item>
+      </el-form>
+
+    </div>
+
+    <el-row class="el-row">
+      <el-button type="success" @click="addTemplate">短信申请</el-button>
+    </el-row>
+
+    <el-table
+            ref="multipleTable"
+            :data="tableData"
+            tooltip-effect="dark"
+            height="480"
+            style="width: 100%;position: relative"
+            stripe
+            highlight-current-row
+            @selection-change="handleSelectionChange"
+            :header-cell-style="{background:'#eef1f6',color:'#18333f'}"
+    >
+      <el-table-column fixed type="index" label="#" :index="indexMethod">
+      </el-table-column>
+      <el-table-column label="短信标题" prop="name" width="150">
+      </el-table-column>
+      <el-table-column prop="type" label="类型" width="120">
+      </el-table-column>
+      <el-table-column prop="company" label="渠道" width="120">
+      </el-table-column>
+      <el-table-column prop="phone" label="短信签名" width="120">
+      </el-table-column>
+      <el-table-column prop="state" label="短信场景" width="120"></el-table-column>
+      <el-table-column prop="address" label="发送内容"></el-table-column>
+      <el-table-column prop="time" label="最后更新时间"  width="180">
+      </el-table-column>
+      <el-table-column prop="monicker" label="操作人" width="120">
+      </el-table-column>
+      <el-table-column fixed="right" label="操作" width="80">
+        <template slot-scope="scope">
+          <el-button @click="addTemplate(scope.row)" type="text" size="mini"
+          >修改</el-button
+          >
+          <!--                          <el-button type="text" size="mini">发送邮箱</el-button>-->
+          <!--                          <el-button-->
+          <!--                            @click.native.prevent="deleteRow(scope.$index, tableData)"-->
+          <!--                            type="text"-->
+          <!--                            size="mini"-->
+          <!--                          >-->
+          <!--                            移除-->
+          <!--                          </el-button>-->
+        </template>
+      </el-table-column>
+    </el-table>
+    <!--    <div style="margin-top: 20px">-->
+    <!--      <el-button @click="toggleSelection(tableData)">全选</el-button>-->
+    <!--      <el-button @click="toggleSelection()">取消选择</el-button>-->
+    <!--    </div>-->
+    <el-pagination
+            class="pagination"
+            background
+            layout="prev, pager, next"
+            :total="1000"
+    >
+    </el-pagination>
   </div>
 </template>
 <style lang="scss" scoped>
-  .content{
+  .search {
     padding: 10px;
     background: #fff;
     box-sizing: border-box;
-    width:100%;
-    h4{
-      border-bottom: 1px solid #eee;
-      padding-bottom:20px;
-      margin-bottom:20px;
-      display:block;
-      font-size:18px;
+    .title-box {
+      background: #ecf5ff;
+      padding: 20px;
+      margin-bottom: 10px;
     }
-    h5{
-      border-bottom: 1px solid #eee;
-      border-top: 1px solid #eee;
-      padding:20px 0;
-      margin:20px auto;
-      display:block;
+    .pagination {
+      text-align: right;
+      margin-top: 20px;
     }
-    .btn{
-      min-width:200px;
-      margin:20px;
+    .line {
+      text-align: center;
     }
-    .user-group{
-      width:100%;
+    .el-row{
+      text-align: right;
+      margin-bottom:10px;
     }
   }
 </style>
@@ -78,61 +112,101 @@
   export default {
     data() {
       return {
-        ruleForm: {
-          name: "",
-          password:"",
-          phone: "",
-          fullName: "",
-          desc: "",
-          mailbox:""
+        pickerOptions: {
+          shortcuts: [{
+            text: '今天',
+            onClick(picker) {
+              picker.$emit('pick', new Date());
+            }
+          }, {
+            text: '昨天',
+            onClick(picker) {
+              const date = new Date();
+              date.setTime(date.getTime() - 3600 * 1000 * 24);
+              picker.$emit('pick', date);
+            }
+          }, {
+            text: '一周前',
+            onClick(picker) {
+              const date = new Date();
+              date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+              picker.$emit('pick', date);
+            }
+          }]
         },
-        rules: {
-          name: [
-            { required: true, message: '请输入用户账号名称', trigger: 'blur' },
-            { min:6, max:20, message: '长度在6到20个字符', trigger: 'blur' }
-          ],
-          password: [
-            { required: true, message: '请输入用户账号密码', trigger: 'blur' },
-            { min:6, max:20, message: '长度在6到20个字符', trigger: 'blur' }
-          ],
-          phone: [
-            { required: true, message: '请输入联系电话', trigger: 'blur' },
-            { min:11, max:11, message: '长度为11个字符', trigger: 'blur' }
-          ],
-          fullName: [
-            { required: true, message: '请输入您的姓名', trigger: 'blur' }
-          ],
-          mailbox: [
-            { required: true, message: '请输入您的邮箱地址', trigger: 'blur' }
-          ],
-          region: [
-            { required: true, message: '请选择所在的部门', trigger: 'change' }
-          ],
+        value1: '',
+        value2: '',
+        value3: '',
+        form: {
+          channel:"",
+          name:"",
+          state:""
         },
+        tableData: [
+          {
+            name:"登录验证码",
+            company:"移动公司",
+            monicker:"小张",
+            phone:"【光大银行】",
+            address: "您正在使用新设备登录，确认后输入动态密码673825，发送序号1，任何人索取动态密码均为诈骗，切勿泄露！[光大银行]",
+            state: "普通短信",
+            time: "2020-09-12 18:30:30",
+            type:"短信验证码"
+          },{
+            name:"注册验证码",
+            company:"联通",
+            monicker:"老王",
+            phone:"【中国电信】",
+            address: "您正在使用新设备登录，确认后输入动态密码673825，发送序号1，任何人索取动态密码均为诈骗，切勿泄露！[光大银行]",
+            state: "普通短信",
+            time: "2020-09-12 18:30:30",
+            type:"短信验证码"
+          },
+          {
+            name:"十周年活动广告",
+            company:"联通",
+            monicker:"张三",
+            phone:"【中国银行】",
+            address: "公司十周年来宾大酬谢！10月1日进店送小轿车一输，任何人索取动态密码均为诈骗，切勿泄露！[光大银行]",
+            state: "语音短信",
+            time: "2020-09-12 18:30:30",
+            type:"营销短信"
+          },
+        ],
+        multipleSelection: []
       };
     },
     methods: {
-      //确定
-      onSubmit(formName) {
+      onSubmit() {
         console.log("submit!");
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            alert('submit!');
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
-        });
       },
-      //重置
-      onReset(formName){
-        this.$refs[formName].resetFields();
-        this.$refs.newTopRightsTree.setCheckedKeys([])//树形重置
+      handleSelectionChange(val) {
+        this.multipleSelection = val;
       },
-      handleCheckChange(){}
-    },
-    mounted() {
-
+      handleClick(row) {
+        console.log(row);
+      },
+      deleteRow(index, rows) {
+        //删除
+        rows.splice(index, 1);
+      },
+      toggleSelection(rows) {
+        if (rows) {
+          rows.forEach(row => {
+            this.$refs.multipleTable.toggleRowSelection(row);
+          });
+        } else {
+          this.$refs.multipleTable.clearSelection();
+        }
+      },
+      indexMethod(index) {
+        //自定义索引
+        return index * 1;
+      },
+      //添加模板
+      addTemplate(){
+        this.$router.push({ path: "/message/addApplyFor" });
+      }
     }
   };
 </script>

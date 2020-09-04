@@ -706,11 +706,11 @@ export default {
                 },
                 {
                   title: this.$t("message.management.list.channel"),
-                  url: "/message/signature"
+                  url: "/message/company"
                 },
                 {
                   title: this.$t("message.management.list.mail"),
-                  url: "/message/addTemplate"
+                  url: "/message/signature"
                 }
               ]
             },{
