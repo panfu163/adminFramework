@@ -2,51 +2,29 @@
   <div class="search">
     <div class="title-box">
       <el-form ref="form" :inline="true" :model="form" label-width="80px">
-        <el-form-item label="账号">
-          <el-input v-model="form.name"></el-input>
-        </el-form-item>
-        <el-form-item label="手机号">
-          <el-input v-model="form.name"></el-input>
-        </el-form-item>
-        <el-form-item label="用户等级">
-          <el-select v-model="form.region" placeholder="请选择用户等级">
-            <el-option label="普通" value="shanghai"></el-option>
-            <el-option label="VIP" value="beijing"></el-option>
+        <el-form-item label="公司名称:">
+          <el-select v-model="form.channel" placeholder="请选择公司名称">
+            <el-option label="顺丰速运" value="shanghai"></el-option>
+            <el-option label="韵达速递" value="beijing"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="注册时间">
-          <el-col :span="11">
-            <el-date-picker
-              type="date"
-              placeholder="选择日期"
-              v-model="form.date1"
-              style="width: 100%;"
-            ></el-date-picker>
-          </el-col>
-          <el-col class="line" :span="1"> - </el-col>
-          <el-col :span="11">
-            <el-time-picker
-              placeholder="选择时间"
-              v-model="form.date2"
-              style="width: 100%;"
-            ></el-time-picker>
-          </el-col>
+        <el-form-item label="快递单号:">
+          <el-input v-model="form.name"></el-input>
         </el-form-item>
-      </el-form>
-      <el-form ref="form" :model="form" label-width="80px">
-        <el-form-item label="状态">
-          <el-checkbox-group v-model="form.type">
-            <el-checkbox label="在线" name="type"></el-checkbox>
-            <el-checkbox label="离线" name="type"></el-checkbox>
-            <el-checkbox label="待审核" name="type"></el-checkbox>
-            <el-checkbox label="黑名单" name="type"></el-checkbox>
-          </el-checkbox-group>
+        <el-form-item label="运输状态:">
+          <el-select v-model="form.state" placeholder="请选择运输状态">
+            <el-option label="未发出" value="shanghai"></el-option>
+            <el-option label="已发出" value="shanghai"></el-option>
+            <el-option label="正在运输中" value="shanghai"></el-option>
+            <el-option label="运输完成" value="beijing"></el-option>
+          </el-select>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSubmit">查询</el-button>
           <el-button>取消</el-button>
         </el-form-item>
-      </el-form>
+     </el-form>
+
     </div>
 
     <el-table
@@ -58,57 +36,32 @@
       stripe
       highlight-current-row
       @selection-change="handleSelectionChange"
+      :header-cell-style="{background:'#eef1f6',color:'#18333f'}"
     >
-      <el-table-column fixed type="index" label="头像" :index="indexMethod">
+      <el-table-column fixed type="index" label="#" :index="indexMethod">
       </el-table-column>
-      <el-table-column fixed type="selection" width="55"> </el-table-column>
-      <el-table-column width="80">
+      <el-table-column label="物流公司" prop="name" width="150">
+      </el-table-column>
+      <el-table-column prop="company" label="公司电话" width="120">
+      </el-table-column>
+      <el-table-column prop="monicker" label="配送人员" width="120">
+      </el-table-column>
+      <el-table-column prop="phone" label="配送人电话" width="120">
+      </el-table-column>
+      <el-table-column prop="state" label="状态">
+      </el-table-column>
+      <el-table-column prop="web" label="官网">
         <template slot-scope="scope">
-          <img
-            :src="scope.row.head_pic"
-            width="40"
-            height="40"
-            style="vertical-align: middle"
-          />
+          <a :href="scope.row.web" target="_blank">
+            {{scope.row.web}}
+          </a>
         </template>
       </el-table-column>
-      <el-table-column label="账号名称" width="150">
-        <template slot-scope="scope">
-          {{ scope.row.date }}
-        </template>
+      <el-table-column prop="address" label="当前物流位置" show-overflow-tooltip>
       </el-table-column>
-      <el-table-column prop="name" label="手机号" width="120">
+      <el-table-column prop="time" label="最后更新时间" show-overflow-tooltip>
       </el-table-column>
-      <el-table-column prop="user" label="用户等级" width="120">
-      </el-table-column>
-      <el-table-column prop="adminuser" label="地区" width="100">
-      </el-table-column>
-      <el-table-column prop="weixin" label="微信号" width="140">
-      </el-table-column>
-      <el-table-column prop="pay" label="支付宝号" width="140">
-      </el-table-column>
-      <el-table-column prop="mailbox" label="邮箱" show-overflow-tooltip>
-      </el-table-column>
-      <el-table-column prop="time" label="注册时间" show-overflow-tooltip>
-      </el-table-column>
-      <el-table-column prop="state" label="状态" show-overflow-tooltip>
-      </el-table-column>
-      <el-table-column prop="time" label="离线时间" show-overflow-tooltip>
-      </el-table-column>
-      <el-table-column
-        prop="promotionID"
-        label="推广账号"
-        show-overflow-tooltip
-      >
-      </el-table-column>
-      <el-table-column prop="promotionID" label="默认" show-overflow-tooltip>
-      </el-table-column>
-      <el-table-column prop="promotionID" label="默认" show-overflow-tooltip>
-      </el-table-column>
-      <el-table-column prop="promotionID" label="默认" show-overflow-tooltip>
-      </el-table-column>
-      <el-table-column prop="promotionID" label="默认" show-overflow-tooltip>
-      </el-table-column>
+
       <el-table-column fixed="right" label="操作" width="80">
         <template slot-scope="scope">
           <el-button @click="getDetails(scope.row)" type="text" size="mini"
@@ -162,346 +115,30 @@ export default {
   data() {
     return {
       form: {
-        name: "",
-        region: "",
-        date1: "",
-        date2: "",
-        delivery: false,
-        type: [],
-        resource: "",
-        desc: ""
+        channel:"",
+        name:"",
+        state:""
       },
       tableData: [
         {
-          date: "panfu",
-          name: "18285533808",
-          address: "12",
-          adminuser: "北京",
-          user: "普通用户组",
-          state: "在线",
-          mailbox: "panfu163@126.com",
-          weixin: "panfu163@126.com",
-          pay: "panfu163@126.com",
+          name:"顺丰速运",
+          company:"95338",
+          monicker:"张三",
+          phone:"18833808838",
+          address: "贵州省贵阳市南明区顺丰速运配送点",
+          state: "运输中",
           time: "2020-09-12 18:30:30",
-          promotionID: "panfu",
-          head_pic:
-            "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+          web:"https://www.sf-express.com/"
+        },{
+          name:"韵达速递",
+          company:"95336",
+          monicker:"张三",
+          phone:"18833808838",
+          address: "贵州省贵阳市南明区顺丰速运韵达速递",
+          state: "正在配送中",
+          time: "2020-09-12 18:30:30",
+          web:"http://www.yundaex.com/"
         },
-        {
-          date: "pengweisen",
-          name: "18285533808",
-          adminuser: "北京",
-          user: "VIP用户组",
-          state: "在线",
-          address: "12",
-          mailbox: "panfu163@126.com",
-          weixin: "panfu163@126.com",
-          pay: "panfu163@126.com",
-          time: "2020-09-12 18:30:30",
-          promotionID: "panfu",
-          head_pic:
-            "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-        },
-        {
-          date: "panfu163@126.com",
-          name: "18285533808",
-          adminuser: "北京",
-          user: "砖石会员",
-          state: "在线",
-          address: "12",
-          mailbox: "panfu163@126.com",
-          weixin: "panfu163@126.com",
-          pay: "panfu163@126.com",
-          time: "2020-09-12 18:30:30",
-          promotionID: "panfu",
-          head_pic:
-            "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-        },
-        {
-          date: "panfu163@126.com",
-          name: "18285533808",
-          adminuser: "北京",
-          state: "离线",
-          user: "普通用户组",
-          address: "12",
-          mailbox: "panfu163@126.com",
-          weixin: "panfu163@126.com",
-          pay: "panfu163@126.com",
-          time: "2020-09-12 18:30:30",
-          promotionID: "panfu",
-          head_pic:
-            "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-        },
-        {
-          date: "panfu163@126.com",
-          name: "18285533808",
-          adminuser: "贵州贵阳",
-          state: "离线",
-          user: "普通用户组",
-          address: "12",
-          mailbox: "panfu163@126.com",
-          weixin: "panfu163@126.com",
-          pay: "panfu163@126.com",
-          time: "2020-09-12 18:30:30",
-          promotionID: "panfu",
-          head_pic:
-            "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-        },
-        {
-          date: "panfu163@126.com",
-          name: "18285533808",
-          adminuser: "贵州贵阳",
-          user: "普通用户组",
-          state: "离线",
-          address: "12",
-          mailbox: "panfu163@126.com",
-          weixin: "panfu163@126.com",
-          pay: "panfu163@126.com",
-          time: "2020-09-12 18:30:30",
-          promotionID: "panfu",
-          head_pic:
-            "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-        },
-        {
-          date: "panfu163@126.com",
-          name: "18285533808",
-          adminuser: "贵州贵阳",
-          user: "普通用户组",
-          state: "离线",
-          address: "12",
-          mailbox: "panfu163@126.com",
-          weixin: "panfu163@126.com",
-          pay: "panfu163@126.com",
-          time: "2020-09-12 18:30:30",
-          promotionID: "panfu",
-          head_pic:
-            "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-        },
-        {
-          date: "panfu163@126.com",
-          name: "18285533808",
-          adminuser: "贵州贵阳",
-          user: "普通用户组",
-          state: "离线",
-          address: "12",
-          mailbox: "panfu163@126.com",
-          weixin: "panfu163@126.com",
-          pay: "panfu163@126.com",
-          time: "2020-09-12 18:30:30",
-          promotionID: "panfu",
-          head_pic:
-            "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-        },
-        {
-          date: "panfu163@126.com",
-          name: "18285533808",
-          adminuser: "贵州贵阳",
-          user: "普通用户组",
-          state: "离线",
-          address: "12",
-          mailbox: "panfu163@126.com",
-          weixin: "panfu163@126.com",
-          pay: "panfu163@126.com",
-          time: "2020-09-12 18:30:30",
-          promotionID: "panfu",
-          head_pic:
-            "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-        },
-        {
-          date: "panfu163@126.com",
-          name: "18285533808",
-          adminuser: "-",
-          user: "普通用户组",
-          state: "离线",
-          address: "12",
-          mailbox: "panfu163@126.com",
-          weixin: "panfu163@126.com",
-          pay: "panfu163@126.com",
-          time: "2020-09-12 18:30:30",
-          promotionID: "panfu",
-          head_pic:
-            "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-        },
-        {
-          date: "panfu163@126.com",
-          name: "18285533808",
-          adminuser: "-",
-          user: "普通用户组",
-          state: "离线",
-          address: "12",
-          mailbox: "panfu163@126.com",
-          weixin: "panfu163@126.com",
-          pay: "panfu163@126.com",
-          time: "2020-09-12 18:30:30",
-          promotionID: "panfu",
-          head_pic:
-            "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-        },
-        {
-          date: "panfu163@126.com",
-          name: "18285533808",
-          adminuser: "-",
-          user: "普通用户组",
-          state: "离线",
-          address: "12",
-          mailbox: "panfu163@126.com",
-          weixin: "panfu163@126.com",
-          pay: "panfu163@126.com",
-          time: "2020-09-12 18:30:30",
-          promotionID: "panfu",
-          head_pic:
-            "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-        },
-        {
-          date: "panfu163@126.com",
-          name: "18285533808",
-          adminuser: "-",
-          user: "普通用户组",
-          state: "离线",
-          address: "12",
-          mailbox: "panfu163@126.com",
-          weixin: "panfu163@126.com",
-          pay: "panfu163@126.com",
-          time: "2020-09-12 18:30:30",
-          promotionID: "panfu",
-          head_pic:
-            "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-        },
-        {
-          date: "panfu163@126.com",
-          name: "18285533808",
-          adminuser: "-",
-          user: "普通用户组",
-          state: "离线",
-          address: "12",
-          mailbox: "panfu163@126.com",
-          weixin: "panfu163@126.com",
-          pay: "panfu163@126.com",
-          time: "2020-09-12 18:30:30",
-          promotionID: "panfu",
-          head_pic:
-            "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-        },
-        {
-          date: "panfu163@126.com",
-          name: "18285533808",
-          adminuser: "-",
-          user: "普通用户组",
-          state: "离线",
-          address: "12",
-          mailbox: "panfu163@126.com",
-          weixin: "panfu163@126.com",
-          pay: "panfu163@126.com",
-          time: "2020-09-12 18:30:30",
-          promotionID: "panfu",
-          head_pic:
-            "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-        },
-        {
-          date: "panfu163@126.com",
-          name: "18285533808",
-          adminuser: "-",
-          user: "普通用户组",
-          state: "离线",
-          address: "12",
-          mailbox: "panfu163@126.com",
-          weixin: "panfu163@126.com",
-          pay: "panfu163@126.com",
-          time: "2020-09-12 18:30:30",
-          promotionID: "panfu",
-          head_pic:
-            "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-        },
-        {
-          date: "panfu163@126.com",
-          name: "18285533808",
-          adminuser: "-",
-          user: "普通用户组",
-          state: "离线",
-          address: "12",
-          mailbox: "panfu163@126.com",
-          weixin: "panfu163@126.com",
-          pay: "panfu163@126.com",
-          time: "2020-09-12 18:30:30",
-          promotionID: "panfu",
-          head_pic:
-            "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-        },
-        {
-          date: "panfu163@126.com",
-          name: "18285533808",
-          adminuser: "-",
-          user: "普通用户组",
-          state: "离线",
-          address: "12",
-          mailbox: "panfu163@126.com",
-          weixin: "panfu163@126.com",
-          pay: "panfu163@126.com",
-          time: "2020-09-12 18:30:30",
-          promotionID: "panfu",
-          head_pic:
-            "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-        },
-        {
-          date: "panfu163@126.com",
-          name: "18285533808",
-          adminuser: "-",
-          user: "普通用户组",
-          state: "离线",
-          address: "12",
-          mailbox: "panfu163@126.com",
-          weixin: "panfu163@126.com",
-          pay: "panfu163@126.com",
-          time: "2020-09-12 18:30:30",
-          promotionID: "panfu",
-          head_pic:
-            "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-        },
-        {
-          date: "panfu163@126.com",
-          name: "18285533808",
-          adminuser: "-",
-          user: "普通用户组",
-          state: "离线",
-          address: "12",
-          mailbox: "panfu163@126.com",
-          weixin: "panfu163@126.com",
-          pay: "panfu163@126.com",
-          time: "2020-09-12 18:30:30",
-          promotionID: "panfu",
-          head_pic:
-            "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-        },
-        {
-          date: "panfu163@126.com",
-          name: "18285533808",
-          adminuser: "-",
-          user: "普通用户组",
-          state: "离线",
-          address: "12",
-          mailbox: "panfu163@126.com",
-          weixin: "panfu163@126.com",
-          pay: "panfu163@126.com",
-          time: "2020-09-12 18:30:30",
-          promotionID: "panfu",
-          head_pic:
-            "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-        },
-        {
-          date: "panfu163@126.com",
-          name: "18285533808",
-          adminuser: "-",
-          user: "普通用户组",
-          state: "离线",
-          address: "12",
-          mailbox: "panfu163@126.com",
-          weixin: "panfu163@126.com",
-          pay: "panfu163@126.com",
-          time: "2020-09-12 18:30:30",
-          promotionID: "panfu",
-          head_pic:
-            "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-        }
       ],
       multipleSelection: []
     };
@@ -535,7 +172,7 @@ export default {
     },
     //跳转详情页
     getDetails() {
-      this.$router.push({ path: "/user/details" });
+      this.$router.push({ path: "/logistics/details" });
     }
   }
 };

@@ -2,32 +2,20 @@
   <div class="search">
     <div class="title-box">
       <el-form ref="form" :inline="true" :model="form" label-width="80px">
+        <el-form-item label="短信标题:">
+          <el-input v-model="form.name"  placeholder="请输入手机号"></el-input>
+        </el-form-item>
         <el-form-item label="聚道:">
           <el-select v-model="form.channel" placeholder="请选择公司名称">
             <el-option label="移动" value="shanghai"></el-option>
             <el-option label="联通" value="beijing"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="手机号:">
-          <el-input v-model="form.name"  placeholder="请输入手机号"></el-input>
-        </el-form-item>
-        <el-form-item label="发送状态:">
+        <el-form-item label="类型:">
           <el-select v-model="form.state" placeholder="请选择运输状态">
-            <el-option label="成功" value="shanghai"></el-option>
-            <el-option label="失败" value="shanghai"></el-option>
-            <el-option label="未到达" value="shanghai"></el-option>
-            <el-option label="已发送" value="beijing"></el-option>
-            <el-option label="正在发送" value="beijing"></el-option>
+            <el-option label="营销短信" value="shanghai"></el-option>
+            <el-option label="普通短信" value="shanghai"></el-option>
           </el-select>
-        </el-form-item>
-        <el-form-item label="发送时间:">
-          <el-date-picker
-                  v-model="value2"
-                  type="datetime"
-                  placeholder="选择日期时间"
-                  align="right"
-                  :picker-options="pickerOptions">
-          </el-date-picker>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSubmit">查询</el-button>
@@ -36,6 +24,10 @@
       </el-form>
 
     </div>
+
+    <el-row class="el-row">
+      <el-button type="success" @click="addTemplate">添加模板</el-button>
+    </el-row>
 
     <el-table
             ref="multipleTable"
@@ -56,34 +48,34 @@
       </el-table-column>
       <el-table-column prop="company" label="渠道" width="120">
       </el-table-column>
-      <el-table-column prop="phone" label="发送手机号" width="120">
+      <el-table-column prop="phone" label="短信签名" width="120">
       </el-table-column>
+      <el-table-column prop="state" label="短信场景" width="120"></el-table-column>
       <el-table-column prop="address" label="发送内容"></el-table-column>
       <el-table-column prop="time" label="最后更新时间"  width="180">
       </el-table-column>
       <el-table-column prop="monicker" label="操作人" width="120">
       </el-table-column>
-      <el-table-column prop="state" label="状态" width="120"></el-table-column>
-<!--      <el-table-column fixed="right" label="操作" width="80">-->
-<!--        <template slot-scope="scope">-->
-<!--          <el-button @click="getDetails(scope.row)" type="text" size="mini"-->
-<!--          >查看</el-button-->
-<!--          >-->
-<!--                    <el-button type="text" size="mini">发送邮箱</el-button>-->
-<!--                    <el-button-->
-<!--                      @click.native.prevent="deleteRow(scope.$index, tableData)"-->
-<!--                      type="text"-->
-<!--                      size="mini"-->
-<!--                    >-->
-<!--                      移除-->
-<!--                    </el-button>-->
-<!--        </template>-->
-<!--      </el-table-column>-->
+            <el-table-column fixed="right" label="操作" width="80">
+              <template slot-scope="scope">
+                <el-button @click="getDetails(scope.row)" type="text" size="mini"
+                >修改</el-button
+                >
+<!--                          <el-button type="text" size="mini">发送邮箱</el-button>-->
+<!--                          <el-button-->
+<!--                            @click.native.prevent="deleteRow(scope.$index, tableData)"-->
+<!--                            type="text"-->
+<!--                            size="mini"-->
+<!--                          >-->
+<!--                            移除-->
+<!--                          </el-button>-->
+              </template>
+            </el-table-column>
     </el-table>
-    <div style="margin-top: 20px">
-      <el-button @click="toggleSelection(tableData)">全选</el-button>
-      <el-button @click="toggleSelection()">取消选择</el-button>
-    </div>
+<!--    <div style="margin-top: 20px">-->
+<!--      <el-button @click="toggleSelection(tableData)">全选</el-button>-->
+<!--      <el-button @click="toggleSelection()">取消选择</el-button>-->
+<!--    </div>-->
     <el-pagination
             class="pagination"
             background
@@ -109,6 +101,10 @@
     }
     .line {
       text-align: center;
+    }
+    .el-row{
+      text-align: right;
+      margin-bottom:10px;
     }
   }
 </style>
@@ -150,19 +146,19 @@
           {
             name:"登录验证码",
             company:"移动公司",
-            monicker:"系统",
-            phone:"18833808838",
+            monicker:"小张",
+            phone:"【光大银行】",
             address: "您正在使用新设备登录，确认后输入动态密码673825，发送序号1，任何人索取动态密码均为诈骗，切勿泄露！[光大银行]",
-            state: "发送失败",
+            state: "普通短信",
             time: "2020-09-12 18:30:30",
             type:"短信验证码"
           },{
             name:"注册验证码",
             company:"联通",
-            monicker:"系统",
-            phone:"18833808838",
+            monicker:"老王",
+            phone:"【中国电信】",
             address: "您正在使用新设备登录，确认后输入动态密码673825，发送序号1，任何人索取动态密码均为诈骗，切勿泄露！[光大银行]",
-            state: "发送成功",
+            state: "普通短信",
             time: "2020-09-12 18:30:30",
             type:"短信验证码"
           },
@@ -170,9 +166,9 @@
             name:"十周年活动广告",
             company:"联通",
             monicker:"张三",
-            phone:"18833808838",
-            address: "您正在使用新设备登录，确认后输入动态密码673825，发送序号1，任何人索取动态密码均为诈骗，切勿泄露！[光大银行]",
-            state: "发送成功",
+            phone:"【中国银行】",
+            address: "公司十周年来宾大酬谢！10月1日进店送小轿车一输，任何人索取动态密码均为诈骗，切勿泄露！[光大银行]",
+            state: "语音短信",
             time: "2020-09-12 18:30:30",
             type:"营销短信"
           },
@@ -209,7 +205,11 @@
       },
       //跳转详情页
       getDetails() {
-        this.$router.push({ path: "/logistics/details" });
+        this.$router.push({ path: "/message/addTemplate" });
+      },
+      //添加模板
+      addTemplate(){
+        this.$router.push({ path: "/message/addTemplate" });
       }
     }
   };

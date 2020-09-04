@@ -256,7 +256,7 @@ export default {
       title: "物流管理",
       list: {
         list:"物流查询",
-        settings:"渠道设置",
+        settings:"物流公司",
         info:"配送设置",
       }
     }
@@ -266,7 +266,7 @@ export default {
     management: {
       title: "短信管理",
       list: {
-        list:"短信列表",
+        list:"短信记录",
         mail:"短信签名",
         channel:"短信渠道"
       }
@@ -274,7 +274,7 @@ export default {
     sendTheManagement: {
       title: "发送管理",
       list: {
-        securityCenter:"发送短信",
+        securityCenter:"人工发送",
         applyFor:"短信发送申请",
         audit:"短信发送审核"
       }

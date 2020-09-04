@@ -706,11 +706,11 @@ export default {
                 },
                 {
                   title: this.$t("message.management.list.channel"),
-                  url: ""
+                  url: "/message/signature"
                 },
                 {
                   title: this.$t("message.management.list.mail"),
-                  url: ""
+                  url: "/message/addTemplate"
                 }
               ]
             },{
@@ -720,15 +720,15 @@ export default {
               data: [
                 {
                   title: this.$t("message.sendTheManagement.list.securityCenter"),
-                  url: ""
+                  url: "/message/send"
                 },
                 {
                   title: this.$t("message.sendTheManagement.list.applyFor"),
-                  url: ""
+                  url: "/message/applyFor"
                 },
                 {
                   title: this.$t("message.sendTheManagement.list.audit"),
-                  url: ""
+                  url: "/message/audit"
                 }
               ]
             },
@@ -739,11 +739,11 @@ export default {
               data: [
                 {
                   title: this.$t("message.template.list.securityCenter"),
-                  url: ""
+                  url: "/message/template"
                 },
                 {
                   title: this.$t("message.template.list.applyFor"),
-                  url: ""
+                  url: "/message/addTemplate"
                 }
               ]
             }
@@ -763,7 +763,7 @@ export default {
                 },
                 {
                   title: this.$t("logistics.management.list.settings"),
-                  url: ""
+                  url: "/logistics/company"
                 },
                 {
                   title: this.$t("logistics.management.list.info"),

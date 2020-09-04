@@ -2,6 +2,9 @@
  * @description 配置文件存放目录
  */
 const config= {
+  /**
+   * @description 目标路径
+   */
   publicPath:{
     dev: "/dev/adminFramework/",
     test: "/test/adminFramework/",
