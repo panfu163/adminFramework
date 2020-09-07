@@ -11,10 +11,11 @@
             <el-option label="联通" value="beijing"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="类型:">
-          <el-select v-model="form.state" placeholder="请选择运输状态">
-            <el-option label="营销短信" value="shanghai"></el-option>
-            <el-option label="普通短信" value="shanghai"></el-option>
+        <el-form-item label="审核状态:">
+          <el-select v-model="form.state" placeholder="请选择审核状态">
+            <el-option label="通过" value="shanghai"></el-option>
+            <el-option label="未通过" value="shanghai"></el-option>
+            <el-option label="已通过" value="shanghai"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -48,6 +49,8 @@
       <el-table-column prop="state" label="短信场景" width="120"></el-table-column>
       <el-table-column prop="address" label="发送内容"></el-table-column>
       <el-table-column prop="time" label="最后更新时间"  width="180">
+      </el-table-column>
+      <el-table-column prop="states" label="审核状态"  width="180">
       </el-table-column>
       <el-table-column prop="monicker" label="操作人" width="120">
       </el-table-column>
@@ -146,7 +149,8 @@
             address: "您正在使用新设备登录，确认后输入动态密码673825，发送序号1，任何人索取动态密码均为诈骗，切勿泄露！[光大银行]",
             state: "普通短信",
             time: "2020-09-12 18:30:30",
-            type:"短信验证码"
+            type:"短信验证码",
+            states:"审核通过"
           },{
             name:"注册验证码",
             company:"联通",
@@ -155,7 +159,8 @@
             address: "您正在使用新设备登录，确认后输入动态密码673825，发送序号1，任何人索取动态密码均为诈骗，切勿泄露！[光大银行]",
             state: "普通短信",
             time: "2020-09-12 18:30:30",
-            type:"短信验证码"
+            type:"短信验证码",
+            states:"审核未通过"
           },
           {
             name:"十周年活动广告",
@@ -165,7 +170,8 @@
             address: "公司十周年来宾大酬谢！10月1日进店送小轿车一输，任何人索取动态密码均为诈骗，切勿泄露！[光大银行]",
             state: "语音短信",
             time: "2020-09-12 18:30:30",
-            type:"营销短信"
+            type:"营销短信",
+            states:"审核已通过"
           },
         ],
         multipleSelection: []

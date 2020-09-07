@@ -1,7 +1,7 @@
 <template>
   <div class="content">
     <h4>{{this.$route.meta.title}}</h4>
-    <el-form ref="formName" :inline="true" :model="ruleForm" :rules="rules" label-width="100px">
+    <el-form ref="formName" :inline="true" :model="ruleForm"  label-width="100px">
       <el-form-item label="模板名称:" prop="name">
         <el-input v-model="ruleForm.name" minlength="6"  placeholder="请输入模板名称"></el-input>
       </el-form-item>
@@ -30,6 +30,17 @@
         </el-form-item>
       </el-row>
       <el-row>
+        <el-form-item label="发送时间:" prop="value2">
+          <el-date-picker
+                  v-model="ruleForm.value2"
+                  type="datetime"
+                  placeholder="选择日期时间"
+                  align="right"
+                  :picker-options="pickerOptions">
+          </el-date-picker>
+        </el-form-item>
+      </el-row>
+      <el-row>
         <el-form-item label="短信内容:" prop="textarea">
           <el-input
                   type="textarea"
@@ -53,9 +64,47 @@
           </el-select>
         </el-form-item>
       </el-row>
+      <el-button class="btn" type="primary" @click="onSubmit('formName')">确定审核</el-button>
+      <el-button class="btn" @click="onReset('formName')">取消</el-button>
     </el-form>
-    <el-button class="btn" type="primary" @click="onSubmit('formName')">确定</el-button>
-    <el-button class="btn" @click="onReset('formName')">取消</el-button>
+
+    <el-dialog
+            title="提示"
+            :visible.sync="dialogVisible"
+            width="30%"
+            :append-to-body="appendToBody"
+            :before-close="handleClose">
+
+      <el-form ref="formName" :inline="true" :model="ruleForm" :rules="rules" label-width="100px">
+        <el-row>
+          <el-form-item label="审核状态:" label-width="200" prop="region">
+            <el-select v-model="ruleForm.region" placeholder="使用状态">
+              <el-option label="审核通过" value="houqing"></el-option>
+              <el-option label="审核不通过" value="chawu"></el-option>
+            </el-select>
+          </el-form-item>
+        </el-row>
+        <el-row>
+          <el-form-item label="备注说明:" label-width="200" prop="region">
+            <el-input
+                    type="textarea"
+                    :rows="10"
+                    placeholder="请输入备注说明"
+                    v-model="textarea"
+                    style="width:500px"
+                    maxlength="200"
+                    show-word-limit
+            >
+            </el-input>
+        </el-form-item>
+        </el-row>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+    <el-button @click="dialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+  </span>
+    </el-dialog>
+
   </div>
 </template>
 <style lang="scss" scoped>
@@ -92,38 +141,23 @@
     data() {
       return {
         ruleForm: {
-          name: "",
-          type:"",
-          channel:"",
-          scene:"",
-          textarea:"",
-          signature:""
+          name: "十周年活动",
+          type:"普通短信",
+          channel:"阿里短信",
+          scene:"普通短信",
+          textarea:"公司十周年来宾大酬谢！10月1日进店送小轿车一输，任何人索取动态密码均为诈骗，切勿泄露！",
+          signature:"南方电网",
+          value2:"2020-09-07 14:04:14",
         },
-        rules: {
-          name: [
-            { required: true, message: '请输入用户账号名称', trigger: 'blur' },
-            { min:6, max:20, message: '长度在6到20个字符', trigger: 'blur' }
-          ],
-          type: [{ required: true, message: '请选择短信类型', trigger: 'change' }],
-          channel: [{ required: true, message: '请选择短信渠道', trigger: 'change' }],
-          scene: [{ required: true, message: '请选择短信场景', trigger: 'change' }],
-          textarea: [{ required: true, message: '请填写短信内容', trigger: 'blur' }],
-          signature: [{ required: true, message: '请选择短信签名', trigger: 'change' }],
-        },
+        dialogVisible:false,
+        appendToBody:true,
+        textarea:""
       };
     },
     methods: {
       //确定
       onSubmit(formName) {
-        console.log("submit!");
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            alert('submit!');
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
-        });
+         this.dialogVisible=true
       },
       //重置
       onReset(formName){
