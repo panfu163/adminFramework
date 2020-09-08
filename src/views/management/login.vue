@@ -222,7 +222,9 @@ export default {
         });
         return;
       }
-      this.getLogin();
+      localStorage.setItem("userInfo","user");//这里只是测试用的
+      this.$router.push({ path: "/" });//这里只是测试用的
+      //this.getLogin();
     },
     // 用户通过了验证
     success(msg) {

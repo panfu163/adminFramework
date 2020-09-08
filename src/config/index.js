@@ -15,7 +15,7 @@ const config= {
    */
   apiUrl: {
     dev: "http://shop.pfuni.cn/dev/",
-    test: "http://shop.pfuni.cn/test/",
+    test: "http://shop.pfuni.cn/test/", // http://shop.pfuni.cn/test/
     prod: "http://shop.pfuni.cn/"
   }
 };
