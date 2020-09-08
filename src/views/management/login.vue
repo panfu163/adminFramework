@@ -183,18 +183,22 @@ export default {
   },
   methods: {
     getLogin() {
-      this.$http(
-        "Request2/GetShopListForVIP",
-        {
+      let loadingInstance = Loading.service({
+        fullscreen: true,
+        background: "rgba(0, 0, 0, 0.8)",
+        text: "拼命加载中..."
+      }); //显示加载中
+      this.$http("/user",{
           page: 1,
           pageSize: 10,
           cityCode: "310100",
           Longitude: 106.70833,
           Latitude: 26.558015
         },
-        data => {
-          console.log("返回的数据信息===================");
-          console.log(data);
+        res => {
+          localStorage.setItem("userInfo",res.data);
+          loadingInstance.close();
+          this.$router.push({ path: "/" });
         },
         error => {
           console.log(error);
@@ -202,7 +206,6 @@ export default {
       );
     },
     Login() {
-      localStorage.setItem("userInfo", "panfu");
       if (!this.phone) {
         this.$notify({
           title: '警告',
@@ -219,32 +222,7 @@ export default {
         });
         return;
       }
-      if(this.phone!=="admin"){
-        this.$notify({
-          title: '警告',
-          message: '输入的用户名不正确',
-          type: 'warning'
-        });
-        return;
-      }
-      if(this.password!=="admin123"){
-        this.$notify({
-          title: '警告',
-          message: '输入的密码不正确',
-          type: 'warning'
-        });
-        return;
-      }
       this.getLogin();
-      let loadingInstance = Loading.service({
-        fullscreen: true,
-        background: "rgba(0, 0, 0, 0.8)",
-        text: "拼命加载中..."
-      }); //显示加载中
-      setTimeout(res => {
-        loadingInstance.close();
-        this.$router.push({ path: "/" });
-      }, 3000);
     },
     // 用户通过了验证
     success(msg) {

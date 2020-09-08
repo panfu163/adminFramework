@@ -89,7 +89,12 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
                ├──map.js                                  #地图公用方法  
                ├──theme.js                                  #主题处理  
                ├──tool.js                                  #工具类方法   
-            ├──router                                   #子路由配置    
+            ├──router                                   #子路由配置  
+         ├── mock                                     #mock数据，模拟后台接口--如果不需要可以删除获在main.js注释引用
+              ├── json                            #JSON数据文件
+                   ├── user.json                      #用户信息
+              ├── index.js                            #接口地址配置 
+         ├── config                                   #共用的项目配置
 	├── components                               #组件文件夹，自己写的组件都放在这个文件夹下
 			├── pulic                            #公用页面组件
 			     ├── footer.vue                            #页脚
@@ -98,7 +103,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 			     ├── sidebar.vue                           #业务系统导航
 			     ├── Main.vue                              #中间主体框架
 			     ├── tag.vue                              #面包屑导航
-    ├── config                                   #共用的项目配置
         ├── index.js                             #共用的项目配置详情
 	├──pages                                     #多页面处理
 	    ├── user                                 #多页面处理-所有路由页面	

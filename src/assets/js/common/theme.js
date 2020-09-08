@@ -38,6 +38,6 @@ export default {
   },
   //主题图片地址
   themeUrl() {
-     localStorage.getItem("themes") ? localStorage.getItem("themes") : "red";
+    localStorage.getItem("themes") ? localStorage.getItem("themes") : "red";
   }
 };

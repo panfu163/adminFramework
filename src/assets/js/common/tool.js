@@ -137,16 +137,16 @@ Tool.objKeyValue = objs => {
 };
 
 //JS禁用微信复制链接、禁用转发
-Tool.jWeixinOnBridgeReady=()=>{
+Tool.jWeixinOnBridgeReady = () => {
   function onBridgeReady() {
-    WeixinJSBridge.call('hideOptionMenu');
+    WeixinJSBridge.call("hideOptionMenu");
   }
   if (typeof WeixinJSBridge === "undefined") {
     if (document.addEventListener) {
-      document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+      document.addEventListener("WeixinJSBridgeReady", onBridgeReady, false);
     } else if (document.attachEvent) {
-      document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
-      document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+      document.attachEvent("WeixinJSBridgeReady", onBridgeReady);
+      document.attachEvent("onWeixinJSBridgeReady", onBridgeReady);
     }
   } else {
     onBridgeReady();

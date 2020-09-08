@@ -1,5 +1,6 @@
 import instance from "./instance";
 import $config from "@/config";
+import {console} from "vuedraggable/src/util/helper";
 
 /*
  * ajax方法实现请求后台数据
@@ -11,23 +12,21 @@ import $config from "@/config";
  */
 export default function(path, params, success, fail) {
   //请求接口地址处理
-  let baseUrl = '';
+  let baseUrl = "";
   switch (process.env.VUE_APP_CURENV) {
-    case 'dev':
+    case "dev":
       baseUrl = $config.apiUrl.dev;
       break;
-    case 'test':
+    case "test":
       baseUrl = $config.apiUrl.test;
       break;
-    case 'prod':
+    case "prod":
       baseUrl = $config.apiUrl.prod;
       break;
   }
-  console.log(baseUrl);
   instance
-    .post(baseUrl+path, params)
+    .post(baseUrl + path, params)
     .then(response => {
-      console.log(response);
       if (response.status === 200) {
         //只做成功处理--失败的请查看instance.js
         let data = response.data;

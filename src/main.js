@@ -8,6 +8,7 @@ import Ajax from "assets/js/common/ajax.js";
 import Tool from "assets/js/common/tool.js";
 import Map from "assets/js/common/map.js";
 Vue.use(Element, { size: "small", zIndex: 3000 });
+require("assets/mock"); //引入mock数据，关闭则注释该行
 
 /**主题处理**/
 /***
@@ -23,7 +24,11 @@ if (isThemes) {
 } else {
   //根据季节变化主题
   let isSeasonBgThemes = theme.seasonBg(); //获取主题
-  require("@@/css/themes/" + isSeasonBgThemes + "/" + isSeasonBgThemes + ".scss");
+  require("@@/css/themes/" +
+    isSeasonBgThemes +
+    "/" +
+    isSeasonBgThemes +
+    ".scss");
   window.document.documentElement.setAttribute("data-theme", isSeasonBgThemes); //这里处理自定义
 }
 

@@ -30,16 +30,16 @@ module.exports = {
     https: false, // https:{type:Boolean}
     open: true, //配置自动启动浏览器
     proxy: {
-      // 配置多个代理
-      "/": {
-        target: "http://www.pfuni.cn", //目标接口域名
-        ws: false, // 如果是https接口，需要配置这个参数
-        changeOrigin: true //是否跨域
-        // pathRewrite: {  //这里重写路径
-        //   "^/" : ""
-        // }
-      }
-    }
+        // 配置多个代理
+        "/": {
+          target: "http://www.pfuni.cn", //目标接口域名
+          ws: false, // 如果是https接口，需要配置这个参数
+          changeOrigin: true //是否跨域
+          // pathRewrite: {  //这里重写路径
+          //   "^/" : ""
+          // }
+        }
+      },
   },
 
   // build时构建文件的目录 构建时传入 --no-clean 可关闭该行为

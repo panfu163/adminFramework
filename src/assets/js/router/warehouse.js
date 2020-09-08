@@ -6,8 +6,7 @@ const warehouse = [
       title: "库存查询",
       navigation: "warehouse" //处理导航显示-子路由需和父路由一至
     },
-    component: () =>
-      import("@/views/warehouse/list.vue")
+    component: () => import("@/views/warehouse/list.vue")
   },
   {
     path: "/warehouse",
@@ -16,8 +15,7 @@ const warehouse = [
       title: "供应商管理",
       navigation: "warehouse" //处理导航显示-子路由需和父路由一至
     },
-    component: () =>
-      import("@/views/warehouse/index.vue")
+    component: () => import("@/views/warehouse/index.vue")
   },
   {
     path: "/warehouse/InventoryFlow",
@@ -26,8 +24,7 @@ const warehouse = [
       title: "库存流水",
       navigation: "warehouse" //处理导航显示-子路由需和父路由一至
     },
-    component: () =>
-      import("@/views/warehouse/InventoryFlow.vue")
+    component: () => import("@/views/warehouse/InventoryFlow.vue")
   },
   {
     path: "/warehouse/uniqueCode",
@@ -36,8 +33,7 @@ const warehouse = [
       title: "唯一码管理",
       navigation: "warehouse" //处理导航显示-子路由需和父路由一至
     },
-    component: () =>
-      import("@/views/warehouse/uniqueCode.vue")
+    component: () => import("@/views/warehouse/uniqueCode.vue")
   },
   {
     path: "/warehouse/goods",
@@ -46,8 +42,7 @@ const warehouse = [
       title: "基础商品",
       navigation: "warehouse" //处理导航显示-子路由需和父路由一至
     },
-    component: () =>
-        import("@/views/warehouse/goods.vue")
+    component: () => import("@/views/warehouse/goods.vue")
   }
 ];
 export default warehouse;

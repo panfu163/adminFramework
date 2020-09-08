@@ -17,7 +17,7 @@ const power = [
       navigation: "power" //处理导航显示-子路由需和父路由一至
     },
     component: () =>
-        import(/*webpackChunkName:"rollist"*/ "@/views/power/userlist.vue")
+      import(/*webpackChunkName:"rollist"*/ "@/views/power/userlist.vue")
   },
   {
     path: "/power/rollist",
@@ -37,7 +37,7 @@ const power = [
       navigation: "power" //处理导航显示-子路由需和父路由一至
     },
     component: () =>
-        import(/*webpackChunkName:"rbacsetting"*/ "@/views/power/rbacsetting.vue")
+      import(/*webpackChunkName:"rbacsetting"*/ "@/views/power/rbacsetting.vue")
   },
   {
     path: "/power/addUserGroup",
@@ -47,7 +47,9 @@ const power = [
       navigation: "power" //处理导航显示-子路由需和父路由一至
     },
     component: () =>
-        import(/*webpackChunkName:"poweraddUser"*/ "@/views/power/addUserGroup.vue")
+      import(
+        /*webpackChunkName:"poweraddUser"*/ "@/views/power/addUserGroup.vue"
+      )
   },
   {
     path: "/power/addRol",
@@ -57,7 +59,7 @@ const power = [
       navigation: "power" //处理导航显示-子路由需和父路由一至
     },
     component: () =>
-        import(/*webpackChunkName:"poweraddUser"*/ "@/views/power/addRol.vue")
+      import(/*webpackChunkName:"poweraddUser"*/ "@/views/power/addRol.vue")
   },
   {
     path: "/power/addUser",
@@ -67,7 +69,7 @@ const power = [
       navigation: "power" //处理导航显示-子路由需和父路由一至
     },
     component: () =>
-        import(/*webpackChunkName:"poweraddUser"*/ "@/views/power/addUser.vue")
+      import(/*webpackChunkName:"poweraddUser"*/ "@/views/power/addUser.vue")
   },
   {
     path: "/power/details", //用户详情
@@ -77,8 +79,9 @@ const power = [
       navigation: "power" //处理导航显示-子路由需和父路由一至
     },
     component: () =>
-        import(/*webpackChunkName:"poweraddUser"*/ "@/views/power/details.vue")
-  },{
+      import(/*webpackChunkName:"poweraddUser"*/ "@/views/power/details.vue")
+  },
+  {
     path: "/power/userDetails", //用户详情
     name: "userDetails",
     meta: {
@@ -86,8 +89,11 @@ const power = [
       navigation: "power" //处理导航显示-子路由需和父路由一至
     },
     component: () =>
-        import(/*webpackChunkName:"poweraddUser"*/ "@/views/power/userDetails.vue")
-  },{
+      import(
+        /*webpackChunkName:"poweraddUser"*/ "@/views/power/userDetails.vue"
+      )
+  },
+  {
     path: "/power/rolDetails", //角色详情
     name: "rolDetails",
     meta: {
@@ -95,8 +101,9 @@ const power = [
       navigation: "power" //处理导航显示-子路由需和父路由一至
     },
     component: () =>
-        import(/*webpackChunkName:"poweraddUser"*/ "@/views/power/rolDetails.vue")
-  },{
+      import(/*webpackChunkName:"poweraddUser"*/ "@/views/power/rolDetails.vue")
+  },
+  {
     path: "/power/menuList", //菜单管理
     name: "menuList",
     meta: {
@@ -104,8 +111,9 @@ const power = [
       navigation: "power" //处理导航显示-子路由需和父路由一至
     },
     component: () =>
-        import(/*webpackChunkName:"rolDetails"*/ "@/views/power/menuList.vue")
-  },{
+      import(/*webpackChunkName:"rolDetails"*/ "@/views/power/menuList.vue")
+  },
+  {
     path: "/power/systemList", //系统管理
     name: "systemList",
     meta: {
@@ -113,7 +121,7 @@ const power = [
       navigation: "power" //处理导航显示-子路由需和父路由一至
     },
     component: () =>
-        import(/*webpackChunkName:"systemList"*/ "@/views/power/systemList.vue")
+      import(/*webpackChunkName:"systemList"*/ "@/views/power/systemList.vue")
   }
 ];
 export default power;

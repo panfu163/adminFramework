@@ -4,7 +4,7 @@ import Main from "@/components/public/Main";
 
 //导入
 import NProgress from "nprogress";
-import '@@/css/nprogress/nprogress.css';
+import "@@/css/nprogress/nprogress.css";
 
 //子路由
 import power from "assets/js/router/power"; //权限管理
@@ -32,8 +32,7 @@ const router = new Router({
       meta: {
         title: "产品中心"
       },
-      component: () =>
-        import("@/views/management/login.vue")
+      component: () => import("@/views/management/login.vue")
     },
     {
       path: "/404",
@@ -41,8 +40,7 @@ const router = new Router({
       meta: {
         title: "404错误"
       },
-      component: () =>
-        import("@/views/management/404.vue")
+      component: () => import("@/views/management/404.vue")
     },
     {
       path: "/power",
@@ -68,19 +66,23 @@ const router = new Router({
       path: "/user",
       component: Main,
       children: user
-    },{
+    },
+    {
       path: "/order",
       component: Main,
       children: order
-    },{
+    },
+    {
       path: "/pay",
       component: Main,
       children: pay
-    },{
+    },
+    {
       path: "/message",
       component: Main,
       children: message
-    },{
+    },
+    {
       path: "/logistics",
       component: Main,
       children: logistics
