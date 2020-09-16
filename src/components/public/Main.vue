@@ -12,9 +12,10 @@
       <menus></menus>
     </div>
     <tags></tags>
-    <div class="min" :style="{height:isHeight+'px'}" :class="{on:sfold}">
+    <div class="min" :style="{height:(isHeight-165)+'px'}" :class="{on:sfold}">
       <router-view></router-view>
     </div>
+    <footers></footers>
   </el-container>
 </template>
 
@@ -23,14 +24,15 @@ import heads from "@/components/public/head";
 import sidebar from "@/components/public/sidebar";
 import tags from "@/components/public/tag";
 import menus from "@/components/public/menu";
-
+import footers from "@/components/public/footer";
 export default {
   name: "Main",
   components: {
     heads,
     sidebar,
     tags,
-    menus
+    menus,
+    footers
   },
   data() {
     return {
