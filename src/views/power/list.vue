@@ -108,13 +108,20 @@
       <el-button @click="toggleSelection()">取消选择</el-button>
       <el-button @click="del()"  type="primary">删除</el-button>
     </div>
+
     <el-pagination
-      class="pagination"
-      background
-      layout="prev, pager, next"
-      :total="1000"
-    >
+            class="pagination"
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="currentPage4"
+            :page-sizes="[100, 200, 300, 400]"
+            :page-size="100"
+            background
+            layout="prev,pager,next, sizes,total,jumper"
+            :total="1000">
     </el-pagination>
+
+
   </div>
 </template>
 <style lang="scss" scoped>
@@ -159,6 +166,7 @@
 export default {
   data() {
     return {
+      currentPage4:10,
       loading: true,
       form: {
         name: "",
@@ -302,6 +310,12 @@ export default {
     //添加用户组
     addUser(){
       this.$router.push({ path: '/power/addUser'});
+    },
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
+    },
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
     }
   },
   mounted() {

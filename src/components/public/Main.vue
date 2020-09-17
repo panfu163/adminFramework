@@ -7,14 +7,26 @@
 <template>
   <el-container>
     <heads></heads>
-    <div class="side" :style="{height:isHeight+'px'}" :class="{on:sfold}">
+    <div
+      class="side"
+      :style="{ height: isHeight + 'px' }"
+      :class="{ on: sfold }"
+    >
       <sidebar></sidebar>
       <menus></menus>
     </div>
     <tags></tags>
-    <div class="min" :style="{height:(isHeight-165)+'px'}" :class="{on:sfold}">
-      <router-view></router-view>
+
+    <div
+      class="min"
+      :style="{ height: isHeight - 165 + 'px' }"
+      :class="{ on: sfold }"
+    >
+      <transition name="slide-fade">
+        <router-view></router-view>
+      </transition>
     </div>
+
     <footers></footers>
   </el-container>
 </template>
@@ -36,21 +48,21 @@ export default {
   },
   data() {
     return {
-      sfold:false,
-      isHeight:"",
+      sfold: false,
+      isHeight: ""
     };
   },
   mounted() {
-    this.bus.$on("sfold",res=>{
-      this.sfold=res;
+    this.bus.$on("sfold", res => {
+      this.sfold = res;
     });
     //设置高度
-    this.isHeight=document.documentElement.clientHeight;
-    window.onresize=()=>{
-        this.isHeight=document.documentElement.clientHeight;
-      }
+    this.isHeight = document.documentElement.clientHeight;
+    window.onresize = () => {
+      this.isHeight = document.documentElement.clientHeight;
+    };
   },
-  methods: {},
+  methods: {}
 };
 </script>
 
@@ -74,10 +86,10 @@ export default {
   overflow: hidden;
   z-index: 2;
   width: 284px;
-  transform:translate(0,0);
-  transition:0.3s;
-  &.on{
-    width:213px;
+  transform: translate(0, 0);
+  transition: 0.3s;
+  &.on {
+    width: 213px;
   }
 }
 .min {
@@ -97,15 +109,28 @@ export default {
   -moz-box-orient: vertical;
   -moz-box-direction: normal;
   flex-direction: column;
-  overflow-x:hidden;
-  overflow-y:auto;
+  overflow-x: hidden;
+  overflow-y: auto;
   z-index: 2;
-  padding-bottom:100px;
-  transform:translate(0,0);
-  transition:0.3s;
-  &.on{
+  padding-bottom: 100px;
+  transform: translate(0, 0);
+  transition: 0.3s;
+  &.on {
     width: calc(99.5% - 214px);
-    left:214px;
+    left: 214px;
   }
+}
+/* 可以设置不同的进入和离开动画 */
+/* 设置持续时间和动画函数 */
+.slide-fade-enter-active {
+  transition: all 0.8s ease;
+}
+.slide-fade-leave-active {
+  transition: all 0.3s cubic-bezier(1, 0.3, 0.8, 1);
+}
+.slide-fade-enter, .slide-fade-leave-to
+  /* .slide-fade-leave-active for below version 2.1.8 */ {
+  transform:translate(10px,0);
+  opacity: 0;
 }
 </style>

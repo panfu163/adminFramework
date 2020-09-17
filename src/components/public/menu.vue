@@ -5,7 +5,7 @@
  --@version 1.0
 --->
 <template>
-  <div class="min-menu" :class="{on:sfold}">
+  <div class="min-menu" :class="{ on: sfold }">
     <div class="title">{{ $t(pathName + ".title") }}</div>
     <el-menu
       class="el-menu-vertical-demo"
@@ -47,14 +47,14 @@
   box-sizing: border-box;
   width: 160px;
   background: #eee;
-  overflow:hidden;
+  overflow: hidden;
   color: #323233;
   background: #fff;
-  transform:translate(0,0);
-  transition:0.3s;
+  transform: translate(0, 0);
+  transition: 0.3s;
   border-right: 1px solid #e5e5e5;
-  &.on{
-    left:40px;
+  &.on {
+    left: 40px;
   }
   .title {
     background: #fff;
@@ -104,21 +104,21 @@
 export default {
   data() {
     return {
-      openeds: ["1","2", "3","4"], //设置菜单栏展开3个需要展开的菜单导航
+      openeds: ["1", "2", "3", "4"], //设置菜单栏展开3个需要展开的菜单导航
       defaultActive: "", //当前选中
       tagData: this.$store.state.tag,
       pathName: "", //根据路径来判断子导航,
       reg: /^\/[0-9a-zA-Z]*.*?/,
-      sfold:false
+      sfold: false
     };
   },
   mounted() {
     this.pathName = this.$route.meta.navigation; //设置导航数据
     let str = this.$route.path;
     let array = str.match(this.reg)[0]; //处理子路由取父路由
-    this.bus.$on("sfold",res=>{
+    this.bus.$on("sfold", res => {
       console.log(res);
-      this.sfold=res;
+      this.sfold = res;
     });
     this.defaultActive = array; //处理导航选中
   },
@@ -252,7 +252,7 @@ export default {
                 {
                   title: this.$t("power.manage.list.userManagement"),
                   url: "/power"
-                },
+                }
               ]
             },
             {
@@ -263,15 +263,17 @@ export default {
                 {
                   title: this.$t("power.rbac.list.rbacsetting"),
                   url: "/power/rbacsetting"
-                },{
+                },
+                {
                   title: this.$t("power.rbac.list.systemManage"),
                   url: "/power/systemList"
-                },{
+                },
+                {
                   title: this.$t("power.rbac.list.menuManage"),
                   url: "/power/menuList"
                 }
               ]
-            },
+            }
           ]
         },
         {
@@ -293,7 +295,8 @@ export default {
                 {
                   title: this.$t("product.information.list.brand"),
                   url: ""
-                },{
+                },
+                {
                   title: this.$t("product.information.list.unitLibrary"),
                   url: ""
                 },
@@ -382,7 +385,9 @@ export default {
                   url: ""
                 },
                 {
-                  title: this.$t("product.BaseInformation.list.ShapeModulationCode"),
+                  title: this.$t(
+                    "product.BaseInformation.list.ShapeModulationCode"
+                  ),
                   url: ""
                 }
               ]
@@ -560,7 +565,7 @@ export default {
                 {
                   title: this.$t("pay.management.list.mail"),
                   url: ""
-                } ,
+                },
                 {
                   title: this.$t("pay.management.list.receipt"),
                   url: ""
@@ -672,24 +677,29 @@ export default {
                 {
                   title: this.$t("order.management.list.batch"),
                   url: ""
-                }, {
+                },
+                {
                   title: this.$t("order.management.list.selfRaising"),
                   url: ""
-                }, {
+                },
+                {
                   title: this.$t("order.management.list.refund"),
                   url: ""
-                }, {
+                },
+                {
                   title: this.$t("order.management.list.arrRefund"),
                   url: ""
-                }, {
+                },
+                {
                   title: this.$t("order.management.list.addOrder"),
                   url: ""
-                }, {
+                },
+                {
                   title: this.$t("order.management.list.assess"),
                   url: ""
                 }
               ]
-            },
+            }
           ]
         },
         {
@@ -713,13 +723,16 @@ export default {
                   url: "/message/signature"
                 }
               ]
-            },{
+            },
+            {
               title: this.$t("message.sendTheManagement.title"),
               icon: "el-icon-chat-dot-square",
               id: "1",
               data: [
                 {
-                  title: this.$t("message.sendTheManagement.list.securityCenter"),
+                  title: this.$t(
+                    "message.sendTheManagement.list.securityCenter"
+                  ),
                   url: "/message/send"
                 },
                 {
@@ -770,15 +783,15 @@ export default {
                   url: ""
                 }
               ]
-            },
+            }
           ]
-        },
+        }
       ];
     }
   },
   watch: {
     $route(to) {
-      console.log("我是menu~~~")
+      console.log("我是menu~~~");
       //单页处理
       //在mounted函数执行的方法，放到该处
       this.pathName = to.meta.navigation;
