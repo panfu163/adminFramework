@@ -44,4 +44,26 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+//分页
+.pagination {
+  text-align: right;
+  margin-top: 20px;
+}
+//按钮
+.btn-box {
+  background: #fff;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px;
+  border-top: 1px solid #eee;
+  z-index: 999;
+  margin-top: 20px;
+  display: block;
+}
+//头部按钮
+.title-but {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 </style>

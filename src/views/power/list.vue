@@ -152,10 +152,6 @@
 
     }
   }
-  .pagination {
-    text-align: right;
-    margin-top: 20px;
-  }
 }
 .el-row {
   text-align: right;

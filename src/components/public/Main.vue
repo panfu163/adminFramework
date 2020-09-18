@@ -112,7 +112,6 @@ export default {
   overflow-x: hidden;
   overflow-y: auto;
   z-index: 2;
-  padding-bottom: 100px;
   transform: translate(0, 0);
   transition: 0.3s;
   &.on {
