@@ -1,6 +1,6 @@
 import instance from "./instance";
 import $config from "@/config";
-import {console} from "vuedraggable/src/util/helper";
+import { console } from "vuedraggable/src/util/helper";
 
 /*
  * ajax方法实现请求后台数据

@@ -1,11 +1,21 @@
 <template>
   <div class="content">
-    <h4>{{ this.$route.meta.title }}
-      <el-button class="title-but" size="small" type="primary" @click="onSubmit('formName')"
-      >确定</el-button
+    <h4>
+      {{ this.$route.meta.title }}
+      <el-button
+        class="title-but"
+        size="small"
+        type="primary"
+        @click="onSubmit('formName')"
       >
+        确定
+      </el-button>
     </h4>
-    <el-form ref="form" :model="form" label-width="100px">
+    <el-form
+      ref="form"
+      :model="form"
+      label-width="100px"
+    >
       <el-form-item label="角色名称">
         <el-input
           v-model="form.name"
@@ -14,25 +24,33 @@
           maxlength="20"
           show-word-limit
           style="width:400px"
-        ></el-input>
+        />
       </el-form-item>
       <el-form-item label="角色说明">
         <el-input
+          v-model="form.name"
           type="textarea"
           :rows="3"
           placeholder="请输入内容"
-          v-model="form.name"
           minlength="6"
           maxlength="200"
           show-word-limit
           style="width:400px"
-        >
-        </el-input>
+        />
       </el-form-item>
       <el-form-item label="部门">
-        <el-select v-model="form.region" placeholder="请选择部门">
-          <el-option label="技术术部" value="shanghai"></el-option>
-          <el-option label="财务部" value="beijing"></el-option>
+        <el-select
+          v-model="form.region"
+          placeholder="请选择部门"
+        >
+          <el-option
+            label="技术术部"
+            value="shanghai"
+          />
+          <el-option
+            label="财务部"
+            value="beijing"
+          />
         </el-select>
       </el-form-item>
       <el-form-item label="用户">
@@ -51,14 +69,16 @@
             :key="item.value"
             :label="item.label"
             :value="item.value"
-          >
-          </el-option>
+          />
         </el-select>
       </el-form-item>
     </el-form>
     <el-row>
       <h5>用户组</h5>
-      <el-row class="user-group" prop="data">
+      <el-row
+        class="user-group"
+        prop="data"
+      >
         <el-tree
           ref="newTopRightsTree"
           :data="data"
@@ -67,8 +87,7 @@
           :default-expanded-keys="[]"
           :default-checked-keys="checkedKeys"
           :props="defaultProps"
-        >
-        </el-tree>
+        />
       </el-row>
     </el-row>
     <el-row>
@@ -80,8 +99,7 @@
           lazy
           show-checkbox
           @check-change="handleCheckChange"
-        >
-        </el-tree>
+        />
       </el-row>
     </el-row>
     <el-row>
@@ -93,15 +111,23 @@
           lazy
           show-checkbox
           @check-change="handleCheckChange"
-        >
-        </el-tree>
+        />
       </el-row>
     </el-row>
     <div class="btn-box">
-      <el-button size="small" @click="onSubmit('formName')">重置</el-button>
-      <el-button size="small" type="primary" @click="onSubmit('formName')"
-      >确定</el-button
+      <el-button
+        size="small"
+        @click="onSubmit('formName')"
       >
+        重置
+      </el-button>
+      <el-button
+        size="small"
+        type="primary"
+        @click="onSubmit('formName')"
+      >
+        确定
+      </el-button>
     </div>
   </div>
 </template>
@@ -115,20 +141,20 @@
   height: 800px;
   overflow-y: auto;
   //按钮
-  .btn-box{
-    background:#fff;
+  .btn-box {
+    background: #fff;
     box-sizing: border-box;
-    width:100%;
-    padding:10px;
-    border-top:1px solid #eee;
-    z-index:999;
-    margin-top:20px;
+    width: 100%;
+    padding: 10px;
+    border-top: 1px solid #eee;
+    z-index: 999;
+    margin-top: 20px;
     display: block;
   }
-  .title-but{
+  .title-but {
     position: absolute;
-    top:0;
-    right:0;
+    top: 0;
+    right: 0;
   }
   h4 {
     position: relative;
@@ -302,6 +328,11 @@ export default {
       checkedKeys: [5]
     };
   },
+  mounted() {
+    this.list = this.states.map(item => {
+      return { value: `value:${item}`, label: `label:${item}` };
+    });
+  },
   methods: {
     //确定
     onSubmit() {
@@ -365,11 +396,6 @@ export default {
         this.options = [];
       }
     }
-  },
-  mounted() {
-    this.list = this.states.map(item => {
-      return { value: `value:${item}`, label: `label:${item}` };
-    });
   }
 };
 </script>

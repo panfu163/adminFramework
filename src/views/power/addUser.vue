@@ -1,8 +1,13 @@
 <template>
   <div class="content">
-    <h4>{{ this.$route.meta.title }}
-      <el-button class="title-but" size="small" type="primary" @click="onSubmit('formName')"
-      >确定</el-button
+    <h4>
+      {{ this.$route.meta.title }}
+      <el-button
+        class="title-but"
+        size="small"
+        type="primary"
+        @click="onSubmit('formName')"
+        >确定</el-button
       >
     </h4>
     <el-form
@@ -128,10 +133,12 @@
       </el-row>
     </el-form>
     <div class="btn-box">
-      <el-button size="small" @click="onReset('formName')">重置</el-button>
-      <el-button size="small" type="primary" @click="onSubmit('formName')"
-      >确定</el-button
-      >
+      <el-button size="small" @click="onReset('formName')">
+        重置
+      </el-button>
+      <el-button size="small" @click="onSubmit()" type="primary">
+        确定
+      </el-button>
     </div>
   </div>
 </template>
@@ -142,7 +149,6 @@
   background: #fff;
   box-sizing: border-box;
   width: 100%;
-
   h4 {
     position: relative;
     border-bottom: 1px solid #eee;

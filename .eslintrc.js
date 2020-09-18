@@ -3,7 +3,7 @@ module.exports = {
   env: {
     node: true
   },
-  extends: ["plugin:vue/essential", "@vue/prettier"],
+  extends: ['plugin:vue/recommended', 'eslint:recommended'], //按VUE推荐顺序
   rules: {
     "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
     "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off",
@@ -51,7 +51,7 @@ module.exports = {
     "key-spacing": [0, { beforeColon: false, afterColon: true }],
     //引号类型 `` "" ''
     quotes: [0, "single"],
-    semi: [2, "always"] //语句强制分号结尾
+    semi: [2, "always"], //语句强制分号结尾
   },
   parserOptions: {
     parser: "babel-eslint"

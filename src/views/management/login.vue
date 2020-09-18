@@ -224,7 +224,7 @@ export default {
         });
         return;
       }
-      if (this.phone != "admin") {
+      if (this.phone !== "admin") {
         this.$notify({
           title: "警告",
           message: "用户名不正确!",
@@ -232,7 +232,7 @@ export default {
         });
         return;
       }
-      if (this.password != "admin") {
+      if (this.password !== "admin") {
         this.$notify({
           title: "警告",
           message: "密码不正确!",
@@ -247,7 +247,7 @@ export default {
     // 用户通过了验证
     success(msg) {
       this.isShow = false; // 通过验证后，需要手动隐藏模态框
-      this.getCode();
+      this.getCode(msg);
     },
     // 用户点击遮罩层，应该关闭模态框
     close() {

@@ -52,7 +52,8 @@ Tool.weiXin = () => {
       //alert(JSON.stringify(_param))
       wx.config(_param);
       wx.error(function(res) {
-        //   alert("出错了：" + res.errMsg);//这个地方的好处就是wx.config配置错误，会弹出窗口哪里错误，然后根据微信文档查询即可。
+        console.log(res);
+        //alert("出错了：" + res.errMsg);//这个地方的好处就是wx.config配置错误，会弹出窗口哪里错误，然后根据微信文档查询即可。
       });
     },
     e => {
@@ -91,7 +92,7 @@ Tool.sinngTxt = (parms, needToken = true) => {
       str.substr(0, str.length - 1) +
       "&key=" +
       "dd90ea5aed334214832ed46e18367f1f"; // + '&token='
-    if (needToken) str += "&token=" + util.getAccessToken();
+    if (needToken) str += "&token=" + Tool.getAccessToken();
     console.log("待签名数据：" + str);
     // console.log('待签名数据：' + encodeURIComponent(str))
     let resultMd5 = md5(str);
@@ -151,6 +152,11 @@ Tool.jWeixinOnBridgeReady = () => {
   } else {
     onBridgeReady();
   }
+};
+
+//或取AccessToken
+Tool.getAccessToken = () => {
+  localStorage.getItem("token");
 };
 
 export default Tool;

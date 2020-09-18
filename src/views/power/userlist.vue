@@ -32,7 +32,9 @@
           <el-button type="primary" @click="onSubmit">查询</el-button>
           <el-button @click="onReset()">重置</el-button>
         </el-form-item>
-        <el-button style="float: right" type="success" round @click="addUser">添加用户组</el-button>
+        <el-button style="float: right" type="success" round @click="addUser"
+          >添加用户组</el-button
+        >
       </el-form>
     </el-row>
     <el-table
@@ -220,7 +222,7 @@ export default {
     handleSelectionChange(val) {
       this.multipleSelection = val;
     },
-    handleClick(row) {
+    handleClick() {
       this.$router.push({ path: "/power/userDetails" });
     },
     deleteRow(index, rows) {
@@ -253,7 +255,7 @@ export default {
     toggleSelection(rows) {
       if (rows) {
         rows.forEach((row, index) => {
-          if (index == 0) {
+          if (index === 0) {
             return;
           }
           this.$refs.multipleTable.toggleRowSelection(row);
@@ -268,7 +270,7 @@ export default {
     },
     //处理选中
     checkSelectable(row, index) {
-      if (index == 0) {
+      if (index === 0) {
         //这个判断根据你的情况而定
         return 0; //不可勾选
       } else {

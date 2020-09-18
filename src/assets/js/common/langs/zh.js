@@ -5,7 +5,7 @@ export default {
     product: "商品",
     purchase: "采购",
     order: "订单",
-    logistics:"物流",
+    logistics: "物流",
     user: "客户",
     supplier: "供应商",
     shop: "门店",
@@ -14,7 +14,7 @@ export default {
     customerService: "客服",
     gallery: "图库",
     marketing: "营销",
-    distribution:"分销",
+    distribution: "分销",
     data: "数据",
     information: "信息",
     community: "社区",
@@ -26,7 +26,7 @@ export default {
     search: {
       title: "库存查询",
       list: {
-        goods:"基础商品",
+        goods: "基础商品",
         check: "库存查询",
         notes: "库存记录",
         code: "唯一码管理"
@@ -59,19 +59,19 @@ export default {
     manage: {
       title: "账户管理",
       list: {
-        userManagement:"用户管理",
+        userManagement: "用户管理",
         userList: "用户组管理",
-        rolList: "角色管理",
+        rolList: "角色管理"
       }
     },
     rbac: {
       title: "权限管理",
       list: {
-        rbacsetting:"权限设置",
-        menuManage:"菜单权限管理",
-        systemManage:"系统权限管理",
+        rbacsetting: "权限设置",
+        menuManage: "菜单权限管理",
+        systemManage: "系统权限管理"
       }
-    },
+    }
   },
   product: {
     title: "商品中心",
@@ -80,43 +80,43 @@ export default {
       list: {
         goods: "商品库",
         classify: "商品分类",
-        brand:"品牌管理",
-        unitLibrary:"单位库",
-        attribute:"属性库"
+        brand: "品牌管理",
+        unitLibrary: "单位库",
+        attribute: "属性库"
       }
     },
     shop: {
       title: "门店商品",
       list: {
         returnGoods: "商店商品",
-        sale: "商品分组",
+        sale: "商品分组"
       }
     },
     network: {
       title: "网店商品",
       list: {
         returnGoods: "网店商品",
-        sale: "商品分组",
+        sale: "商品分组"
       }
     },
     virtualGoods: {
       title: "虚拟商品",
       list: {
         returnGoods: "虚拟商品",
-        sale: "商品分组",
+        sale: "商品分组"
       }
     },
     BaseInformation: {
       title: "商品工具",
       list: {
-        settings:"商品设置",
-        info:"标签管理",
-        import:"运费设置",
-        backups:"配送价格",
-        restore:"零售价格",
-        generating:"生成商品代码",
-        priceTag:"打印商品价签",
-        ShapeModulationCode:"打印调形码",
+        settings: "商品设置",
+        info: "标签管理",
+        import: "运费设置",
+        backups: "配送价格",
+        restore: "零售价格",
+        generating: "生成商品代码",
+        priceTag: "打印商品价签",
+        ShapeModulationCode: "打印调形码"
       }
     }
   },
@@ -167,34 +167,34 @@ export default {
     data: {
       title: "权益管理",
       list: {
-        dataImport:"权益卡",
-        dataExport:"积分权益",
-        dataBackup:"自定义权益",
+        dataImport: "权益卡",
+        dataExport: "积分权益",
+        dataBackup: "自定义权益"
       }
     },
     fundManagement: {
       title: "资金管理",
       list: {
-        dataImport:"资金规则",
-        dataExport:"资金查询",
-        dataBackup:"运营管理",
+        dataImport: "资金规则",
+        dataExport: "资金查询",
+        dataBackup: "运营管理"
       }
     }
   },
-  pay:{
-      title: "财务管理",
-      management: {
-        title: "收入管理",
-        list: {
-          list:"销售毛利",
-          securityCenter: "销售明细",
-          mail: "销售分佣",
-          receipt: "收款对账",
-          returnedMoney: "回款对账"
-        }
-      },
-      costManagement: {
-      title:"成本管理",
+  pay: {
+    title: "财务管理",
+    management: {
+      title: "收入管理",
+      list: {
+        list: "销售毛利",
+        securityCenter: "销售明细",
+        mail: "销售分佣",
+        receipt: "收款对账",
+        returnedMoney: "回款对账"
+      }
+    },
+    costManagement: {
+      title: "成本管理",
       list: {
         settings: "出入库单",
         info: "存货明细",
@@ -205,15 +205,15 @@ export default {
       }
     },
     BaseInformations: {
-      title:"结算管理",
+      title: "结算管理",
       list: {
         settings: "采购结算",
         info: "加盟结算",
-        import: "分用结算",
+        import: "分用结算"
       }
     },
     paymentReceived: {
-      title:"收付款管理",
+      title: "收付款管理",
       list: {
         settings: "付款管理",
         info: "采购管理",
@@ -221,24 +221,24 @@ export default {
         backups: "加盟退款",
         restore: "采购预付款",
         bargainMoney: "加盟预付款",
-        bargainMoneys:"其他预付款"
+        bargainMoneys: "其他预付款"
       }
     },
     financialData: {
-      title:"财务资料",
+      title: "财务资料",
       list: {
         settings: "财务组织",
         info: "往来单位",
-        import: "费用项",
+        import: "费用项"
       }
     }
   },
-  order:{
+  order: {
     title: "订单中心",
     management: {
       title: "订单管理",
       list: {
-        query:"订单查询",
+        query: "订单查询",
         speedy: "快速打单",
         consignment: "销售发货",
         batch: "批量发货",
@@ -246,46 +246,46 @@ export default {
         refund: "退款维权",
         arrRefund: "批量退款",
         addOrder: "添加订单",
-        assess: "售后评价",
+        assess: "售后评价"
       }
     }
   },
-  logistics:{
+  logistics: {
     title: "物流中心",
     management: {
       title: "物流管理",
       list: {
-        list:"物流查询",
-        settings:"物流公司",
-        info:"配送设置",
+        list: "物流查询",
+        settings: "物流公司",
+        info: "配送设置"
       }
     }
   },
-  message:{
+  message: {
     title: "短信中心",
     management: {
       title: "短信管理",
       list: {
-        list:"短信记录",
-        mail:"短信签名",
-        channel:"短信渠道"
+        list: "短信记录",
+        mail: "短信签名",
+        channel: "短信渠道"
       }
     },
     sendTheManagement: {
       title: "发送管理",
       list: {
-        securityCenter:"人工发送",
-        applyFor:"短信发送申请",
-        audit:"短信发送审核"
+        securityCenter: "人工发送",
+        applyFor: "短信发送申请",
+        audit: "短信发送审核"
       }
     },
     template: {
-      title:"模板管理",
+      title: "模板管理",
       list: {
-        securityCenter:"短信模板列表",
-        applyFor:"添加短信模板"
+        securityCenter: "短信模板列表",
+        applyFor: "添加短信模板"
       }
-    },
+    }
   },
   confirm: {
     ok: "确认",
@@ -299,7 +299,7 @@ export default {
   },
   nav: {
     home: "首页", //首页
-    pay:"支付中心",
-    order:"订单中心"
-  },
+    pay: "支付中心",
+    order: "订单中心"
+  }
 };

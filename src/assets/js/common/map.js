@@ -85,7 +85,7 @@ Map.baiduGetLocation = callback => {
   let geolocation = new BMap.Geolocation();
   geolocation.getCurrentPosition(
     function(r) {
-      if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+      if (this.getStatus() === BMAP_STATUS_SUCCESS) {
         // 将百度经纬度转为高德经纬度
         let gps = [r.point.lng, r.point.lat];
         AMap.convertFrom(gps, "gps", function(status, result) {
