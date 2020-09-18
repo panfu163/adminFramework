@@ -1,7 +1,8 @@
 # adminFramework
 
 项目在线演示地址：[http://shop.pfuni.cn/test/adminFramework](http://shop.pfuni.cn/test/adminFramework)  
-
+用户名：admin
+密码：admin
 
 ## Project setup
 ## 安装依赖

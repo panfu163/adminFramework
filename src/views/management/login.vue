@@ -188,7 +188,9 @@ export default {
         background: "rgba(0, 0, 0, 0.8)",
         text: "拼命加载中..."
       }); //显示加载中
-      this.$http("/user",{
+      this.$http(
+        "/user",
+        {
           page: 1,
           pageSize: 10,
           cityCode: "310100",
@@ -196,7 +198,7 @@ export default {
           Latitude: 26.558015
         },
         res => {
-          localStorage.setItem("userInfo",res.data);
+          localStorage.setItem("userInfo", res.data);
           loadingInstance.close();
           this.$router.push({ path: "/" });
         },
@@ -208,22 +210,38 @@ export default {
     Login() {
       if (!this.phone) {
         this.$notify({
-          title: '警告',
-          message: '用户名不能未空!',
-          type: 'warning'
+          title: "警告",
+          message: "用户名不能未空!",
+          type: "warning"
         });
         return;
       }
       if (!this.password) {
         this.$notify({
-          title: '警告',
-          message: '密码不能为空!',
-          type: 'warning'
+          title: "警告",
+          message: "密码不能为空!",
+          type: "warning"
         });
         return;
       }
-      localStorage.setItem("userInfo","user");//这里只是测试用的
-      this.$router.push({ path: "/" });//这里只是测试用的
+      if (this.phone != "admin") {
+        this.$notify({
+          title: "警告",
+          message: "用户名不正确!",
+          type: "warning"
+        });
+        return;
+      }
+      if (this.password != "admin") {
+        this.$notify({
+          title: "警告",
+          message: "密码不正确!",
+          type: "warning"
+        });
+        return;
+      }
+      localStorage.setItem("userInfo", "user"); //这里只是测试用的
+      this.$router.push({ path: "/" }); //这里只是测试用的
       //this.getLogin();
     },
     // 用户通过了验证
