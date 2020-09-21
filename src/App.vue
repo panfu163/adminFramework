@@ -60,10 +60,28 @@ input[type="number"] {
   margin-top: 20px;
   display: block;
 }
+.drawer{
+  position: relative;
+  .btn-box {
+    position:absolute;
+    right:0;
+    bottom:0;
+    width:100%;
+    background: #fff;
+    box-sizing: border-box;
+    padding: 10px;
+    border-top: 1px solid #eee;
+    z-index:999;
+    display: block;
+  }
+}
 //头部按钮
 .title-but {
   position: absolute;
   top: 0;
   right: 0;
+}
+*:focus {
+  outline: 0;
 }
 </style>

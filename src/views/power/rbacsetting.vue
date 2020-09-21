@@ -4,7 +4,7 @@
       <el-col :span="3">
         <el-tree class="el-cols" accordion :data="data" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
       </el-col>
-      <el-col :span="21" class="pagination">
+      <el-col :span="21" class="rbacseting">
         <h5>功能权限</h5>
         <el-checkbox  class="el-checkbox-title" :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
         <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
@@ -38,6 +38,7 @@
     padding-bottom:10px;
     margin-bottom:20px;
     display:block;
+    text-align: left;
   }
   .btn{
     margin:20px 0;
@@ -47,18 +48,8 @@
     padding: 20px;
     margin-bottom: 10px;
   }
-  .pagination {
-    padding:10px 20px;
-    border-left:1px solid #eee;
-    .el-checkbox-group{
-      margin-bottom:20px;
-    }
-    .el-checkbox-title{
-      margin-bottom:10px;
-      &:first-child{
-        margin-top:0;
-      }
-    }
+  .rbacseting{
+    text-align: left;
   }
 }
 </style>

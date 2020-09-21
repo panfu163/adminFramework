@@ -111,6 +111,20 @@
       :total="1000"
     >
     </el-pagination>
+
+    <!--弹框-添加用户-->
+    <el-drawer
+            title="添加用户组"
+            :visible.sync="drawer"
+            direction="rtl"
+            size="50%"
+            :before-close="handleClose"
+            class="drawer"
+            :append-to-body="true"
+    >
+        <addUserGroup @handleClose="handleClose" />
+    </el-drawer>
+
   </div>
 </template>
 <style lang="scss" scoped>
@@ -140,11 +154,16 @@
 }
 </style>
 <script>
+import addUserGroup from "./addUserGroup";
 export default {
+  components:{
+    addUserGroup
+  },
   data() {
     return {
+      drawer:false,
       loading: true,
-      currentPage4L: 4,
+      currentPage4: 4,
       form: {
         name: "",
         region: "",
@@ -279,13 +298,17 @@ export default {
     },
     //添加用户组
     addUser() {
-      this.$router.push({ path: "/power/addUserGroup" });
+      this.drawer=true;
+      //this.$router.push({ path: "/power/addUserGroup" });
     },
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
     },
     handleCurrentChange(val) {
       console.log(`当前页: ${val}`);
+    },
+    handleClose(){
+      this.drawer=false;
     }
   },
   mounted() {
