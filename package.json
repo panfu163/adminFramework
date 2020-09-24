@@ -13,6 +13,7 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "@riophae/vue-treeselect": "^0.4.0",
     "axios": "^0.19.2",
     "blueimp-md5": "^2.16.0",
     "draggable": "^4.2.0",

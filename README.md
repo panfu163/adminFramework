@@ -149,4 +149,5 @@ vue-puzzle-vcode | 滑动验证 | [https://github.com/javaLuo/vue-puzzle-vcode](
 vuedraggable| 可拖拽组件 | [https://github.com/SortableJS/Vue.Draggable](https://github.com/SortableJS/Vue.Draggable)
 vuedraggable| 可拖拽组件 | [https://github.com/SortableJS/Vue.Draggable](https://github.com/SortableJS/Vue.Draggable)
 vue-quill-editor| 富文本编辑器 | [https://github.surmon.me/vue-quill-editor/](https://github.surmon.me/vue-quill-editor/)
+VueTreeselect| 多选树形控件 | [https://www.vue-treeselect.cn/](https://www.vue-treeselect.cn/)
  
