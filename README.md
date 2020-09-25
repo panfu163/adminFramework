@@ -152,7 +152,7 @@ vue-quill-editor| 富文本编辑器 | [https://github.surmon.me/vue-quill-edito
 VueTreeselect| 多选树形控件 | [https://www.vue-treeselect.cn/](https://www.vue-treeselect.cn/)
 
 ### 组件基本用法需注意的问题
--- VueTreeselect用法
+- VueTreeselect用法
 ```
  //使用VueTreeselect组件需要页面上引用组件和组件样式
  // import the component
