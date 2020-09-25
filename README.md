@@ -97,7 +97,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
               ├── index.js                            #接口地址配置 
          ├── config                                   #共用的项目配置
 	├── components                               #组件文件夹，自己写的组件都放在这个文件夹下
-			├── pulic                            #公用页面组件
+			├── layout                            #公用页面组件
 			     ├── footer.vue                            #页脚
 			     ├── head.vue                              #页头
 			     ├── left.vue                              #业务系统功能导航
