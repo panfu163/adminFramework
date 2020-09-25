@@ -97,7 +97,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
               ├── index.js                            #接口地址配置 
          ├── config                                   #共用的项目配置
 	├── components                               #组件文件夹，自己写的组件都放在这个文件夹下
-			├── layout                            #公用页面组件
+			├── layout                            #公用页面布局组件
 			     ├── footer.vue                            #页脚
 			     ├── head.vue                              #页头
 			     ├── left.vue                              #业务系统功能导航
@@ -150,4 +150,13 @@ vuedraggable| 可拖拽组件 | [https://github.com/SortableJS/Vue.Draggable](ht
 vuedraggable| 可拖拽组件 | [https://github.com/SortableJS/Vue.Draggable](https://github.com/SortableJS/Vue.Draggable)
 vue-quill-editor| 富文本编辑器 | [https://github.surmon.me/vue-quill-editor/](https://github.surmon.me/vue-quill-editor/)
 VueTreeselect| 多选树形控件 | [https://www.vue-treeselect.cn/](https://www.vue-treeselect.cn/)
- 
+
+### 组件基本用法需注意的问题
+-- VueTreeselect用法
+```
+ //使用VueTreeselect组件需要页面上引用组件和组件样式
+ // import the component
+  import Treeselect from '@riophae/vue-treeselect'
+  // import the styles
+  import '@riophae/vue-treeselect/dist/vue-treeselect.css'
+```
