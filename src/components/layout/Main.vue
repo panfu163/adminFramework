@@ -32,11 +32,11 @@
 </template>
 
 <script>
-import heads from "@/components/public/head";
-import sidebar from "@/components/public/sidebar";
-import tags from "@/components/public/tag";
-import menus from "@/components/public/menu";
-import footers from "@/components/public/footer";
+import heads from "@/components/layout/head";
+import sidebar from "@/components/layout/sidebar";
+import tags from "@/components/layout/tag";
+import menus from "@/components/layout/menu";
+import footers from "@/components/layout/footer";
 export default {
   name: "Main",
   components: {

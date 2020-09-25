@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Main from "@/components/public/Main";
+import Main from "@/components/layout/Main";
 
 //导入
 import NProgress from "nprogress";
