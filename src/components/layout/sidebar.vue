@@ -8,6 +8,7 @@
   <div class="sidebar" :style="{width:sidWidth+'px'}">
     <div class="title">
       <img src="@/assets/img/logo.png" />
+      <span>管理系统</span>
     </div>
     <ul class="miansub">
       <li
@@ -59,15 +60,18 @@
     box-sizing: border-box;
     text-align: center;
     color: #fff;
-    font-size: 18px;
+    font-size: 14px;
     width: 100%;
     overflow: hidden;
+    display: flex;
+    .span{
+      font-size:14px;
+    }
     img {
       width: 30px;
       height: auto;
       border-radius: 50%;
-      background: #fff;
-      margin: 10px auto;
+      margin: 10px 10px 10px 6px;
       display: block;
     }
   }
