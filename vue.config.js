@@ -25,14 +25,14 @@ module.exports = {
   //显示开启 eslint 验证
   lintOnSave: process.env.NODE_ENV === "production" ? false : true,
   devServer: {
-    port: 8888, // 端口
+    port: 8080, // 本地端口
     host: "localhost",
     https: false, // https:{type:Boolean}
     open: true, //配置自动启动浏览器
     proxy: {
         // 配置多个代理
         "/": {
-          target: "http://www.pfuni.cn", //目标接口域名
+          target: "http://test.pfuni.cn:8763", //目标接口域名
           ws: false, // 如果是https接口，需要配置这个参数
           changeOrigin: true //是否跨域
           // pathRewrite: {  //这里重写路径

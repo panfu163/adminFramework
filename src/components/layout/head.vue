@@ -5,22 +5,30 @@
  --@version 1.0
 --->
 <template>
-  <div class="head" :class="{on:sfold}">
+  <div
+    class="head"
+    :class="{on:sfold}"
+  >
     <el-row :gutter="20">
       <el-col :span="16">
         <div class="grid-left">
-          <template v-for="item in routes" v-if="item.children">
+          <template
+            v-for="item in routes"
+            v-if="item.children"
+          >
             <el-breadcrumb
+              v-if="item.path == '/' + path"
               class="breadcrumb"
               separator="/"
-              v-if="item.path == '/' + path"
             >
               <el-breadcrumb-item :to="{ path: '/' }">
-                {{ $t("nav.home") }}</el-breadcrumb-item
-              >
-              <el-breadcrumb-item :to="{ path: item.path }">{{
-                pathName
-              }}</el-breadcrumb-item>
+                {{ $t("nav.home") }}
+              </el-breadcrumb-item>
+              <el-breadcrumb-item :to="{ path: item.path }">
+                {{
+                  pathName
+                }}
+              </el-breadcrumb-item>
               <el-breadcrumb-item>{{ $route.meta.title }}</el-breadcrumb-item>
             </el-breadcrumb>
           </template>
@@ -30,62 +38,83 @@
         <div class="grid-right">
           <el-dropdown>
             <span class="el-dropdown-link">
-              主题切换<i class="el-icon-arrow-down el-icon--right"></i>
+              主题切换<i class="el-icon-arrow-down el-icon--right" />
             </span>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item @click.native="getThemes('red')"
-                >红色</el-dropdown-item
+              <el-dropdown-item
+                @click.native="getThemes('red')"
               >
-              <el-dropdown-item @click.native="getThemes('blue')"
-                >蓝色</el-dropdown-item
+                红色
+              </el-dropdown-item>
+              <el-dropdown-item
+                @click.native="getThemes('blue')"
               >
-              <el-dropdown-item @click.native="getThemes('yellow')"
-                >黄色</el-dropdown-item
+                蓝色
+              </el-dropdown-item>
+              <el-dropdown-item
+                @click.native="getThemes('yellow')"
               >
-              <el-dropdown-item @click.native="getThemes('green')"
-                >绿色</el-dropdown-item
+                黄色
+              </el-dropdown-item>
+              <el-dropdown-item
+                @click.native="getThemes('green')"
               >
+                绿色
+              </el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
           &nbsp;&nbsp;&nbsp;&nbsp;
           <el-dropdown>
             <span class="el-dropdown-link">
-              语言切换<i class="el-icon-arrow-down el-icon--right"></i>
+              语言切换<i class="el-icon-arrow-down el-icon--right" />
             </span>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item @click.native="getlocale('zh')"
-                >中文简体</el-dropdown-item
+              <el-dropdown-item
+                @click.native="getlocale('zh')"
               >
-              <el-dropdown-item @click.native="getlocale('en')"
-                >English</el-dropdown-item
+                中文简体
+              </el-dropdown-item>
+              <el-dropdown-item
+                @click.native="getlocale('en')"
               >
+                English
+              </el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
           <i
             v-if="isFullScreen"
-            @click="fullScreen()"
             class="el-icon-full-screen"
-          ></i>
-          <i v-if="!isFullScreen" @click="exitScreen()" class="el-icon-aim"></i>
+            @click="fullScreen()"
+          />
+          <i
+            v-if="!isFullScreen"
+            class="el-icon-aim"
+            @click="exitScreen()"
+          />
           <span class="badge-item">
-            <i class="el-icon-message-solid"></i>
+            <i class="el-icon-message-solid" />
             <i class="badge">99</i>
           </span>
           <el-avatar
             src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-          ></el-avatar>
+          />
           <el-dropdown>
             <span class="el-dropdown-link">
-              panfu<i class="el-icon-arrow-down el-icon--right"></i>
+              {{ list.nickname }}<i class="el-icon-arrow-down el-icon--right" />
             </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item class="clearfix">
                 消息
-                <el-badge class="mark" :value="12" />
+                <el-badge
+                  class="mark"
+                  :value="12"
+                />
               </el-dropdown-item>
               <el-dropdown-item>个人信息</el-dropdown-item>
               <el-dropdown-item>修改密码</el-dropdown-item>
-              <el-dropdown-item divided>退出系统</el-dropdown-item>
+              <el-dropdown-item divided>
+                退出系统
+              </el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </div>
@@ -96,16 +125,31 @@
 
 <script>
 import theme from "assets/js/common/theme.js";
+import userApi from "assets/js/api/user.js";
 export default {
-  name: "top",
+  name: "Top",
   data() {
     return {
       isFullScreen: true,
       routes: "", //所有的路由
       pathName: "",
       path: "",
-      sfold:false
+      sfold:false,
+      list:{
+        id:"1",
+        username:"admin",
+        nickname:"彭文森",
+        phone:"18785112455",
+      }
     };
+  },
+  watch: {
+    $route(to) {
+      console.log("我是head~~~");
+      //单页处理
+      //在mounted函数执行的方法，放到该处
+      this.path = to.meta.navigation;
+    }
   },
   mounted() {
     this.bus.$on("sfold",res=>{
@@ -121,6 +165,7 @@ export default {
     this.pathName = localStorage.getItem("headTitle")
       ? localStorage.getItem("headTitle")
       : "数据";
+    this.getUserInfo();
   },
   methods: {
     //切换主题
@@ -176,14 +221,15 @@ export default {
           $this.isFullScreen = false;
         }
       };
-    }
-  },
-  watch: {
-    $route(to) {
-      console.log("我是head~~~")
-      //单页处理
-      //在mounted函数执行的方法，放到该处
-      this.path = to.meta.navigation;
+    },
+    //获取用户信息
+    getUserInfo(){
+      console.log("获取用信息信息！！");
+      userApi.query({},res=>{
+        if(res.code===200){
+          this.list=res.data;
+        }
+      });
     }
   }
 };

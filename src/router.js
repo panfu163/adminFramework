@@ -98,7 +98,7 @@ const router = new Router({
 //处理登录信息
 router.beforeEach(function(to, from, next) {
   NProgress.start(); // 设置加载进度条(开始..)
-  if (!localStorage.getItem("userInfo")) {
+  if (!localStorage.getItem("authorization")) {
     //查看用户信息是否存在
     if (to.path !== "/login") {
       return next("/login");

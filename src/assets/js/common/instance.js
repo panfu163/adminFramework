@@ -23,10 +23,10 @@ let instance = axios.create({
 instance.interceptors.request.use(
   config => {
     NProgress.start(); // 设置加载进度条(开始..)
-    const token = localStorage.getItem("token");
-    if (token) {
+    const authorization = localStorage.getItem("authorization");
+    if (authorization) {
       // 判断是否存在token，如果存在的话，则每个http header都加上token
-      config.headers.authorization = token; //请求头加上token
+      config.headers.authorization = authorization; //请求头加上token
     }
     return config;
   },
@@ -45,7 +45,7 @@ instance.interceptors.response.use(
     //拦截响应，做统一处理
     if (response.data.code) {
       switch (response.data.code) {
-        case 1002: //登录失效跳回登录页
+        case 2005 || 2004: //令牌已过期
           store.state.isLogin = false;
           router.replace({
             path: "login",

@@ -2,45 +2,60 @@
   <div class="login">
     <div class="box">
       <div class="left">
-        <img src="@/assets/img/management/login.png" height="659" width="737" />
+        <img
+          src="@/assets/img/management/login.png"
+          height="659"
+          width="737"
+        >
       </div>
       <div class="right">
         <div class="login-box">
           <h3>用户名</h3>
           <input
+            v-model="phone"
             class="input"
             placeholder="请输入用户名/手机号/邮箱"
             type="text"
             @input="getPhone"
-            v-model="phone"
-          />
+          >
           <div class="input-box">
             <input
               v-if="isGetCocing"
+              v-model="password"
               class="input"
               placeholder="请输入您的验证码"
               type="text"
-              v-model="password"
-            />
+            >
             <input
               v-else
+              v-model="password"
               class="input"
               placeholder="请输入您的密码"
               type="password"
-              v-model="password"
-            />
-            <div class="but" v-if="isGetCocing" @click.stop="getVcode()">
+            >
+            <div
+              v-if="isGetCocing"
+              class="but"
+              @click.stop="getVcode()"
+            >
               {{ codeText }}
             </div>
           </div>
           <Vcode
             :show="isShow"
-            :sliderText="sliderText"
+            :slider-text="sliderText"
             @success="success"
             @close="close"
-          ></Vcode>
-          <button class="btn" @click="Login()">登 录</button>
-          <div class="forget">忘记密码?</div>
+          />
+          <button
+            class="btn"
+            @click="Login()"
+          >
+            登 录
+          </button>
+          <div class="forget">
+            忘记密码?
+          </div>
         </div>
       </div>
     </div>
@@ -165,6 +180,9 @@
 import Vcode from "vue-puzzle-vcode";
 import { Loading } from "element-ui";
 export default {
+  components: {
+    Vcode
+  },
   data() {
     return {
       sliderText: "拖动滑块完成验证",
@@ -181,32 +199,13 @@ export default {
       password: ""
     };
   },
+  computed: {},
+  mounted() {
+    let myDate = new Date();
+    this.year = myDate.getFullYear();
+  },
   methods: {
-    getLogin() {
-      let loadingInstance = Loading.service({
-        fullscreen: true,
-        background: "rgba(0, 0, 0, 0.8)",
-        text: "拼命加载中..."
-      }); //显示加载中
-      this.$http(
-        "/user",
-        {
-          page: 1,
-          pageSize: 10,
-          cityCode: "310100",
-          Longitude: 106.70833,
-          Latitude: 26.558015
-        },
-        res => {
-          localStorage.setItem("userInfo", res.data);
-          loadingInstance.close();
-          this.$router.push({ path: "/" });
-        },
-        error => {
-          console.log(error);
-        }
-      );
-    },
+    //登录
     Login() {
       if (!this.phone) {
         this.$notify({
@@ -224,25 +223,32 @@ export default {
         });
         return;
       }
-      if (this.phone !== "admin") {
-        this.$notify({
-          title: "警告",
-          message: "用户名不正确!",
-          type: "warning"
-        });
-        return;
-      }
-      if (this.password !== "admin") {
-        this.$notify({
-          title: "警告",
-          message: "密码不正确!",
-          type: "warning"
-        });
-        return;
-      }
-      localStorage.setItem("userInfo", "user"); //这里只是测试用的
-      this.$router.push({ path: "/" }); //这里只是测试用的
-      //this.getLogin();
+      this.getLogin();
+    },
+    //登录验证
+    getLogin() {
+      let loadingInstance = Loading.service({
+        fullscreen: true,
+        background: "rgba(0, 0, 0, 0.8)",
+        text: "拼命加载中..."
+      }); //显示加载中
+      this.$http("/dolphin-auth/management/oauth/login", {
+          password:this.password,
+          username:this.phone,
+          Longitude:106.70833,
+          Latitude:26.558015
+        },
+        res => {
+        console.log(res);
+          loadingInstance.close();
+          localStorage.setItem("authorization",res.data); //存用户token
+          this.$router.push({ path: "/" });
+        },
+        error => {
+          loadingInstance.close();
+          console.log(error);
+        }
+      );
     },
     // 用户通过了验证
     success(msg) {
@@ -290,14 +296,6 @@ export default {
         this.isGetCocing = false;
       }
     }
-  },
-  mounted() {
-    let myDate = new Date();
-    this.year = myDate.getFullYear();
-  },
-  computed: {},
-  components: {
-    Vcode
   }
 };
 </script>
