@@ -8,7 +8,7 @@
   <div class="sidebar" :style="{width:sidWidth+'px'}">
     <div class="title">
       <img src="@/assets/img/logo.png" />
-      <span>管理系统</span>
+      <span>服务平台</span>
     </div>
     <ul class="miansub">
       <li
