@@ -45,7 +45,7 @@ instance.interceptors.response.use(
     //拦截响应，做统一处理
     if (response.data.code) {
       switch (response.data.code) {
-        case 2005 || 2004: //令牌已过期
+        case 102005 || 102004: //令牌已过期
           store.state.isLogin = false;
           router.replace({
             path: "login",

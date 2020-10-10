@@ -5,10 +5,23 @@
  --@version 1.0
 --->
 <template>
-  <div class="tag-box" :class="{on:sfold}">
-    <span class="el-icon-arrow-left" v-if="isRarr" @click="arrowLeft"></span>
-    <div class="el-tag-box" ref="tagBox">
-      <div class="tag-min" ref="tagMin">
+  <div
+    class="tag-box"
+    :class="{on:sfold}"
+  >
+    <span
+      v-if="isRarr"
+      class="el-icon-arrow-left"
+      @click="arrowLeft"
+    />
+    <div
+      ref="tagBox"
+      class="el-tag-box"
+    >
+      <div
+        ref="tagMin"
+        class="tag-min"
+      >
         <el-tag
           v-for="(item, index) in dynamicTags"
           :key="index"
@@ -17,11 +30,16 @@
           :disable-transitions="false"
           @close="handleClose(item)"
           @click="getoUrl(item)"
-          >{{ item.title }}
+        >
+          {{ item.title }}
         </el-tag>
       </div>
     </div>
-    <span class="el-icon-arrow-right" v-if="isRarr" @click="arrowRight"></span>
+    <span
+      v-if="isRarr"
+      class="el-icon-arrow-right"
+      @click="arrowRight"
+    />
   </div>
 </template>
 
@@ -40,16 +58,46 @@ export default {
       sfold:false
     };
   },
+  computed: {},
+  watch: {
+    $route(to) {
+      console.log("我是tag~~~");
+      if (to.path) {
+        let val = {
+          title: to.meta.title,
+          url: to.path
+        };
+        this.dynamicTags.push(val);
+        this.dynamicTags = this.distinct(this.dynamicTags); //数据去重
+        //监听地址变化
+        this.path = to.path;
+      } else {
+        this.$message("跳转地址没有配置");
+      }
+    }
+  },
+  mounted() {
+    this.path = this.$route.path;
+    let item = this.$route;
+    let val = [{
+        title: item.meta.title,
+        url: item.path
+      }];
+    this.dynamicTags = val;
+    this.bus.$on("sfold",res=>{this.sfold=res;});
+  },
   methods: {
     //删除
     handleClose(tag) {
-      if (this.$route.path === tag.url) {
-        this.$message("当前显示页不可删除");
-        return;
-      }
-      //删除
-      this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
-      localStorage.setItem("tagTitle", JSON.stringify(this.dynamicTags)); //设置头部信息
+        this.dynamicTags.splice(this.dynamicTags.indexOf(tag),1);//删除
+        let arr = this.dynamicTags;
+        if(arr.length>0) {
+          let item=arr.slice(-1);//获取最后一个数组
+          this.$router.push({path:item[0].url});//跳转地址
+          //localStorage.setItem("dynamicTags", JSON.stringify(this.dynamicTags)); //设置头部信息
+        }else{
+          this.$router.push({path:"/"});//跳转首页
+        }
     },
     getoUrl(item) {
       //标签跳转
@@ -93,34 +141,6 @@ export default {
         }
       }
       return result;
-    }
-  },
-  mounted() {
-    this.path = this.$route.path;
-    let item = this.$route;
-    let val = [{
-        title: item.meta.title,
-        url: item.path
-      }];
-    this.dynamicTags = val;
-    this.bus.$on("sfold",res=>{this.sfold=res;});
-  },
-  computed: {},
-  watch: {
-    $route(to) {
-      console.log("我是tag~~~")
-      if (to.path) {
-        let val = {
-          title: to.meta.title,
-          url: to.path
-        };
-        this.dynamicTags.push(val);
-        this.dynamicTags = this.distinct(this.dynamicTags); //数据去重
-        //监听地址变化
-        this.path = to.path;
-      } else {
-        this.$message("跳转地址没有配置");
-      }
     }
   }
 };

@@ -41,8 +41,6 @@ export default function(path, params, success, fail,method) {
             if (fail && typeof fail === "function") {
               return fail(data);
              }else{
-              console.log("=========");
-              console.log(data);
                message(data.message);
              }
           }
