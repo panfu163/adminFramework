@@ -85,7 +85,16 @@ export default {
     init(){
       this.path = this.$route.path;
       let dynamicTags=localStorage.getItem("dynamicTags");
-      this.dynamicTags=JSON.parse(dynamicTags);
+      if(dynamicTags){
+        this.dynamicTags=JSON.parse(dynamicTags);
+      }else{
+        let item = this.$route;
+        let val = [{
+          title: item.meta.title,
+          url: item.path
+        }];
+        this.dynamicTags=val;
+      }
       this.bus.$on("sfold",res=>{this.sfold=res;});
     },
     //删除

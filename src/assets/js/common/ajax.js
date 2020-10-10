@@ -15,18 +15,18 @@ export default function(path, params, success, fail,method) {
   //请求接口地址处理
   let baseUrl = "";
   switch (process.env.VUE_APP_CURENV) {
-    case "dev":
-      baseUrl = $config.apiUrl.dev;
-      break;
-    case "test":
-      baseUrl = $config.apiUrl.test;
-      break;
-    case "prod":
-      baseUrl = $config.apiUrl.prod;
-      break;
-  }
+      case "dev":
+        baseUrl = $config.apiUrl.dev;
+        break;
+      case "test":
+        baseUrl = $config.apiUrl.test;
+        break;
+      case "prod":
+        baseUrl = $config.apiUrl.prod;
+        break;
+     }
   instance({
-    url:baseUrl + path,
+    url:baseUrl + path+`?ts=${Date.now()}`,
     data:params,
     method:method ? method : "POST"
   }).then(response => {
