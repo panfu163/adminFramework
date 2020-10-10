@@ -69,6 +69,7 @@ export default {
         };
         this.dynamicTags.push(val);
         this.dynamicTags = this.distinct(this.dynamicTags); //数据去重
+        localStorage.setItem("dynamicTags", JSON.stringify(this.dynamicTags)); //设置头部信息
         //监听地址变化
         this.path = to.path;
       } else {
@@ -77,16 +78,16 @@ export default {
     }
   },
   mounted() {
-    this.path = this.$route.path;
-    let item = this.$route;
-    let val = [{
-        title: item.meta.title,
-        url: item.path
-      }];
-    this.dynamicTags = val;
-    this.bus.$on("sfold",res=>{this.sfold=res;});
+   this.init();
   },
   methods: {
+    //初始化tag数据
+    init(){
+      this.path = this.$route.path;
+      let dynamicTags=localStorage.getItem("dynamicTags");
+      this.dynamicTags=JSON.parse(dynamicTags);
+      this.bus.$on("sfold",res=>{this.sfold=res;});
+    },
     //删除
     handleClose(tag) {
         this.dynamicTags.splice(this.dynamicTags.indexOf(tag),1);//删除
@@ -94,13 +95,13 @@ export default {
         if(arr.length>0) {
           let item=arr.slice(-1);//获取最后一个数组
           this.$router.push({path:item[0].url});//跳转地址
-          //localStorage.setItem("dynamicTags", JSON.stringify(this.dynamicTags)); //设置头部信息
+          localStorage.setItem("dynamicTags", JSON.stringify(this.dynamicTags)); //设置头部信息
         }else{
           this.$router.push({path:"/"});//跳转首页
         }
     },
+    //标签跳转
     getoUrl(item) {
-      //标签跳转
       this.$router.push({ path: item.url });
     },
     //点击右箭头

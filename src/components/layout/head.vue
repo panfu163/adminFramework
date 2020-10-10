@@ -14,10 +14,9 @@
         <div class="grid-left">
           <template
             v-for="item in routes"
-            v-if="item.children"
           >
             <el-breadcrumb
-              v-if="item.path == '/' + path"
+              v-if="item.children && item.path == '/' + path"
               class="breadcrumb"
               separator="/"
             >

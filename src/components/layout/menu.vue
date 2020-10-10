@@ -30,7 +30,9 @@
             :key="index"
             :index="items.url"
             @click="goto(items)"
-            >{{ items.title }}</el-menu-item
+            >
+           {{ items.title }}
+          </el-menu-item
           >
         </el-menu-item-group>
       </el-submenu>
@@ -108,21 +110,19 @@ export default {
       defaultActive: "", //当前选中
       tagData: this.$store.state.tag,
       pathName: "", //根据路径来判断子导航,
-      reg: /^\/[0-9a-zA-Z]*.*?/,
       sfold: false
     };
   },
   mounted() {
-    this.pathName = this.$route.meta.navigation; //设置导航数据
-    let str = this.$route.path;
-    let array = str.match(this.reg)[0]; //处理子路由取父路由
-    this.bus.$on("sfold", res => {
-      console.log(res);
-      this.sfold = res;
-    });
-    this.defaultActive = array; //处理导航选中
+    this.init();
   },
   methods: {
+    //初始化
+    init(){
+      this.pathName = this.$route.meta.navigation; //设置导航数据
+      this.bus.$on("sfold", res => {this.sfold = res;});
+      this.defaultActive = this.$route.path; //处理导航选中
+    },
     goto(item, index) {
       if (item.url) {
         this.$router.push({ path: item.url }); //跳转地址
@@ -795,9 +795,7 @@ export default {
       //单页处理
       //在mounted函数执行的方法，放到该处
       this.pathName = to.meta.navigation;
-      let str = to.path;
-      let array = str.match(this.reg)[0]; //处理子路由取父路由
-      this.defaultActive = array; //处理导航选中
+      this.defaultActive = to.path; //处理导航选中
     }
   }
 };
