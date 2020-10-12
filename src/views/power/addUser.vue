@@ -7,8 +7,9 @@
         size="small"
         type="primary"
         @click="onSubmit('formName')"
-        >确定</el-button
       >
+        确定
+      </el-button>
     </h4>
     <el-form
       ref="formName"
@@ -16,7 +17,10 @@
       :rules="rules"
       label-width="100px"
     >
-      <el-form-item label="用户账号:" prop="name">
+      <el-form-item
+        label="用户账号:"
+        prop="name"
+      >
         <el-input
           v-model="ruleForm.name"
           placeholder="请输入用户账号"
@@ -24,9 +28,12 @@
           maxlength="20"
           show-word-limit
           style="width:400px"
-        ></el-input>
+        />
       </el-form-item>
-      <el-form-item label="账号密码:" prop="password">
+      <el-form-item
+        label="账号密码:"
+        prop="password"
+      >
         <el-input
           v-model="ruleForm.password"
           placeholder="请输入账号密码"
@@ -34,9 +41,12 @@
           maxlength="10"
           show-word-limit
           style="width:400px"
-        ></el-input>
+        />
       </el-form-item>
-      <el-form-item label="确认密码:" prop="password">
+      <el-form-item
+        label="确认密码:"
+        prop="password"
+      >
         <el-input
           v-model="ruleForm.password"
           placeholder="再次确认密码"
@@ -44,9 +54,12 @@
           maxlength="10"
           show-word-limit
           style="width:400px"
-        ></el-input>
+        />
       </el-form-item>
-      <el-form-item label="联系手机号:" prop="phone">
+      <el-form-item
+        label="联系手机号:"
+        prop="phone"
+      >
         <el-input
           v-model="ruleForm.phone"
           type="number"
@@ -55,9 +68,12 @@
           maxlength="11"
           show-word-limit
           style="width:400px"
-        ></el-input>
+        />
       </el-form-item>
-      <el-form-item label="联系邮箱:" prop="mailbox">
+      <el-form-item
+        label="联系邮箱:"
+        prop="mailbox"
+      >
         <el-input
           v-model="ruleForm.mailbox"
           type="email"
@@ -65,9 +81,12 @@
           maxlength="80"
           show-word-limit
           style="width:400px"
-        ></el-input>
+        />
       </el-form-item>
-      <el-form-item label="真实姓名:" prop="fullName">
+      <el-form-item
+        label="真实姓名:"
+        prop="fullName"
+      >
         <el-input
           v-model="ruleForm.fullName"
           placeholder="请输入真实姓名"
@@ -75,24 +94,25 @@
           maxlength="20"
           show-word-limit
           style="width:400px"
-        ></el-input>
+        />
       </el-form-item>
-      <el-form-item label="所在部门:" prop="region">
-        <el-select v-model="ruleForm.region" placeholder="请选择部门">
-          <el-option label="总经办" value="houqing"></el-option>
-          <el-option label="财务部" value="chawu"></el-option>
-          <el-option label="技术部" value="jinshu"></el-option>
-          <el-option label="后勤部" value="houqing"></el-option>
-          <el-option label="商务部" value="shangwu"></el-option>
-          <el-option label="人事部" value="renshi"></el-option>
-          <el-option label="销售部" value="xiaoshe"></el-option>
-          <el-option label="营运部" value="yuanying"></el-option>
-          <el-option label="证券部" value="zhengjuan"></el-option>
-        </el-select>
+      <el-form-item
+        label="所在部门:"
+        prop="region"
+      >
+        <treeselect
+            v-model="value"
+            :options="options"
+            placeholder="请选择部门"
+            style="width:400px"
+        />
       </el-form-item>
       <el-row>
         <h5>用户组</h5>
-        <el-row class="user-group" prop="data">
+        <el-row
+          class="user-group"
+          prop="data"
+        >
           <el-tree
             ref="newTopRightsTree"
             :data="data"
@@ -101,8 +121,7 @@
             :default-expanded-keys="[]"
             :default-checked-keys="checkedKeys"
             :props="defaultProps"
-          >
-          </el-tree>
+          />
         </el-row>
       </el-row>
       <el-row>
@@ -114,8 +133,7 @@
             lazy
             show-checkbox
             @check-change="handleCheckChange"
-          >
-          </el-tree>
+          />
         </el-row>
       </el-row>
       <el-row>
@@ -127,16 +145,22 @@
             lazy
             show-checkbox
             @check-change="handleCheckChange"
-          >
-          </el-tree>
+          />
         </el-row>
       </el-row>
     </el-form>
     <div class="btn-box">
-      <el-button size="small" @click="onReset('formName')">
+      <el-button
+        size="small"
+        @click="onReset('formName')"
+      >
         重置
       </el-button>
-      <el-button size="small" @click="onSubmit()" type="primary">
+      <el-button
+        size="small"
+        type="primary"
+        @click="onSubmit()"
+      >
         确定
       </el-button>
     </div>
@@ -170,7 +194,10 @@
 }
 </style>
 <script>
+import Treeselect from "@riophae/vue-treeselect";
 export default {
+  name:"adduser",
+  components:{ Treeselect  },
   data() {
     return {
       ruleForm: {
@@ -281,9 +308,48 @@ export default {
       props: {
         label: "name",
         children: "zones"
-      }
+      },
+      value: null,
+      options: [{
+        id: 'fruits',
+        label: '总公司',
+        children: [{
+          id: 'apple',
+          label: '技术部',
+          isNew: true,
+        }, {
+          id: 'grapes',
+          label: '财务部',
+        }, {
+          id: 'pear',
+          label: '后勤部',
+        }, {
+          id: 'strawberry',
+          label: '服务部',
+        }, {
+          id: 'watermelon',
+          label: '客服部',
+        }],
+      }, {
+        id: 'vegetables',
+        label: '广州分公司',
+        children: [{
+          id: 'corn',
+          label: '销售部',
+        }, {
+          id: 'carrot',
+          label: '运营部',
+        }, {
+          id: 'eggplant',
+          label: '公关部',
+        }, {
+          id: 'tomato',
+          label: '人事部',
+        }],
+      }],
     };
   },
+  mounted() {},
   methods: {
     //确定
     onSubmit(formName) {
@@ -344,7 +410,6 @@ export default {
       }, 500);
     },
     handleCheckChange() {}
-  },
-  mounted() {}
+  }
 };
 </script>
