@@ -158,6 +158,7 @@ module.exports = {
       .set("@", resolve("src")) // key,value自行定义，比如.set('@@', resolve('src/components'))
       .set("@@", resolve("public"))
       .set("assets", resolve("src/assets"))
+      .set("api", resolve("src/assets/js/api"))
       .set("components", resolve("src/components"))
       .set("base", resolve("baseConfig"))
       .set("public", resolve("public"));

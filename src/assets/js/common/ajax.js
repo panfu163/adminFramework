@@ -1,7 +1,7 @@
 import instance from "./instance";
 import $config from "@/config";
 import { console } from "vuedraggable/src/util/helper";
-import {message} from "element-ui";
+import { Message } from "element-ui";
 
 /*
  * ajax方法实现请求后台数据
@@ -41,7 +41,7 @@ export default function(path, params, success, fail,method) {
             if (fail && typeof fail === "function") {
               return fail(data);
              }else{
-               message(data.message);
+                Message(data.message);
              }
           }
         }

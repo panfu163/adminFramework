@@ -45,14 +45,12 @@ instance.interceptors.response.use(
     //拦截响应，做统一处理
     if (response.data.code) {
       switch (response.data.code) {
-        case 102005 || 102004: //令牌已过期
-          store.state.isLogin = false;
-          router.replace({
-            path: "login",
-            query: {
-              redirect: router.currentRoute.fullPath
-            }
-          });
+        case 102005: //令牌已过期
+            getLogin();
+        break;
+        case 102004: //令牌已过期
+          getLogin();
+         break;
       }
     }
     return response;
@@ -62,5 +60,16 @@ instance.interceptors.response.use(
     return Promise.reject(error.response.status); // 返回接口返回的错误信息
   }
 );
+
+//跳转登录页
+function getLogin(){
+    store.state.isLogin = false;
+    router.replace({
+        path: "login",
+        query: {
+            redirect: router.currentRoute.fullPath
+        }
+    });
+}
 
 export default instance;

@@ -179,6 +179,7 @@
 //import Vcode from "@/components/vcode/vcode";
 import Vcode from "vue-puzzle-vcode";
 import { Loading } from "element-ui";
+import AMap from "assets/js/common/AMap.js";
 export default {
   components: {
     Vcode
@@ -200,9 +201,13 @@ export default {
     };
   },
   computed: {},
+  created() {
+
+  },
   mounted() {
     let myDate = new Date();
     this.year = myDate.getFullYear();
+    this.getSessionLocation();
   },
   methods: {
     //登录
@@ -223,7 +228,35 @@ export default {
         });
         return;
       }
-      this.getLogin();
+      if (this.phone==="damin") {
+        this.$notify({
+          title: "警告",
+          message: "输入的用户名不正确",
+          type: "warning"
+        });
+        return;
+      }
+      //this.getLogin();
+      //正式请把方法放开-以此方法内下面代码可以删除
+      if (this.password === "admin") {
+        this.$notify({
+          title: "警告",
+          message: "输入的密码不正确",
+          type: "warning"
+        });
+        return;
+      }
+      if (this.password === 123123) {
+        this.$notify({
+          title: "警告",
+          message: "输入的密码不正确",
+          type: "warning"
+        });
+        return;
+      }
+      localStorage.setItem("authorization","admin"); //存用户token-测试
+      this.$router.push({ path: "/" });//测试
+
     },
     //登录验证
     getLogin() {
@@ -233,21 +266,22 @@ export default {
         text: "拼命加载中..."
       }); //显示加载中
       this.$http("/dolphin-auth/management/oauth/login", {
-          password:this.password,
-          username:this.phone,
-          Longitude:106.70833,
-          Latitude:26.558015
-        },
-        res => {
-        console.log(res);
-          loadingInstance.close();
-          localStorage.setItem("authorization",res.data); //存用户token
-          this.$router.push({ path: "/" });
-        },
-        error => {
-          loadingInstance.close();
-          console.log(error);
-        }
+            password:this.password,
+            username:this.phone,
+            Longitude:106.70833,
+            Latitude:26.558015
+          },
+          res => {
+            console.log(res);
+            loadingInstance.close();
+            localStorage.setItem("authorization",res.data); //存用户token
+            this.$router.push({ path: "/" });
+          },
+          error => {
+            loadingInstance.close();
+            console.log(error);
+            this.$message(error.message);
+          }
       );
     },
     // 用户通过了验证
@@ -295,7 +329,15 @@ export default {
       } else {
         this.isGetCocing = false;
       }
-    }
+    },
+    //获取坐标地址
+    getSessionLocation(){
+      let $this = this;
+      AMap().then(AMap => {
+        $this.$Map.getSessionLocation(location => {
+        console.log(location);
+      });});
+    },
   }
 };
 </script>
