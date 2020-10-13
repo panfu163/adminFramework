@@ -3,7 +3,7 @@ import Router from "vue-router";
 import Main from "@/components/layout/Main";
 
 //导入
-import NProgress from "nprogress";
+import NProgress from 'nprogress';
 import "@@/css/nprogress/nprogress.css";
 
 //子路由
