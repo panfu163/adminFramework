@@ -101,10 +101,10 @@
         prop="region"
       >
         <treeselect
-            v-model="value"
-            :options="options"
-            placeholder="请选择部门"
-            style="width:400px"
+          v-model="value"
+          :options="options"
+          placeholder="请选择部门"
+          style="width:400px"
         />
       </el-form-item>
       <el-row>
@@ -194,9 +194,9 @@
 }
 </style>
 <script>
-import Treeselect from "@riophae/vue-treeselect";
+import Treeselect from '@riophae/vue-treeselect';
 export default {
-  name:"adduser",
+  name:"Adduser",
   components:{ Treeselect  },
   data() {
     return {
