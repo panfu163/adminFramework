@@ -31,8 +31,9 @@
               v-model="password"
               class="input"
               placeholder="请输入您的密码"
-              type="password"
+              :type="passwordType"
             >
+            <i :class="passwordType === 'password' ? 'el-icon-turn-off' : 'el-icon-open'" @click="showPwd" class="show-pwd" />
             <div
               v-if="isGetCocing"
               class="but"
@@ -166,6 +167,15 @@
       }
     }
   }
+  .show-pwd{
+    position: absolute;
+    z-index:99;
+    top:13px;
+    right:20px;
+    cursor: pointer;
+    font-size:30px;
+    color:#889aa4;
+  }
   .footer {
     text-align: center;
     color: #fff;
@@ -186,6 +196,7 @@ export default {
   },
   data() {
     return {
+      passwordType:"password",
       sliderText: "拖动滑块完成验证",
       isShow: false, // 验证码模态框是否出现
       isGetCocing: false,
@@ -210,6 +221,13 @@ export default {
     this.getSessionLocation();
   },
   methods: {
+    showPwd() {
+      if (this.passwordType === 'password') {
+        this.passwordType = '';
+      } else {
+        this.passwordType = 'password';
+      }
+    },
     //登录
     Login() {
       if (!this.phone) {
