@@ -60,6 +60,8 @@ export default {
       title: "账户管理",
       list: {
         userManagement: "用户管理",
+        userManagementList:'用户列表',
+        userAdd:'添加用户',
         userList: "用户组管理",
         rolList: "角色管理"
       }

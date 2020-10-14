@@ -229,6 +229,19 @@
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
     />
+
+    <!--弹框-添加用户-->
+    <el-drawer
+      title="用户详情"
+      :visible.sync="drawer"
+      direction="rtl"
+      size="50%"
+      :before-close="handleClose"
+      class="drawer"
+      :append-to-body="true"
+    >
+      <vdetails @handleClose="handleClose" />
+    </el-drawer>
   </div>
 </template>
 <style lang="scss" scoped>
@@ -265,7 +278,10 @@
 }
 </style>
 <script>
+import vdetails from "@/views/power/details";
 export default {
+  name:"List",
+  components:{ vdetails },
   data() {
     return {
       currentPage4: 10,
@@ -329,7 +345,8 @@ export default {
           mail: "1602858720@qq.com"
         }
       ],
-      multipleSelection: [] //被选中的记录数据-----对应“批量删除”传的参数值
+      multipleSelection: [],//被选中的记录数据-----对应“批量删除”传的参数值
+      drawer:false
     };
   },
   mounted() {
@@ -375,7 +392,10 @@ export default {
       this.multipleSelection = val;
     },
     handleClick() {
-      this.$router.push({ path: "/power/details" });
+      this.drawer=true;
+    },
+    handleClose(){
+      this.drawer=false;
     },
     deleteRow(index, rows) {
       //删除

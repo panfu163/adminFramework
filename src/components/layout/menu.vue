@@ -5,36 +5,57 @@
  --@version 1.0
 --->
 <template>
-  <div class="min-menu" :class="{ on: sfold }">
-    <div class="title">{{ $t(pathName + ".title") }}</div>
+  <div
+    class="min-menu"
+    :class="{ on: sfold }"
+  >
+    <div class="title">
+      {{ $t(pathName + ".title") }}
+    </div>
     <el-menu
+      v-for="(items, indexs) in listData"
+      v-if="items.name == pathName"
+      :key="indexs"
       class="el-menu-vertical-demo"
       :default-openeds="openeds"
       :default-active="defaultActive"
-      v-for="(items, indexs) in listData"
-      :key="indexs"
-      v-if="items.name == pathName"
     >
       <el-submenu
-        :index="(indexs + 1).toString()"
         v-for="(item, indexs) in items.list"
         :key="indexs"
+        :index="(indexs + 1).toString()"
       >
         <template slot="title">
-          <i :class="item.icon"></i>
+          <i :class="item.icon" />
           <span>{{ item.title }}</span>
         </template>
-        <el-menu-item-group>
-          <el-menu-item
-            v-for="(items, index) in item.data"
-            :key="index"
-            :index="items.url"
-            @click="goto(items)"
-            >
-           {{ items.title }}
-          </el-menu-item
+
+        <template v-for="(items, index) in item.data">
+          <el-submenu
+            v-if="items.children"
+            :index="(indexs + 1).toString()+'_'+(index + 1).toString()"
           >
-        </el-menu-item-group>
+            <template slot="title">
+              {{ items.title }}
+            </template>
+            <el-menu-item
+              v-for="(itemChild,i) in items.children"
+              :index="itemChild.url"
+              @click="goto(itemChild)"
+            >
+             {{ itemChild.title }}
+            </el-menu-item>
+          </el-submenu>
+          <el-menu-item-group v-else>
+            <el-menu-item
+              :key="index"
+              :index="items.url"
+              @click="goto(items)"
+            >
+              {{ items.title }}
+            </el-menu-item>
+          </el-menu-item-group>
+        </template>
       </el-submenu>
     </el-menu>
   </div>
@@ -112,37 +133,6 @@ export default {
       pathName: "", //根据路径来判断子导航,
       sfold: false
     };
-  },
-  mounted() {
-    this.init();
-  },
-  methods: {
-    //初始化
-    init(){
-      this.pathName = this.$route.meta.navigation; //设置导航数据
-      this.bus.$on("sfold", res => {this.sfold = res;});
-      this.defaultActive = this.$route.path; //处理导航选中
-    },
-    goto(item, index) {
-      if (item.url) {
-        this.$router.push({ path: item.url }); //跳转地址
-        localStorage.setItem("defaultActive", index); //导航选中选中
-      } else {
-        this.$message("跳转地址不能为空~~");
-      }
-    },
-    //数组去重
-    distinct(arr) {
-      let result = [];
-      let objs = {};
-      for (let i = 0; i < arr.length; i++) {
-        if (!objs[arr[i].title]) {
-          result.push(arr[i]);
-          objs[arr[i].title] = true;
-        }
-      }
-      return result;
-    }
   },
   computed: {
     listData() {
@@ -251,7 +241,13 @@ export default {
                 },
                 {
                   title: this.$t("power.manage.list.userManagement"),
-                  url: "/power"
+                  children:[{
+                        title: this.$t("power.manage.list.userManagementList"),
+                        url: "/power",
+                      },{
+                      title: this.$t("power.manage.list.userAdd"),
+                      url: "/power/addUser",
+                      }]
                 }
               ]
             },
@@ -791,11 +787,41 @@ export default {
   },
   watch: {
     $route(to) {
-      console.log("我是menu~~~");
       //单页处理
       //在mounted函数执行的方法，放到该处
       this.pathName = to.meta.navigation;
       this.defaultActive = to.path; //处理导航选中
+    }
+  },
+  mounted() {
+    this.init();
+  },
+  methods: {
+    //初始化
+    init(){
+      this.pathName = this.$route.meta.navigation; //设置导航数据
+      this.bus.$on("sfold", res => {this.sfold = res;});
+      this.defaultActive = this.$route.path; //处理导航选中
+    },
+    goto(item, index) {
+      if (item.url) {
+        this.$router.push({ path: item.url }); //跳转地址
+        localStorage.setItem("defaultActive", index); //导航选中选中
+      } else {
+        this.$message("跳转地址不能为空~~");
+      }
+    },
+    //数组去重
+    distinct(arr) {
+      let result = [];
+      let objs = {};
+      for (let i = 0; i < arr.length; i++) {
+        if (!objs[arr[i].title]) {
+          result.push(arr[i]);
+          objs[arr[i].title] = true;
+        }
+      }
+      return result;
     }
   }
 };

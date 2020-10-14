@@ -6,13 +6,12 @@
 --->
 <template>
   <div class="content">
-    <h4>{{this.$route.meta.title}}</h4>
     <el-row>
       <el-col :span="4">
         <div class="head-portrait">
           <el-avatar
             src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-          ></el-avatar>
+          />
         </div>
       </el-col>
       <el-col :span="4">
@@ -29,12 +28,12 @@
       <h5>用户组</h5>
       <el-row>
         <el-tree
-                :props="props"
-                :load="loadNode"
-                lazy
-                show-checkbox
-                @check-change="handleCheckChange">
-        </el-tree>
+          :props="props"
+          :load="loadNode"
+          lazy
+          show-checkbox
+          @check-change="handleCheckChange"
+        />
       </el-row>
     </el-row>
   </div>
@@ -138,7 +137,8 @@ export default {
 
         resolve(data);
       }, 500);
-    }
+    },
+    handleCheckChange(){}
   }
 };
 </script>

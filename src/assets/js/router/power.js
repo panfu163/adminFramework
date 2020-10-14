@@ -44,7 +44,7 @@ const power = [
     name: "addUserGroup",
     meta: {
       title: "添加用户组",
-      navigation: "power" //处理导航显示-子路由需和父路由一至
+      navigation: "power", //处理导航显示-子路由需和父路由一至
     },
     component: () =>
       import(
