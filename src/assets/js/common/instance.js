@@ -1,60 +1,63 @@
-import instance from "./instance";
-import $config from "@/config";
-import { console } from "vuedraggable/src/util/helper";
-import { Message } from "element-ui";
+import axios from "axios"; //引入axios
+//下面这两个不一定需要引入，看你项目需要拦截的时候做什么操作，但是一般都需要引入store
+import store from "@/store"; //引入store
+import router from "@/router"; //引入router
+//导入
+import NProgress from "nprogress";
 
+//创建实例
+let instance = axios.create({
+    // headers: {
+    //   'content-type': 'application/x-www-form-urlencoded'
+    // },
+    timeout: 5000, //超时设置
+    // `maxContentLength` 定义允许的响应内容的最大尺寸
+    maxContentLength: 2000
+});
+
+// http request 拦截器-请求拦截
 /*
- * ajax方法实现请求后台数据
- * @param  {Array}  path      链接地址
- * @param  {String} params    参数
- * @param  {String} success   成功
- * @param  {String} fail      失败
- * @return {Array}            请求数据结果
- */
-export default function(path, params, success, fail,method) {
-    //请求接口地址处理
-    let baseUrl = "";
-    switch (process.env.VUE_APP_CURENV) {
-        case "dev":
-            baseUrl = $config.apiUrl.dev;
-            break;
-        case "test":
-            baseUrl = $config.apiUrl.test;
-            break;
-        case "prod":
-            baseUrl = $config.apiUrl.prod;
-            break;
-    }
-    const parameters={
-        url:baseUrl + path+`?ts=${Date.now()}`,
-        data:params,
-        method:method ? method : "POST"
-    };
-    /**
-     * params是添加到url的请求字符串中的，用于get请求。
-     * 而data是添加到请求体（body）中的， 用于post请求。
-     */
-    if(method==="GET"){
-        parameters.params=params;
-    }
-    instance(parameters).then(response => {
-        if (response.status === 200) {
-            //只做成功处理--失败的请查看instance.js
-            let data = response.data;
-            if (data.code === 200) {
-                if (typeof success === "function") {
-                    return success(data);
-                }
-            } else {
-                if (fail && typeof fail === "function") {
-                    return fail(data);
-                }else{
-                    Message(data.message);
-                }
-            }
+ * 请求拦截器的作用是在请求发送前进行一些操作
+ * */
+instance.interceptors.request.use(
+    config => {
+        NProgress.start(); // 设置加载进度条(开始..)
+        const authorization = localStorage.getItem("authorization");
+        if (authorization) {
+            // 判断是否存在token，如果存在的话，则每个http header都加上token
+            config.headers.authorization = authorization; //请求头加上token
         }
-    }).catch(err => {
-        //使用catch方法和then的第二个参数的效果一样，但是它还有你另外一个作用,那就是在then的第一个resolve回调函数中代码出错，不用卡死js的执行，而是会进入到catch中，捕获err原因。
-        console.log("err", err);
-    });
-}
+        return config;
+    },
+    err => {
+        return Promise.reject(err);
+    }
+);
+
+// http response 拦截器-响应拦截
+/**
+ * 响应拦截器的作用是在接收到响应后进行一些操作，例如在服务器返回登录状态失效，需要重新登录的时候，跳转到登录页
+ * */
+instance.interceptors.response.use(
+    response => {
+        NProgress.done(); // 设置加载进度条(结束..)
+        //拦截响应，做统一处理
+        if (response.data.code===200 || response.data.code===10206 || response.data.code===10001) {
+            return response;
+        }else{
+            store.state.isLogin = false;
+            router.replace({
+                path: "login",
+                query: {
+                    redirect: router.currentRoute.fullPath
+                }
+            });
+        }
+    },
+    //接口错误状态处理，也就是说无响应时的处理
+    error => {
+        return Promise.reject(error.response.status); // 返回接口返回的错误信息
+    }
+);
+
+export default instance;
