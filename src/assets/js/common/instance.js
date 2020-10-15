@@ -42,9 +42,7 @@ instance.interceptors.response.use(
     response => {
         NProgress.done(); // 设置加载进度条(结束..)
         //拦截响应，做统一处理
-        if (response.data.code===200 || response.data.code===10206 || response.data.code===10001) {
-            return response;
-        }else{
+        if (response.data.code===10205 || response.data.code===10204) {
             store.state.isLogin = false;
             router.replace({
                 path: "login",
@@ -52,6 +50,8 @@ instance.interceptors.response.use(
                     redirect: router.currentRoute.fullPath
                 }
             });
+        }else{
+            return response;
         }
     },
     //接口错误状态处理，也就是说无响应时的处理

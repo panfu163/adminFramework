@@ -63,7 +63,9 @@ export default {
         userManagementList:'用户列表',
         userAdd:'添加用户',
         userList: "用户组管理",
-        rolList: "角色管理"
+        rol: "角色管理",
+        rollist:'角色列表',
+        rolAdd:'添加角色',
       }
     },
     rbac: {

@@ -6,24 +6,24 @@
 --->
 <template>
   <div
-    class="min-menu"
-    :class="{ on: sfold }"
+      class="min-menu"
+      :class="{ on: sfold }"
   >
     <div class="title">
       {{ $t(pathName + ".title") }}
     </div>
     <el-menu
-      v-for="(items, indexs) in listData"
-      v-if="items.name == pathName"
-      :key="indexs"
-      class="el-menu-vertical-demo"
-      :default-openeds="openeds"
-      :default-active="defaultActive"
+        v-for="(items, indexs) in listData"
+        v-if="items.name == pathName"
+        :key="indexs"
+        class="el-menu-vertical-demo"
+        :default-openeds="openeds"
+        :default-active="defaultActive"
     >
       <el-submenu
-        v-for="(item, indexs) in items.list"
-        :key="indexs"
-        :index="(indexs + 1).toString()"
+          v-for="(item, indexs) in items.list"
+          :key="indexs"
+          :index="(indexs + 1).toString()"
       >
         <template slot="title">
           <i :class="item.icon" />
@@ -32,25 +32,25 @@
 
         <template v-for="(items, index) in item.data">
           <el-submenu
-            v-if="items.children"
-            :index="(indexs + 1).toString()+'_'+(index + 1).toString()"
+              v-if="items.children"
+              :index="(indexs + 1).toString()+'_'+(index + 1).toString()"
           >
             <template slot="title">
               {{ items.title }}
             </template>
             <el-menu-item
-              v-for="(itemChild,i) in items.children"
-              :index="itemChild.url"
-              @click="goto(itemChild)"
+                v-for="(itemChild,i) in items.children"
+                :index="itemChild.url"
+                @click="goto(itemChild)"
             >
-             {{ itemChild.title }}
+              {{ itemChild.title }}
             </el-menu-item>
           </el-submenu>
           <el-menu-item-group v-else>
             <el-menu-item
-              :key="index"
-              :index="items.url"
-              @click="goto(items)"
+                :key="index"
+                :index="items.url"
+                @click="goto(items)"
             >
               {{ items.title }}
             </el-menu-item>
@@ -236,18 +236,25 @@ export default {
                   url: "/power/userList"
                 },
                 {
-                  title: this.$t("power.manage.list.rolList"),
-                  url: "/power/rolList"
+                  title: this.$t("power.manage.list.rol"),
+                  url: "/power/rolList",
+                  children:[{
+                    title: this.$t("power.manage.list.rollist"),
+                    url: "/power/rolList",
+                  },{
+                    title: this.$t("power.manage.list.rolAdd"),
+                    url: "/power/addRol",
+                  }]
                 },
                 {
                   title: this.$t("power.manage.list.userManagement"),
                   children:[{
-                        title: this.$t("power.manage.list.userManagementList"),
-                        url: "/power",
-                      },{
-                      title: this.$t("power.manage.list.userAdd"),
-                      url: "/power/addUser",
-                      }]
+                    title: this.$t("power.manage.list.userManagementList"),
+                    url: "/power",
+                  },{
+                    title: this.$t("power.manage.list.userAdd"),
+                    url: "/power/addUser",
+                  }]
                 }
               ]
             },
@@ -382,7 +389,7 @@ export default {
                 },
                 {
                   title: this.$t(
-                    "product.BaseInformation.list.ShapeModulationCode"
+                      "product.BaseInformation.list.ShapeModulationCode"
                   ),
                   url: ""
                 }
@@ -727,7 +734,7 @@ export default {
               data: [
                 {
                   title: this.$t(
-                    "message.sendTheManagement.list.securityCenter"
+                      "message.sendTheManagement.list.securityCenter"
                   ),
                   url: "/message/send"
                 },
