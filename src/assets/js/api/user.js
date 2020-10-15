@@ -21,6 +21,10 @@ export default {
     query(params,success,fail,type){
         Ajax(`/dolphin-auth/management/oauth/current/user`,params,success,fail,type);
     },
+    //修改密码
+    updatePassword(params,success,fail,type){
+        Ajax(`/dolphin-auth/management/oauth/current/user`,params,success,fail,type);
+    },
     //下载
     download(params,success,fail){
         Ajax(`/dolphin-auth/management/oauth/current/user/${params.id}`, {responseType: "blob"},success,fail,"GET");
