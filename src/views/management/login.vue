@@ -33,7 +33,11 @@
               placeholder="请输入您的密码"
               :type="passwordType"
             >
-            <i :class="passwordType === 'password' ? 'el-icon-turn-off' : 'el-icon-open'" @click="showPwd" class="show-pwd" />
+            <i
+              :class="passwordType === 'password' ? 'el-icon-turn-off' : 'el-icon-open'"
+              class="show-pwd"
+              @click="showPwd"
+            />
             <div
               v-if="isGetCocing"
               class="but"
@@ -190,6 +194,7 @@
 import Vcode from "vue-puzzle-vcode";
 import { Loading } from "element-ui";
 import AMap from "assets/js/common/AMap.js";
+import user from "api/user";
 export default {
   components: {
     Vcode
@@ -283,24 +288,21 @@ export default {
         background: "rgba(0, 0, 0, 0.8)",
         text: "拼命加载中..."
       }); //显示加载中
-      this.$http("/dolphin-auth/management/oauth/login", {
-            password:this.password,
-            username:this.phone,
-            Longitude:106.70833,
-            Latitude:26.558015
-          },
-          res => {
-            console.log(res);
-            loadingInstance.close();
-            localStorage.setItem("authorization",res.data); //存用户token
-            this.$router.push({ path: "/" });
-          },
-          error => {
-            loadingInstance.close();
-            console.log(error);
-            this.$message(error.message);
-          }
-      );
+      user.login({
+        password:this.password,
+        username:this.phone,
+        Longitude:106.70833,
+        Latitude:26.558015
+      },res=>{
+        console.log(res);
+        loadingInstance.close();
+        localStorage.setItem("authorization",res.data); //存用户token
+        this.$router.push({ path: "/" });
+      },error=>{
+        loadingInstance.close();
+        console.log(error);
+        this.$message(error.message);
+      });
     },
     // 用户通过了验证
     success(msg) {
@@ -354,7 +356,8 @@ export default {
       AMap().then(AMap => {
         $this.$Map.getSessionLocation(location => {
         console.log(location);
-      });});
+      });
+});
     },
   }
 };

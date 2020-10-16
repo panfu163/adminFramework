@@ -7,48 +7,48 @@
 <template>
   <div class="content">
     <el-form
-      ref="formName"
-      :model="queryParams"
-      :rules="rules"
-      label-width="80px"
+        ref="formName"
+        :model="queryParams"
+        :rules="rules"
+        label-width="80px"
     >
       <el-form-item
-        label="旧密码"
-        prop="oldPassword"
+          label="旧密码"
+          prop="oldPassword"
       >
         <el-input
-          v-model="queryParams.oldPassword"
-          minlength="6"
-          maxlength="30"
-          show-word-limit
-          show-password
-          placeholder="请输入旧密码"
+            v-model="queryParams.oldPassword"
+            minlength="6"
+            maxlength="30"
+            show-word-limit
+            show-password
+            placeholder="请输入旧密码"
         />
       </el-form-item>
       <el-form-item
-        label="新密码"
-        prop="newPassword"
+          label="新密码"
+          prop="newPassword"
       >
         <el-input
-          v-model="queryParams.newPassword"
-          minlength="6"
-          maxlength="30"
-          show-password
-          show-word-limit
-          placeholder="请输入新密码"
+            v-model="queryParams.newPassword"
+            minlength="6"
+            maxlength="30"
+            show-password
+            show-word-limit
+            placeholder="请输入新密码"
         />
       </el-form-item>
       <el-form-item
-        label="确认密码"
-        prop="reNewPassword"
+          label="确认密码"
+          prop="reNewPassword"
       >
         <el-input
-          v-model="queryParams.reNewPassword"
-          minlength="6"
-          maxlength="30"
-          show-password
-          show-word-limit
-          placeholder="再次确认密码"
+            v-model="queryParams.reNewPassword"
+            minlength="6"
+            maxlength="30"
+            show-password
+            show-word-limit
+            placeholder="再次确认密码"
         />
       </el-form-item>
     </el-form>
@@ -57,8 +57,8 @@
         取 消
       </el-button>
       <el-button
-        type="primary"
-        @click="updatePassword"
+          type="primary"
+          @click="updatePassword"
       >
         确 定
       </el-button>
@@ -80,15 +80,6 @@ import user from "api/user";
 export default {
   name:"UpdatePasswords",
   data() {
-    var validatePass2 = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请再次输入密码'));
-      } else if (value !== this.info.password) {
-        callback(new Error('两次输入密码不一致!'));
-      } else {
-        callback();
-      }
-    };
     return {
       queryParams:{
         oldPassword: "",
@@ -109,7 +100,6 @@ export default {
         reNewPassword: [
           { required: true, message: "请输入确认新密码", trigger: "blur" },
           { min:6, max:30, message: "长度在6到30个字符", trigger: "blur" },
-          { required: true, validator: validatePass2, trigger: 'blur' }
         ]
       },
     };
@@ -117,9 +107,14 @@ export default {
   methods:{
     //修改密码
     updatePassword(){
-       user.updatePassword({},res=>{
-        console.log(res);
-      });
+      if(this.newPassword===this.reNewPassword){
+        user.updatePassword(this.queryParams,res=>{
+          console.log(res);
+          this.$emit("handleClose");
+        });
+      }else{
+        this.$message("输入的两次密码不正确");
+      }
     },
     hide(){
       this.$emit("handleClose");

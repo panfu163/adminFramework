@@ -42,7 +42,7 @@ instance.interceptors.response.use(
     response => {
         NProgress.done(); // 设置加载进度条(结束..)
         //拦截响应，做统一处理
-        if (response.data.code===10205 || response.data.code===10204) {
+        if (response.data.code===102004 || response.data.code===102005) {
             store.state.isLogin = false;
             router.replace({
                 path: "login",

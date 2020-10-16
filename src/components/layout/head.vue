@@ -6,19 +6,19 @@
 --->
 <template>
   <div
-    class="head"
-    :class="{on:sfold}"
+      class="head"
+      :class="{on:sfold}"
   >
     <el-row :gutter="20">
       <el-col :span="16">
         <div class="grid-left">
           <template
-            v-for="item in routes"
+              v-for="item in routes"
           >
             <el-breadcrumb
-              v-if="item.children && item.path == '/' + path"
-              class="breadcrumb"
-              separator="/"
+                v-if="item.children && item.path == '/' + path"
+                class="breadcrumb"
+                separator="/"
             >
               <el-breadcrumb-item :to="{ path: '/' }">
                 {{ $t("nav.home") }}
@@ -41,22 +41,22 @@
             </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item
-                @click.native="getThemes('red')"
+                  @click.native="getThemes('red')"
               >
                 红色
               </el-dropdown-item>
               <el-dropdown-item
-                @click.native="getThemes('blue')"
+                  @click.native="getThemes('blue')"
               >
                 蓝色
               </el-dropdown-item>
               <el-dropdown-item
-                @click.native="getThemes('yellow')"
+                  @click.native="getThemes('yellow')"
               >
                 黄色
               </el-dropdown-item>
               <el-dropdown-item
-                @click.native="getThemes('green')"
+                  @click.native="getThemes('green')"
               >
                 绿色
               </el-dropdown-item>
@@ -69,33 +69,33 @@
             </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item
-                @click.native="getlocale('zh')"
+                  @click.native="getlocale('zh')"
               >
                 中文简体
               </el-dropdown-item>
               <el-dropdown-item
-                @click.native="getlocale('en')"
+                  @click.native="getlocale('en')"
               >
                 English
               </el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
           <i
-            v-if="isFullScreen"
-            class="el-icon-full-screen"
-            @click="fullScreen()"
+              v-if="isFullScreen"
+              class="el-icon-full-screen"
+              @click="fullScreen()"
           />
           <i
-            v-if="!isFullScreen"
-            class="el-icon-aim"
-            @click="exitScreen()"
+              v-if="!isFullScreen"
+              class="el-icon-aim"
+              @click="exitScreen()"
           />
           <span class="badge-item">
             <i class="el-icon-message-solid" />
             <i class="badge">99</i>
           </span>
           <el-avatar
-            src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+              src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
           />
           <el-dropdown>
             <span class="el-dropdown-link">
@@ -105,15 +105,15 @@
               <el-dropdown-item class="clearfix">
                 消息
                 <el-badge
-                  class="mark"
-                  :value="12"
+                    class="mark"
+                    :value="12"
                 />
               </el-dropdown-item>
               <el-dropdown-item>个人信息</el-dropdown-item>
               <el-dropdown-item @click.native.stop="updatePassword">修改密码</el-dropdown-item>
               <el-dropdown-item
-                divided
-                @click.native.stop="logout"
+                  divided
+                  @click.native.stop="logout"
               >
                 退出系统
               </el-dropdown-item>
@@ -126,12 +126,12 @@
 
     <!--审核弹窗-->
     <el-dialog
-      title="修改密码"
-      :visible.sync="dialogVisible"
-      width="30%"
-      :before-close="handleClose"
-      :append-to-body="true"
-      class="dialog"
+        title="修改密码"
+        :visible.sync="dialogVisible"
+        width="30%"
+        :before-close="handleClose"
+        :append-to-body="true"
+        class="dialog"
     >
       <updatePassword @handleClose="handleClose" />
     </el-dialog>
@@ -140,7 +140,7 @@
 
 <script>
 import theme from "assets/js/common/theme.js";
-import userApi from "assets/js/api/user.js";
+import user from "assets/js/api/user.js";
 import updatePassword from "components/layout/components/updatePassword";
 export default {
   name: "Top",
@@ -181,7 +181,7 @@ export default {
       this.pathName = res;
     });
     this.pathName = localStorage.getItem("headTitle") ? localStorage.getItem("headTitle") : "权限";
-   //this.getUserInfo();
+    this.getUserInfo();
   },
   methods: {
     //切换主题
@@ -226,10 +226,10 @@ export default {
       //监听window是否全屏，并进行相应的操作,支持esc键退出
       window.onresize = function() {
         var isFull = !!(
-          document.webkitIsFullScreen ||
-          document.mozFullScreen ||
-          document.msFullscreenElement ||
-          document.fullscreenElement
+            document.webkitIsFullScreen ||
+            document.mozFullScreen ||
+            document.msFullscreenElement ||
+            document.fullscreenElement
         ); //!document.webkitIsFullScreen都为true。因此用!!
         if (isFull === false) {
           $this.isFullScreen = true;
@@ -241,7 +241,7 @@ export default {
     //获取用户信息
     getUserInfo(){
       console.log("获取用信息信息！！");
-      userApi.query({},res=>{
+      user.query({},res=>{
         if(res.code===200){
           this.list=res.data;
         }
@@ -249,13 +249,12 @@ export default {
     },
     //退出登录
     logout(){
-      this.$http("/dolphin-auth/management/oauth/logout",{},res=>{
+      user.logout({},res=>{
         this.$message(res.message);
-
         this.$router.push({path:"/login"});
-      },res=>{
-        console.log(res);
-      },"GET");
+      },error=>{
+        console.log(error);
+      });
     },
     //修改密码
     updatePassword(){
