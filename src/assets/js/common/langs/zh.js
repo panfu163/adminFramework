@@ -18,7 +18,7 @@ export default {
     data: "数据",
     information: "信息",
     community: "社区",
-    personnelMatters: "人事",
+    humanResource: "人事",
     help: "帮助中心"
   },
   warehouse: {
@@ -290,6 +290,23 @@ export default {
         applyFor: "添加短信模板"
       }
     }
+  },
+  humanResource:{
+    title: "人事管理中心",
+    management: {
+      title:'人事管理',
+      list: {
+        ogr: "组织架构",
+        staff:"员工信息"
+      }
+    },
+    template: {
+      title:'模板管理',
+      list: {
+        finance: "财务办公类",
+        office:"人事办公类"
+      }
+    },
   },
   confirm: {
     ok: "确认",

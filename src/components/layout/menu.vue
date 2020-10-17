@@ -788,7 +788,40 @@ export default {
               ]
             }
           ]
-        }
+        },
+        {name:"humanResource",
+          list:[
+            {
+              title: this.$t("humanResource.management.title"),
+              icon: "el-icon-search",
+              id: "1",
+              data: [
+                {
+                  title: this.$t("humanResource.management.list.ogr"),
+                  url: "/humanResource"
+                },
+                {
+                  title: this.$t("humanResource.management.list.staff"),
+                  url: "/humanResource/list"
+                }
+              ]
+            },
+            {
+              title: this.$t("humanResource.template.title"),
+              icon: "el-icon-search",
+              id: "2",
+              data: [
+                {
+                  title: this.$t("humanResource.template.list.finance"),
+                  url: ""
+                },
+                {
+                  title: this.$t("humanResource.template.list.office"),
+                  url: ""
+                }
+              ]
+            },
+          ]}
       ];
     }
   },

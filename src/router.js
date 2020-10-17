@@ -16,6 +16,7 @@ import pay from "assets/js/router/pay"; //支付管理管理
 import order from "assets/js/router/order"; //订单管理管理
 import message from "assets/js/router/message"; //短信管理
 import logistics from "assets/js/router/logistics"; //物流管理
+import humanResource from "assets/js/router/humanResource"; //人力资源管理
 
 Vue.use(Router);
 const router = new Router({
@@ -86,6 +87,11 @@ const router = new Router({
       path: "/logistics",
       component: Main,
       children: logistics
+    },
+    {
+      path: "/humanResource",
+      component: Main,
+      children: humanResource
     },
     {
       path: "*",

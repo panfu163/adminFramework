@@ -231,8 +231,8 @@ export default {
           icon: "el-icon-coffee-cup"
         },
         {
-          title: this.$t("sidebar.personnelMatters"), //"OA",
-          url: "",
+          title: this.$t("sidebar.humanResource"), //"OA",
+          url: "/humanResource",
           icon: "el-icon-s-opportunity"
         }
       ];
