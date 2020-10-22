@@ -15,7 +15,7 @@
           ></el-avatar>
         </div>
       </el-col>
-      <el-col :span="4">
+      <el-col :span="20">
         <div class="portrait">
           <p>名称：销售员</p>
           <p>创建时间：2023-03-04</p>
@@ -42,9 +42,6 @@
         <el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
       </el-checkbox-group>
     </el-row>
-    <div style="margin-top: 20px">
-      <el-button type="primary" @click="toggleSelection(tableData)">确定</el-button>
-    </div>
   </div>
 </template>
 <style lang="scss" scoped>

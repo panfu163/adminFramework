@@ -7,14 +7,12 @@
 <template>
   <div class="content">
     <h4>{{this.$route.meta.title}}</h4>
-    <el-form ref="form" :inline="true" :model="form" label-width="100px">
+    <el-form ref="form"  :model="form" label-width="100px">
     <el-row>
-      <el-col :span="12">
         <div class="portrait">
           <el-form-item label="用户组名称：" prop="name">
             <el-input v-model="form.name"  placeholder="请输入用户组名称"></el-input>
           </el-form-item>
-          <el-row>
             <el-form-item label="备注：" prop="desc">
               <el-input v-model="form.desc"
                         type="textarea"
@@ -24,16 +22,12 @@
                         show-word-limit>
               </el-input>
             </el-form-item>
-          </el-row>
-          <el-row>
             <el-form-item label="状态" prop="start">
               <el-select v-model="form.start" placeholder="请选择状态">
                 <el-option label="正常" value="shanghai"></el-option>
                 <el-option label="停用" value="beijing"></el-option>
               </el-select>
             </el-form-item>
-          </el-row>
-          <el-row>
             <el-form-item label="添加用户" prop="start">
 
               <el-select
@@ -54,9 +48,7 @@
               </el-select>
 
             </el-form-item>
-          </el-row>
         </div>
-      </el-col>
     </el-row>
       <h5>用户组</h5>
       <el-row class="user-group" prop="data">

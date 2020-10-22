@@ -32,7 +32,7 @@
           <el-button type="primary" @click="onSubmit">查询</el-button>
           <el-button @click="onReset()">重置</el-button>
         </el-form-item>
-        <el-button style="float: right" type="success" round @click="addUser"
+        <el-button style="float: right" type="success" round @click="addUser(1)"
           >添加用户组</el-button
         >
       </el-form>
@@ -81,7 +81,7 @@
       </el-table-column>
       <el-table-column fixed="right" label="操作" width="200">
         <template slot-scope="scope" v-if="scope.$index != 0">
-          <el-button @click="handleClick(scope.row)" type="text" size="mini"
+          <el-button @click="handleClick(2,scope.row)" type="text" size="mini"
             >查看</el-button
           >
           <el-button
@@ -122,7 +122,8 @@
             class="drawer"
             :append-to-body="true"
     >
-        <addUserGroup @handleClose="handleClose" />
+        <addUserGroup v-if="drawerIndex===1" @handleClose="handleClose" />
+        <userDetails v-if="drawerIndex===2" @handleClose="handleClose" />
     </el-drawer>
 
   </div>
@@ -155,13 +156,16 @@
 </style>
 <script>
 import addUserGroup from "./addUserGroup";
+import userDetails from "./userDetails";
 export default {
   components:{
-    addUserGroup
+    addUserGroup,
+    userDetails
   },
   data() {
     return {
       drawer:false,
+      drawerIndex:1,
       loading: true,
       currentPage4: 4,
       form: {
@@ -242,7 +246,8 @@ export default {
       this.multipleSelection = val;
     },
     handleClick() {
-      this.$router.push({ path: "/power/userDetails" });
+      this.drawer=true;
+      this.drawerIndex=2;
     },
     deleteRow(index, rows) {
       //删除
@@ -299,6 +304,7 @@ export default {
     //添加用户组
     addUser() {
       this.drawer=true;
+      this.drawerIndex=1;
       //this.$router.push({ path: "/power/addUserGroup" });
     },
     handleSizeChange(val) {

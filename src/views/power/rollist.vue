@@ -110,6 +110,21 @@
       :total="1000"
     >
     </el-pagination>
+    <!--弹框-用户详情-->
+    <el-drawer
+        title=""
+        :visible.sync="drawer"
+        direction="rtl"
+        size="50%"
+        :before-close="handleClose"
+        class="drawer"
+        :append-to-body="true"
+    >
+      <rolDetails
+          ref="rolDetails"
+          @handleClose="handleClose"
+      />
+    </el-drawer>
   </div>
 </template>
 <style lang="scss" scoped>
@@ -139,9 +154,12 @@
 }
 </style>
 <script>
+import rolDetails from "@/views/power/rolDetails";
 export default {
+  components:{rolDetails},
   data() {
     return {
+      drawer:false,
       loading: true,
       currentPage4: 10,
       form: {
@@ -202,9 +220,11 @@ export default {
     handleSelectionChange(val) {
       this.multipleSelection = val;
     },
-    handleClick(row) {
-      console.log(row);
-      this.$router.push({ path: "/power/rolDetails" });
+    handleClick() {
+      this.drawer=true;
+    },
+    handleClose(){
+      this.drawer=false;
     },
     deleteRow(index, rows) {
       //删除

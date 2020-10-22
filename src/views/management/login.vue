@@ -34,7 +34,7 @@
               :type="passwordType"
             >
             <i
-              :class="passwordType === 'password' ? 'el-icon-turn-off' : 'el-icon-open'"
+              :class="passwordType === 'password' ? 'el-icon-view on' : 'el-icon-view'"
               class="show-pwd"
               @click="showPwd"
             />
@@ -145,7 +145,7 @@
           border-radius: 10px;
           outline: none;
           -webkit-appearance: none;
-          color: #24282c;
+          color: #24282c
         }
         .btn {
           width: 100%;
@@ -178,7 +178,10 @@
     right:20px;
     cursor: pointer;
     font-size:30px;
-    color:#889aa4;
+    color:#00c1de;
+    &.on{
+      color:#889aa4;
+    }
   }
   .footer {
     text-align: center;
@@ -218,7 +221,7 @@ export default {
   },
   computed: {},
   created() {
-
+   this.onkeydown();
   },
   mounted() {
     let myDate = new Date();
@@ -359,6 +362,17 @@ export default {
       });
 });
     },
+    //鼠标按下
+    onkeydown(){
+      let $this = this;
+      document.onkeydown = function(e) {   //按下回车提交
+        let key = window.event.keyCode;
+        //事件中keycode=13为回车事件
+        if (key === 13) {
+          $this.Login();
+        }
+      };
+    }
   }
 };
 </script>

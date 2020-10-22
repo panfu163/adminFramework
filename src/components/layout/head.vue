@@ -181,7 +181,7 @@ export default {
       this.pathName = res;
     });
     this.pathName = localStorage.getItem("headTitle") ? localStorage.getItem("headTitle") : "权限";
-    this.getUserInfo();
+    //this.getUserInfo();
   },
   methods: {
     //切换主题
