@@ -127,7 +127,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ├── .eslintrc.js                                 #代码编写规格
 ├── .gitignore                                   #忽略的文件
 ├── package.json                                 #项目及工具的依赖配置文件
-├── package-lock.json                            #锁定安装时的包的版本号-保证其他人在npm install时大家的依赖能保证一致。
+├── package-lock.json                            #锁定安装时的包的版本号-保证其他人在npm install时大家的依赖能保证一致。注：如安装一直无法成功时，可以删除此文件再安装
 ├── postcss.config.js                            #配置，将px转化成rem
 ├── README.md                                    #说明
 ├── vue.config.js                                #配置

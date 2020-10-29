@@ -4,7 +4,6 @@ node_modules/
 /dist-test/
 /dist-dev/
 /dist-prod/
-package-lock.json
 
 # local env files
 .env.local
