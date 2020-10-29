@@ -1,25 +1,5 @@
 <template>
   <div class="search">
-    <div class="title-box">
-      <el-form ref="form" :inline="true" :model="form" label-width="80px">
-        <el-form-item label="系统名称">
-          <el-input v-model="form.name"></el-input>
-        </el-form-item>
-        <el-form-item label="菜单名称">
-          <el-input v-model="form.name"></el-input>
-        </el-form-item>
-        <el-form-item label="状态">
-          <el-select v-model="form.region" placeholder="请选择菜单状态">
-            <el-option label="正常" value="shanghai"></el-option>
-            <el-option label="停用" value="beijing"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="onSubmit">查询</el-button>
-          <el-button>取消</el-button>
-        </el-form-item>
-      </el-form>
-    </div>
     <el-row>
       <el-button type="success" round @click="addUser">添加菜单</el-button>
     </el-row>
@@ -88,13 +68,7 @@
       <el-button @click="toggleSelection()">取消选择</el-button>
       <el-button @click="del()"  type="primary">删除</el-button>
     </div>
-    <el-pagination
-      class="pagination"
-      background
-      layout="prev, pager, next"
-      :total="1000"
-    >
-    </el-pagination>
+
 
 
     <el-dialog title="添加菜单"

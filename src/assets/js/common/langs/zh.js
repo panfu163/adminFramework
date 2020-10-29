@@ -83,6 +83,8 @@ export default {
       title: "商品资料",
       list: {
         goods: "商品库",
+        list: "商品列表",
+        addGoods: "添加商品",
         classify: "商品分类",
         brand: "品牌管理",
         unitLibrary: "单位库",

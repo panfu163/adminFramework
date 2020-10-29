@@ -289,11 +289,17 @@ export default {
               data: [
                 {
                   title: this.$t("product.information.list.goods"),
-                  url: "/product"
+                  children:[{
+                    title: this.$t("product.information.list.list"),
+                    url: "/product"
+                  },{
+                    title: this.$t("product.information.list.addGoods"),
+                    url: "/product/addProduct"
+                  }]
                 },
                 {
                   title: this.$t("product.information.list.classify"),
-                  url: ""
+                  url: "/product/classify"
                 },
                 {
                   title: this.$t("product.information.list.brand"),

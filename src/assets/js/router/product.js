@@ -16,6 +16,15 @@ const product = [
       navigation: "product" //处理导航显示-子路由需和父路由一至
     },
     component: () => import("@/views/product/addProduct.vue")
+  },
+  {
+    path: "/product/classify",
+    name: "classifyProduct",
+    meta: {
+      title: "商品分类",
+      navigation: "product" //处理导航显示-子路由需和父路由一至
+    },
+    component: () => import("@/views/product/classify.vue")
   }
 ];
 export default product;
