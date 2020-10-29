@@ -303,7 +303,7 @@ export default {
                 },
                 {
                   title: this.$t("product.information.list.brand"),
-                  url: ""
+                  url: "/product/brand"
                 },
                 {
                   title: this.$t("product.information.list.unitLibrary"),
