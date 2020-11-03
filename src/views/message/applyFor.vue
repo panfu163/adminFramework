@@ -1,66 +1,138 @@
 <template>
   <div class="search">
     <div class="title-box">
-      <el-form ref="form" :inline="true" :model="form" label-width="80px">
+      <el-form
+        ref="form"
+        :inline="true"
+        :model="form"
+        label-width="80px"
+      >
         <el-form-item label="短信标题:">
-          <el-input v-model="form.name"  placeholder="请输入手机号"></el-input>
+          <el-input
+            v-model="form.name"
+            placeholder="请输入手机号"
+          />
         </el-form-item>
         <el-form-item label="聚道:">
-          <el-select v-model="form.channel" placeholder="请选择公司名称">
-            <el-option label="移动" value="shanghai"></el-option>
-            <el-option label="联通" value="beijing"></el-option>
+          <el-select
+            v-model="form.channel"
+            placeholder="请选择公司名称"
+          >
+            <el-option
+              label="移动"
+              value="shanghai"
+            />
+            <el-option
+              label="联通"
+              value="beijing"
+            />
           </el-select>
         </el-form-item>
         <el-form-item label="类型:">
-          <el-select v-model="form.state" placeholder="请选择运输状态">
-            <el-option label="营销短信" value="shanghai"></el-option>
-            <el-option label="普通短信" value="shanghai"></el-option>
+          <el-select
+            v-model="form.state"
+            placeholder="请选择运输状态"
+          >
+            <el-option
+              label="营销短信"
+              value="shanghai"
+            />
+            <el-option
+              label="普通短信"
+              value="shanghai"
+            />
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="onSubmit">查询</el-button>
+          <el-button
+            type="primary"
+            @click="onSubmit"
+          >
+            查询
+          </el-button>
           <el-button>取消</el-button>
         </el-form-item>
       </el-form>
-
     </div>
 
     <el-row class="el-row">
-      <el-button type="success" @click="addTemplate">短信申请</el-button>
+      <el-button
+        type="success"
+        @click="addTemplate"
+      >
+        短信申请
+      </el-button>
     </el-row>
 
     <el-table
-            ref="multipleTable"
-            :data="tableData"
-            tooltip-effect="dark"
-            height="480"
-            style="width: 100%;position: relative"
-            stripe
-            highlight-current-row
-            @selection-change="handleSelectionChange"
-            :header-cell-style="{background:'#eef1f6',color:'#18333f'}"
+      ref="multipleTable"
+      :data="tableData"
+      tooltip-effect="dark"
+      height="480"
+      style="width: 100%;position: relative"
+      stripe
+      highlight-current-row
+      :header-cell-style="{background:'#eef1f6',color:'#18333f'}"
+      @selection-change="handleSelectionChange"
     >
-      <el-table-column fixed type="index" label="#" :index="indexMethod">
-      </el-table-column>
-      <el-table-column label="短信标题" prop="name" width="150">
-      </el-table-column>
-      <el-table-column prop="type" label="类型" width="120">
-      </el-table-column>
-      <el-table-column prop="company" label="渠道" width="120">
-      </el-table-column>
-      <el-table-column prop="phone" label="短信签名" width="120">
-      </el-table-column>
-      <el-table-column prop="state" label="短信场景" width="120"></el-table-column>
-      <el-table-column prop="address" label="发送内容"></el-table-column>
-      <el-table-column prop="time" label="最后更新时间"  width="180">
-      </el-table-column>
-      <el-table-column prop="monicker" label="操作人" width="120">
-      </el-table-column>
-      <el-table-column fixed="right" label="操作" width="80">
+      <el-table-column
+        fixed
+        type="index"
+        label="#"
+        :index="indexMethod"
+      />
+      <el-table-column
+        label="短信标题"
+        prop="name"
+        width="150"
+      />
+      <el-table-column
+        prop="type"
+        label="类型"
+        width="120"
+      />
+      <el-table-column
+        prop="company"
+        label="渠道"
+        width="120"
+      />
+      <el-table-column
+        prop="phone"
+        label="短信签名"
+        width="120"
+      />
+      <el-table-column
+        prop="state"
+        label="短信场景"
+        width="120"
+      />
+      <el-table-column
+        prop="address"
+        label="发送内容"
+      />
+      <el-table-column
+        prop="time"
+        label="最后更新时间"
+        width="180"
+      />
+      <el-table-column
+        prop="monicker"
+        label="操作人"
+        width="120"
+      />
+      <el-table-column
+        fixed="right"
+        label="操作"
+        width="80"
+      >
         <template slot-scope="scope">
-          <el-button @click="addTemplate(scope.row)" type="text" size="mini"
-          >修改</el-button
+          <el-button
+            type="text"
+            size="mini"
+            @click="addTemplate(scope.row)"
           >
+            修改
+          </el-button>
           <!--                          <el-button type="text" size="mini">发送邮箱</el-button>-->
           <!--                          <el-button-->
           <!--                            @click.native.prevent="deleteRow(scope.$index, tableData)"-->
@@ -77,12 +149,25 @@
     <!--      <el-button @click="toggleSelection()">取消选择</el-button>-->
     <!--    </div>-->
     <el-pagination
-            class="pagination"
-            background
-            layout="prev, pager, next"
-            :total="1000"
+      class="pagination"
+      background
+      layout="prev, pager, next"
+      :total="1000"
+    />
+
+    <!--弹框-添加用户-->
+    <el-drawer
+        title="短信申请"
+        :visible.sync="drawer"
+        direction="rtl"
+        size="50%"
+        :before-close="handleClose"
+        class="drawer"
+        :append-to-body="true"
     >
-    </el-pagination>
+      <addApplyFor @handleClose="handleClose" />
+    </el-drawer>
+
   </div>
 </template>
 <style lang="scss" scoped>
@@ -109,7 +194,9 @@
   }
 </style>
 <script>
+import addApplyFor from "./addApplyFor";
   export default {
+    components:{addApplyFor},
     data() {
       return {
         pickerOptions: {
@@ -173,7 +260,8 @@
             type:"营销短信"
           },
         ],
-        multipleSelection: []
+        multipleSelection: [],
+        drawer:false
       };
     },
     methods: {
@@ -205,7 +293,7 @@
       },
       //添加模板
       addTemplate(){
-        this.$router.push({ path: "/message/addApplyFor" });
+        this.drawer=true;
       }
     }
   };

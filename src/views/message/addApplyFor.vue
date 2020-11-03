@@ -87,10 +87,12 @@
         </el-form-item>
       </el-row>
     </el-form>
-    <el-button class="btn" type="primary" @click="onSubmit('formName')"
+    <div class="btn-box">
+      <el-button size="small" @click="onReset('formName')">取消</el-button>
+    <el-button size="small" type="primary" @click="onSubmit('formName')"
       >确定</el-button
     >
-    <el-button class="btn" @click="onReset('formName')">取消</el-button>
+    </div>
   </div>
 </template>
 <style lang="scss" scoped>

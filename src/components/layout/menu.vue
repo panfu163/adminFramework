@@ -307,11 +307,11 @@ export default {
                 },
                 {
                   title: this.$t("product.information.list.unitLibrary"),
-                  url: ""
+                  url: "/product/units"
                 },
                 {
                   title: this.$t("product.information.list.attribute"),
-                  url: ""
+                  url: "/product/attrs"
                 }
               ]
             },

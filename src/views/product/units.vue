@@ -2,7 +2,7 @@
   <div class="search">
     <div class="title-box">
       <el-form ref="form" :inline="true" :model="form">
-        <el-form-item label="品牌名称：">
+        <el-form-item label="单位名称：">
           <el-input v-model="form.name" placeholder="请输入品牌名称"></el-input>
         </el-form-item>
         <el-form-item class="el-row-btn">
@@ -13,7 +13,7 @@
       </el-form>
     </div>
     <el-row>
-      <el-button type="primary" round @click="addBrand(1,'添加品牌')">添加品牌</el-button>
+      <el-button type="primary" round @click="addBrand(1,'添加品牌')">添加单位</el-button>
     </el-row>
     <el-table
       ref="multipleTable"
@@ -29,26 +29,13 @@
     >
       <el-table-column type="index" :index="indexMethod" label="#"> </el-table-column>
       <el-table-column type="selection" width="55"> </el-table-column>
-      <el-table-column label="" width="60">
-        <template slot-scope="scope">
-          <img
-            :src="scope.row.headPic"
-            width="40"
-            height="40"
-            style="vertical-align: middle"
-          />
-        </template>
+      <el-table-column label="单位名称" prop="name" width="220">
       </el-table-column>
-      <el-table-column label="品牌名称" width="220">
-        <template slot-scope="scope">
-          {{ scope.row.name }}
-        </template>
+      <el-table-column prop="type" label="单位类型" >
       </el-table-column>
-      <el-table-column prop="state" label="品牌网址" >
+      <el-table-column prop="source" label="单位来源" show-overflow-tooltip >
       </el-table-column>
-      <el-table-column prop="onlineTime" label="品牌描述" show-overflow-tooltip >
-      </el-table-column>
-      <el-table-column prop="mail" label="排序"  show-overflow-tooltip>
+      <el-table-column prop="sort" label="排序"  show-overflow-tooltip>
       </el-table-column>
       <el-table-column fixed="right" label="操作" width="200">
         <template slot-scope="scope">
@@ -144,51 +131,27 @@ export default {
       },
       tableData: [
         {
-          headPic:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",
-          name: "周六福",
-          state:"https://cube.elemecdn.com",
-          fullName:"122",
-          department:"双",
-          onlineTime: "2020-12-20 20:30:30",
-          leavelineTime:"2022-02-03 20:30:30",
-          userRol:"超级管理员",
-          phone:"80.00",
-          mail:"4"
+          name: "箱",
+          type:"计数",
+          source:'商家创建',
+          sort:"1"
         },
         {
-          headPic:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",
-          name: "六桂福",
-          state:"https://cube.elemecdn.com",
-          fullName:"124",
-          department:"个",
-          onlineTime: "2020-12-20 20:30:30",
-          leavelineTime:"2022-02-03 20:30:30",
-          userRol:"超级管理员",
-          phone:"180.00",
-          mail:"3"
+          name: "件",
+          type:"计数",
+          source:"商家创建",
+          sort:"2"
         },
         {
-          headPic:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",
-          name: "银泰",
-          state:"https://cube.elemecdn.com",
-          fullName:"132",
-          department:"个",
-          onlineTime: "2020-12-20 20:30:30",
-          leavelineTime:"2022-02-03 20:30:30",
-          userRol:"超级管理员",
-          phone:"280.00",
-          mail:"2"
+          name: "千克",
+          type:"计重",
+          source:"商家创建",
+          sort:"3"
         }, {
-          headPic:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",
-          name: "玫瑰园",
-          state: "https://cube.elemecdn.com",
-          fullName:"243",
-          department:"个",
-          onlineTime: "2020-12-20 20:30:30",
-          leavelineTime:"2022-02-03 20:30:30",
-          userRol:"超级管理员",
-          phone:"380.00",
-          mail:"1"
+          name: "米",
+          type:"计量",
+          source:"系统预设",
+          sort:"4"
         },
 
       ],

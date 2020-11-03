@@ -2,7 +2,7 @@
   <div class="search">
     <div class="title-box">
       <el-form ref="form" :inline="true" :model="form">
-        <el-form-item label="品牌名称：">
+        <el-form-item label="属性名称：">
           <el-input v-model="form.name" placeholder="请输入品牌名称"></el-input>
         </el-form-item>
         <el-form-item class="el-row-btn">
@@ -13,7 +13,7 @@
       </el-form>
     </div>
     <el-row>
-      <el-button type="primary" round @click="addBrand(1,'添加品牌')">添加品牌</el-button>
+      <el-button type="primary" round @click="addBrand(1,'添加品牌')">添加属性</el-button>
     </el-row>
     <el-table
       ref="multipleTable"
@@ -29,26 +29,16 @@
     >
       <el-table-column type="index" :index="indexMethod" label="#"> </el-table-column>
       <el-table-column type="selection" width="55"> </el-table-column>
-      <el-table-column label="" width="60">
-        <template slot-scope="scope">
-          <img
-            :src="scope.row.headPic"
-            width="40"
-            height="40"
-            style="vertical-align: middle"
-          />
-        </template>
-      </el-table-column>
-      <el-table-column label="品牌名称" width="220">
+      <el-table-column label="属性项" width="220">
         <template slot-scope="scope">
           {{ scope.row.name }}
         </template>
       </el-table-column>
-      <el-table-column prop="state" label="品牌网址" >
+      <el-table-column prop="state" label="属性值" >
       </el-table-column>
-      <el-table-column prop="onlineTime" label="品牌描述" show-overflow-tooltip >
+      <el-table-column prop="sales" label="关联商品数" show-overflow-tooltip >
       </el-table-column>
-      <el-table-column prop="mail" label="排序"  show-overflow-tooltip>
+      <el-table-column prop="sort" label="排序"  show-overflow-tooltip>
       </el-table-column>
       <el-table-column fixed="right" label="操作" width="200">
         <template slot-scope="scope">
@@ -144,53 +134,23 @@ export default {
       },
       tableData: [
         {
-          headPic:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",
-          name: "周六福",
-          state:"https://cube.elemecdn.com",
-          fullName:"122",
-          department:"双",
-          onlineTime: "2020-12-20 20:30:30",
-          leavelineTime:"2022-02-03 20:30:30",
-          userRol:"超级管理员",
-          phone:"80.00",
-          mail:"4"
+          name: "酒类",
+          state:"红酒、白酒、啤酒、洋酒",
+          sales:"0",
+          sort:"1"
         },
         {
-          headPic:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",
-          name: "六桂福",
-          state:"https://cube.elemecdn.com",
-          fullName:"124",
-          department:"个",
-          onlineTime: "2020-12-20 20:30:30",
-          leavelineTime:"2022-02-03 20:30:30",
-          userRol:"超级管理员",
-          phone:"180.00",
-          mail:"3"
+          name: "酒精度",
+          state:"18度、30度、45度、45度、52度",
+          sales:"0",
+          sort:"2",
         },
         {
-          headPic:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",
-          name: "银泰",
-          state:"https://cube.elemecdn.com",
-          fullName:"132",
-          department:"个",
-          onlineTime: "2020-12-20 20:30:30",
-          leavelineTime:"2022-02-03 20:30:30",
-          userRol:"超级管理员",
-          phone:"280.00",
-          mail:"2"
-        }, {
-          headPic:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",
-          name: "玫瑰园",
-          state: "https://cube.elemecdn.com",
-          fullName:"243",
-          department:"个",
-          onlineTime: "2020-12-20 20:30:30",
-          leavelineTime:"2022-02-03 20:30:30",
-          userRol:"超级管理员",
-          phone:"380.00",
-          mail:"1"
-        },
-
+          name: "酒香型",
+          state:"酱香型、浓香型、清香型、汾香型",
+          sales:"0",
+          sort:"3",
+        }
       ],
       multipleSelection: [],//被选中的记录数据-----对应“批量删除”传的参数值
       title:"系统提示",

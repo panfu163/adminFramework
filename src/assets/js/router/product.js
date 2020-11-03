@@ -34,6 +34,24 @@ const product = [
       navigation: "product" //处理导航显示-子路由需和父路由一至
     },
     component: () => import("@/views/product/brand.vue")
+  },
+  {
+    path: "/product/units",
+    name: "unitsProduct",
+    meta: {
+      title: "单位库",
+      navigation: "product" //处理导航显示-子路由需和父路由一至
+    },
+    component: () => import("@/views/product/units.vue")
+  },
+  {
+    path: "/product/attrs",
+    name: "attrsProduct",
+    meta: {
+      title: "属性库",
+      navigation: "product" //处理导航显示-子路由需和父路由一至
+    },
+    component: () => import("@/views/product/attrs.vue")
   }
 ];
 export default product;
