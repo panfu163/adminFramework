@@ -18,7 +18,7 @@
       </el-form>
     </div>
     <el-row>
-      <el-button type="success" round @click="addUser">添加菜单</el-button>
+      <el-button type="success" round @click="addUser">添加权限</el-button>
     </el-row>
     <el-table
             ref="multipleTable"

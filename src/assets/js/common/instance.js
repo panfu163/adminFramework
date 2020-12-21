@@ -5,6 +5,12 @@ import router from "@/router"; //引入router
 //导入
 import NProgress from "nprogress";
 
+/**
+ * CancelToken有一个source静态方法，调用之后返回一个对象，该对象包含一个token属性，用于标记请求和一个cancel方法，用于取消请求。
+ * */
+const CancelToken = axios.CancelToken;//处理重复请求
+let source = CancelToken.source();//处理重复请求
+
 //创建实例
 let instance = axios.create({
     // headers: {
@@ -21,6 +27,9 @@ let instance = axios.create({
  * */
 instance.interceptors.request.use(
     config => {
+
+        config.headers.cancelToken=source.token; //处理重复请求
+
         NProgress.start(); // 设置加载进度条(开始..)
         const authorization = localStorage.getItem("authorization");
         if (authorization) {
@@ -59,5 +68,7 @@ instance.interceptors.response.use(
         return Promise.reject(error.response.status); // 返回接口返回的错误信息
     }
 );
+
+source.cancel();//用于取消请求
 
 export default instance;
