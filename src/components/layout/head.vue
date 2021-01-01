@@ -151,7 +151,7 @@ export default {
       routes: "", //所有的路由
       pathName: "",
       path: "",
-      sfold:false,
+      sfold:false, //小导航改为true
       list:{
         id:"1",
         username:"admin",

@@ -8,7 +8,7 @@
   <div class="sidebar" :style="{width:sidWidth+'px'}">
     <div class="title">
       <img src="@/assets/img/logo.png" />
-      <span>服务平台</span>
+      <span v-if="isShow">服务平台</span>
     </div>
     <ul class="miansub">
       <li
@@ -128,9 +128,8 @@ export default {
     return {
       isActive: "", //选中
       reg: /^\/[0-9a-zA-Z]*.*?/,
-      sidWidth:117,
-      isShow:true,
-
+      sidWidth:117, //展开改成117-isShow为true,不展开为40-isShow为false
+      isShow:true
     };
   },
   computed: {

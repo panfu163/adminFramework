@@ -48,7 +48,7 @@ export default {
   },
   data() {
     return {
-      sfold: false,
+      sfold:false, //小导航改为true
       isHeight: ""
     };
   },

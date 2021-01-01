@@ -55,7 +55,7 @@ export default {
       isRarr: true,
       path: "",
       dynamicTags: [],
-      sfold:false
+      sfold:false //小导航改为true
     };
   },
   computed: {},

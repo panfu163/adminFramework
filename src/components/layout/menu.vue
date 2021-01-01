@@ -131,7 +131,7 @@ export default {
       defaultActive: "", //当前选中
       tagData: this.$store.state.tag,
       pathName: "", //根据路径来判断子导航,
-      sfold: false
+      sfold: false //小导航改成true
     };
   },
   computed: {
