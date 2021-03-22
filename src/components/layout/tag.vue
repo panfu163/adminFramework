@@ -166,7 +166,6 @@ export default {
   overflow: hidden;
   display: flex;
   transform:translate(0,0);
-  transition:0.3s;
   &.on{
     width: calc(100% - 213px);
     left: 204px;
@@ -196,11 +195,11 @@ export default {
       left: 0;
       display: flex;
       flex-wrap: nowrap;
-      transition: all 0.3s ease;
-      transform: translate(0, 0);
       .el-tag {
         color: #000;
         cursor: pointer;
+        transition: all .3s cubic-bezier(.645, .045, .355, 1);
+        transform-origin: 100% 50%;
       }
       .el-tag + .el-tag {
         margin-left: 10px;

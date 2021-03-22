@@ -1,5 +1,6 @@
 <template>
   <div class="login">
+
     <div class="box">
       <div class="left">
         <img
@@ -68,6 +69,7 @@
       <p>版权所有 贵州钱多多科技有限公司</p>
       <p>@{{ year }} PFUNI.CN 黔ICP备19010969号-1</p>
     </div>
+    <div class="bj"></div>
   </div>
 </template>
 <style lang="scss" scoped>
@@ -84,11 +86,25 @@
   box-sizing: border-box;
   min-width: 1200px;
   margin: 0 auto;
+  .bj{
+    position: absolute;
+    bottom:-80px;
+    left:0;
+    width:100%;
+    height:777px;
+    box-sizing:border-box;
+    overflow: hidden;
+    z-index:1;
+    background:url("../../assets/img/management/loginbj.png") repeat-x;
+    animation: animate-cloud 0s linear infinite;
+    opacity:0.3;
+  }
   .box {
     padding: 0 20px;
     display: flex;
     position: relative;
     overflow: hidden;
+    z-index:100;
     .left {
       flex: 1;
       img {
@@ -96,6 +112,7 @@
         width: 60%;
         height: auto;
         margin: 18% auto 0;
+        animation: down 1.5s linear infinite;
       }
     }
     .right {
@@ -108,6 +125,7 @@
         width: 50%;
         box-sizing: border-box;
         margin: 20% auto 0;
+        position: relative;
         h3 {
           margin: 20px 0;
         }
@@ -189,8 +207,39 @@
     line-height: 30px;
     margin: 10% auto 10px;
     font-size: 12px;
+    position: relative;
+    z-index:99;
   }
 }
+
+
+@-webkit-keyframes down {
+  25% {-webkit-transform: translateY(-10px);}
+  50%, 100% {-webkit-transform: translateY(0);}
+ 75% {-webkit-transform: translateY(10px);}
+ }
+@-webkit-keyframes animate-cloud {
+  from {
+    background-position:1024px 100%;
+  }
+  to {
+    background-position: 0 100%;
+  }
+}
+
+//发光效果
+@keyframes scaless {
+  0% {
+    transform: scale(1)
+  }
+  50%,75% {
+    transform: scale(3)
+  }
+  78%,100% {
+    opacity: 0
+  }
+}
+
 </style>
 <script>
 //import Vcode from "@/components/vcode/vcode";

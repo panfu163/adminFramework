@@ -127,8 +127,7 @@ export default {
 .slide-fade-leave-active {
   transition: all 0.3s cubic-bezier(1, 0.3, 0.8, 1);
 }
-.slide-fade-enter, .slide-fade-leave-to
-  /* .slide-fade-leave-active for below version 2.1.8 */ {
+.slide-fade-enter, .slide-fade-leave-to{
   transform: translate(10px, 0);
   opacity: 0;
 }

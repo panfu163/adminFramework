@@ -6,9 +6,9 @@ const config = {
    * @description 目标路径
    */
   publicPath: {
-    dev: "/dev/admin/adminFramework",
-    test: "/test/admin/adminFramework",
-    prod: "/admin/adminFramework"
+    dev: "/dev/adminFramework",
+    test: "/test/adminFramework",
+    prod: "/adminFramework"
   },
   /**
    * @description api请求基础路径

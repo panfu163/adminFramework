@@ -298,6 +298,7 @@ export default {
   }
   .grid-left {
     line-height: 50px;
+    transition: all .3s cubic-bezier(.645, .045, .355, 1);
     .breadcrumb {
       margin: 15px 0 0 20px;
     }
