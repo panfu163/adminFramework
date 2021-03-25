@@ -1,6 +1,6 @@
 # adminFramework
 
-项目在线演示地址：[http://test.pfuni.cn/test/adminFramework](http://test.pfuni.cn/test/adminFramework)  
+项目在线演示地址：[http://www.pfuni.cn/test/adminFramework](http://www.pfuni.cn/test/adminFramework)  
 用户名：admin
 密码：123123
 
